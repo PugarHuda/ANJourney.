@@ -35,7 +35,7 @@
         <div class="row">
           <div class="col-12">
             <span class="search-close-btn"><i class="fa fa-times"></i></span>
-            <h3>Make Quick Searchhh to Find!</h3>
+            <h3>Make Quick Search to Find!</h3>
             <form>
               <div class="form-group">
                 <i class="fa fa-search"></i>
@@ -116,7 +116,45 @@
                 <li><a href="payment.html">PAYMENT</a></li>
               </ul>
             </li>
-            <li class="nav-item"><a class="nav-link" href="contact.html">CONTACT</a></li>
+            <li class="nav-item"><a id="login-link" class="nav-link" href="#">LOGIN</a></li>
+
+            <!-- The login modal -->
+            <div id="loginModal" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Welcome Back</h2>
+                <form id="loginForm">
+                  <div class="form-group">
+                    <input type="text" id="username" name="username" placeholder="Username" required />
+                  </div>
+                  <div class="form-group">
+                    <input type="password" id="password" name="password" placeholder="Password" required />
+                  </div>
+                  <button type="submit" class="login-btn">Login</button>
+                </form>
+                <p class="signup-link">Don't have an account? <a href="#" id="signup-link">Sign Up</a></p>
+              </div>
+            </div>
+
+            <!-- The sign-up modal -->
+            <div id="signupModal" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Sign Up</h2>
+                <form id="signupForm">
+                  <div class="form-group">
+                    <input type="text" id="signupUsername" name="signupUsername" placeholder="Username" required />
+                  </div>
+                  <div class="form-group">
+                    <input type="email" id="signupEmail" name="signupEmail" placeholder="Email" required />
+                  </div>
+                  <div class="form-group">
+                    <input type="password" id="signupPassword" name="signupPassword" placeholder="Password" required />
+                  </div>
+                  <button type="submit" class="signup-btn">Sign Up</button>
+                </form>
+              </div>
+            </div>
           </ul>
         </nav>
         <!-- end navbar -->
@@ -564,10 +602,10 @@
           <div class="col-lg-3 col-md-4">
             <h5>CONTACT US</h5>
             <address>
-              GFXPARTNER INC.<br />
+              ATHENA INC.<br />
               Jakal km 14.5, Yogyakarta<br />
               Phone: 123 456 7890<br />
-              <a href="#">info@gfxpartner.com</a>
+              <a href="#">info@athenacomp.com</a>
             </address>
           </div>
           <!-- end col-3 -->
