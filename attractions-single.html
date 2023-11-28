@@ -97,7 +97,13 @@
               </ul>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link" href="attractions-single.html">ATTRACTIONS</a>
+              <a class="nav-link">ATTRACTIONS</a>
+              <ul class="dropdown-menu">
+                <li><a href="attcJak.html">JAKARTA</a></li>
+                <li><a href="attcJog.html">YOGYAKARTA</a></li>
+                <li><a href="attcBan.html">BANDUNG</a></li>
+                <li><a href="attcBali.html">BALI</a></li>
+              </ul>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link">CHECKOUT</a>
@@ -108,7 +114,45 @@
                 <li><a href="payment.html">PAYMENT</a></li>
               </ul>
             </li>
-            <li class="nav-item"><a class="nav-link" href="contact.html">CONTACT</a></li>
+            <li class="nav-item"><a id="login-link" class="nav-link" href="#">LOGIN</a></li>
+
+            <!-- The login modal -->
+            <div id="loginModal" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Welcome Back</h2>
+                <form id="loginForm">
+                  <div class="form-group">
+                    <input type="text" id="username" name="username" placeholder="Username" required />
+                  </div>
+                  <div class="form-group">
+                    <input type="password" id="password" name="password" placeholder="Password" required />
+                  </div>
+                  <button type="submit" class="login-btn">Login</button>
+                </form>
+                <p class="signup-link">Don't have an account? <a href="#" id="signup-link">Sign Up</a></p>
+              </div>
+            </div>
+
+            <!-- The sign-up modal -->
+            <div id="signupModal" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Sign Up</h2>
+                <form id="signupForm">
+                  <div class="form-group">
+                    <input type="text" id="signupUsername" name="signupUsername" placeholder="Username" required />
+                  </div>
+                  <div class="form-group">
+                    <input type="email" id="signupEmail" name="signupEmail" placeholder="Email" required />
+                  </div>
+                  <div class="form-group">
+                    <input type="password" id="signupPassword" name="signupPassword" placeholder="Password" required />
+                  </div>
+                  <button type="submit" class="signup-btn">Sign Up</button>
+                </form>
+              </div>
+            </div>
           </ul>
         </nav>
         <!-- end navbar -->
@@ -424,7 +468,6 @@
       </div>
       <!-- end container -->
     </footer>
-    ''
 
     <!-- JS FILES -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
