@@ -130,7 +130,7 @@
   wow.init();
 
   // SLIDER
-  var menu = ["WISATA TERSEMBUNYI<span>DI JAKARTA</span>", "YAUDAH<span>SPECIAL OFFER</span>", "BEST SELLING<span>ICE CLIMBING</span>", "THE FAMOUS<span>HIKING TRAILS</span>"];
+  var menu = ["WISATA TERSEMBUNYI<span>DI JAKARTA</span>", "WISATA<span>DI BALI</span>", "AYO EKSPLORE<span>YOGYAKARTA</span>", "KEAJAIBAN<span>KOTA BANDUNG</span>"];
   var interleaveOffset = 0.5;
   var swiperOptions = {
     loop: true,
