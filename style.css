@@ -51,6 +51,12 @@ header {
   font-weight: 600;
   color: rgb(47, 141, 70);
   cursor: pointer;
+  align-items: center;
+}
+.logo img {
+  height: 50px;
+  width: 200px;
+  align-items: center;
 }
 
 .icn {
