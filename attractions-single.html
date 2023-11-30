@@ -18,10 +18,12 @@
 
     <!-- CSS FILES -->
     <link rel="stylesheet" href="css/swiper.min.css" />
-    <link rel="stylesheet" href="css/daterangepicker.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
     <link rel="stylesheet" href="css/style.css" />
+
+    <!-- link baru -->
+    <link rel="stylesheet" href="css/profile.css" />
   </head>
   <body>
     <div class="preloader">
@@ -35,13 +37,13 @@
         <div class="row">
           <div class="col-12">
             <span class="search-close-btn"><i class="fa fa-times"></i></span>
-            <h3>Make Quick Search to Find!</h3>
-            <form>
+            <h3>Profile</h3>
+            <!-- <form>
               <div class="form-group">
                 <i class="fa fa-search"></i>
                 <input type="text" placeholder="Search Activities, Themes or Tours" />
               </div>
-              <!-- end form-group -->
+              --end form-group
               <button type="submit">SEARCH</button>
             </form>
             <dl>
@@ -51,7 +53,45 @@
               <dd><a href="#">Waterfalls</a></dd>
               <dd><a href="#">Winter Tours</a></dd>
               <dd><a href="#">Glaciar Walk</a></dd>
-            </dl>
+            </dl> -->
+          </div>
+          <div class="container mt-5">
+            <div class="row">
+              <div class="col-lg-8 pb-5">
+                <form class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="account-fn">NAMA DEPAN</label>
+                      <input class="form-control" type="text" id="account-fn" value="Daniel" disabled="" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="account-ln">NAMA BELAKANG</label>
+                      <input class="form-control" type="text" id="account-ln" value="Adams" disabled="" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="account-email">E-MAIL</label>
+                      <input class="form-control" type="email" id="account-email" value="daniel.adams@example.com" disabled="" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="account-phone">No.HP</label>
+                      <input class="form-control" type="text" id="account-phone" value="+7 (805) 348 95 72" disabled="" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="account-pass">PASSWORD</label>
+                      <input class="form-control" type="password" id="account-pass" value="da" disabled="" />
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
           <!-- end col-12 -->
         </div>
@@ -63,7 +103,7 @@
     <header class="header-int">
       <div class="container">
         <nav class="navbar dark">
-          <a href="index.html" class="navbar-brand"><img src="images/logo-dark.png" alt="Image" /></a>
+          <a href="index.html" class="navbar-brand"><img src="images/anjBlack.png" alt="Image" /></a>
           <div class="menu-btn">
             <div class="menu-circle-wrap">
               <div class="wave"></div>
@@ -98,7 +138,13 @@
               </ul>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link" href="attractions-single.html">ATTRACTIONS</a>
+              <a class="nav-link">ATTRACTIONS</a>
+              <ul class="dropdown-menu">
+                <li><a href="attcJak.html">JAKARTA</a></li>
+                <li><a href="attcJog.html">YOGYAKARTA</a></li>
+                <li><a href="attcBan.html">BANDUNG</a></li>
+                <li><a href="attcBali.html">BALI</a></li>
+              </ul>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link">CHECKOUT</a>
@@ -109,7 +155,48 @@
                 <li><a href="payment.html">PAYMENT</a></li>
               </ul>
             </li>
-            <li class="nav-item"><a class="nav-link" href="contact.html">CONTACT</a></li>
+            <li class="nav-item"><a id="login-link" class="nav-link" href="#">LOGIN</a></li>
+
+            <!-- The login modal -->
+            <div id="loginModal" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Welcome Back</h2>
+                <form id="loginForm">
+                  <div class="form-group">
+                    <input type="email" id="loginEmail" name="loginEmail" placeholder="Email" required />
+                  </div>
+                  <div class="form-group">
+                    <input type="password" id="loginPassword" name="loginPassword" placeholder="Password" required />
+                  </div>
+                  <button type="submit" class="login-btn">Login</button>
+                </form>
+                <p class="signup-link">Don't have an account? <a href="#" id="signup-link">Sign Up</a></p>
+              </div>
+            </div>
+
+            <!-- The sign-up modal -->
+            <div id="signupModal" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Sign Up</h2>
+                <form id="signupForm">
+                  <div class="form-group">
+                    <input type="text" id="firstName" name="firstName" placeholder="First Name" required />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required />
+                  </div>
+                  <div class="form-group">
+                    <input type="email" id="signupEmail" name="signupEmail" placeholder="Email" required />
+                  </div>
+                  <div class="form-group">
+                    <input type="password" id="signupPassword" name="signupPassword" placeholder="Password" required />
+                  </div>
+                  <button type="submit" class="signup-btn">Sign Up</button>
+                </form>
+              </div>
+            </div>
           </ul>
         </nav>
         <!-- end navbar -->
@@ -368,34 +455,31 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-3 col-md-4">
-            <h5>ABOUT US</h5>
+            <h5>TENTANG KAMI</h5>
             <ul class="footer-menu">
-              <li><a href="#">About us</a></li>
-              <li><a href="#">Training & Safety</a></li>
-              <li><a href="#">Our Guides</a></li>
-              <li><a href="#">Office Team</a></li>
-              <li><a href="#">Blog</a></li>
+              <li><a href="about-us.html">Tentang Kami</a></li>
+
+              <li><a href="#">Tim Kami</a></li>
+              <li><a href="blog-list.html">Berita</a></li>
             </ul>
           </div>
           <!-- end col-3 -->
           <div class="col-lg-3 col-md-4">
-            <h5>USEFUL INFO</h5>
+            <h5>Layanan</h5>
             <ul class="footer-menu">
-              <li><a href="#">Pickup Locations</a></li>
               <li><a href="#">Terms of Payment</a></li>
               <li><a href="#">Privacy Policy</a></li>
               <li><a href="#">Difficulty Levels</a></li>
-              <li><a href="#">Where to Find Us</a></li>
             </ul>
           </div>
           <!-- end col-3 -->
           <div class="col-lg-3 col-md-4">
-            <h5>CONTACT US</h5>
+            <h5>Hubungi Kami</h5>
             <address>
-              GFXPARTNER INC.<br />
-              30 Aarhus, Denmark<br />
-              Phone: 123 456 7890<br />
-              <a href="#">info@gfxpartner.com</a>
+              ATHENA INC.<br />
+              Jakal km 14.5, Yogyakarta<br />
+              Telp: 123 456 7890<br />
+              <a href="#">info@athenacomp.com</a>
             </address>
           </div>
           <!-- end col-3 -->
@@ -421,7 +505,7 @@
             </ul>
           </div>
           <!-- end col-12 -->
-          <div class="col-12"><span class="copyright">&copy; GFXPARTNER</span></div>
+          <div class="col-12"><span class="copyright">&copy; ATHENA</span></div>
           <!-- end col-12 -->
         </div>
         <!-- end row -->

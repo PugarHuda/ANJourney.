@@ -130,7 +130,7 @@
   wow.init();
 
   // SLIDER
-  var menu = ["WISATA TERSEMBUNYI<span>DI JAKARTA</span>", "YAUDAH<span>SPECIAL OFFER</span>", "BEST SELLING<span>ICE CLIMBING</span>", "THE FAMOUS<span>HIKING TRAILS</span>"];
+  var menu = ["WISATA TERSEMBUNYI<span>DI JAKARTA</span>", "WISATA<span>DI BALI</span>", "AYO EKSPLORE<span>YOGYAKARTA</span>", "KEAJAIBAN<span>KOTA BANDUNG</span>"];
   var interleaveOffset = 0.5;
   var swiperOptions = {
     loop: true,
@@ -389,77 +389,65 @@
 
   // LOGIN BARU 21/11/23
   // Ambil elemen-elemen yang dibutuhkan dari HTML
-  const loginLink = document.getElementById("login-link");
-  const loginModal = document.getElementById("loginModal");
-  const closeButton = document.querySelector(".close");
+// Ambil elemen yang dibutuhkan dari HTML
+const loginLink = document.getElementById('login-link');
+const loginModal = document.getElementById('loginModal');
+const closeButton = document.querySelector('#loginModal .close');
 
-  // Fungsi untuk menampilkan modal
-  function openModal() {
-    loginModal.style.display = "block";
+const signUpLink = document.querySelector('.signup-link');
+const signUpModal = document.getElementById('signupModal');
+const closeSignUpButton = document.querySelector('#signupModal .close');
+
+// Fungsi untuk menampilkan modal login
+function openLoginModal() {
+  loginModal.style.display = 'block';
+}
+
+// Fungsi untuk menyembunyikan modal login
+function closeLoginModal() {
+  loginModal.style.display = 'none';
+}
+
+// Fungsi untuk menampilkan modal sign up
+function openSignUpModal() {
+  signUpModal.style.display = 'block';
+  closeLoginModal(); // Menutup modal login saat membuka modal sign up
+}
+
+// Fungsi untuk menyembunyikan modal sign up
+function closeSignUpModal() {
+  signUpModal.style.display = 'none';
+}
+
+// Event listener untuk tombol Login pada modal login
+loginLink.addEventListener('click', openLoginModal);
+
+// Event listener untuk tombol close pada modal login
+closeButton.addEventListener('click', closeLoginModal);
+
+// Event listener untuk tombol Sign Up pada modal login
+signUpLink.addEventListener('click', openSignUpModal);
+
+// Event listener untuk tombol close pada modal sign up
+closeSignUpButton.addEventListener('click', closeSignUpModal);
+
+// Event listener untuk menutup modal ketika klik di luar modal
+window.addEventListener('click', (event) => {
+  if (event.target === loginModal) {
+    closeLoginModal();
   }
-
-  // Fungsi untuk menyembunyikan modal
-  function closeModal() {
-    loginModal.style.display = "none";
-  }
-
-  // Event listener untuk tombol login
-  loginLink.addEventListener("click", openModal);
-
-  // Event listener untuk tombol close
-  closeButton.addEventListener("click", closeModal);
-
-  // Event listener untuk menutup modal ketika klik di luar modal
-  window.addEventListener("click", (event) => {
-    if (event.target === loginModal) {
-      closeModal();
-    }
-  });
-
-  // Event listener untuk mengirimkan form login (di sini hanya contoh)
-  const loginForm = document.getElementById("loginForm");
-  loginForm.addEventListener("submit", (event) => {
-    event.preventDefault(); // Menghentikan pengiriman form, hanya contoh
-    // Lakukan sesuatu dengan data login (misalnya, validasi atau pengiriman ke server)
-    // Kemudian tutup modal atau lakukan sesuatu yang sesuai dengan logika aplikasi Anda
-    closeModal();
-  });
-
-  //baru
-  // Ambil elemen yang dibutuhkan dari HTML
-  const signUpLink = document.querySelector(".signup-link");
-  const signUpModal = document.getElementById("signupModal");
-  const closeSignUpButton = document.querySelector("#signupModal .close");
-
-  // Fungsi untuk menampilkan sign up modal
-  function openSignUpModal() {
-    signUpModal.style.display = "block";
-  }
-
-  // Fungsi untuk menyembunyikan sign up modal
-  function closeSignUpModal() {
-    signUpModal.style.display = "none";
-  }
-
-  // Event listener untuk tombol Sign Up pada login modal
-  signUpLink.addEventListener("click", openSignUpModal);
-
-  // Event listener untuk tombol close pada sign up modal
-  closeSignUpButton.addEventListener("click", closeSignUpModal);
-
-  // Event listener untuk menutup sign up modal ketika klik di luar modal
-  window.addEventListener("click", (event) => {
-    if (event.target === signUpModal) {
-      closeSignUpModal();
-    }
-  });
-
-  // Event listener untuk mengirimkan form sign up (hanya contoh)
-  const signupForm = document.getElementById("signupForm");
-  signupForm.addEventListener("submit", (event) => {
-    event.preventDefault(); // Menghentikan pengiriman form, hanya contoh
-    // Lakukan sesuatu dengan data sign up (misalnya, validasi atau pengiriman ke server)
-    // Kemudian tutup modal atau lakukan sesuatu yang sesuai dengan logika aplikasi Anda
+  if (event.target === signUpModal) {
     closeSignUpModal();
-  });
+  }
+});
+
+// Event listener untuk mengirimkan form sign up (hanya contoh)
+const signupForm = document.getElementById('signupForm');
+signupForm.addEventListener('submit', (event) => {
+  event.preventDefault(); // Menghentikan pengiriman form, hanya contoh
+  // Lakukan sesuatu dengan data sign up (misalnya, validasi atau pengiriman ke server)
+  // Kemudian tutup modal atau lakukan sesuatu yang sesuai dengan logika aplikasi Anda
+  closeSignUpModal();
+});
+
 })(jQuery);

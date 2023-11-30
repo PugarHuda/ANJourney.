@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
     <link rel="stylesheet" href="css/style.css" />
+
+    <!-- link baru -->
+    <link rel="stylesheet" href="css/profile.css" />
   </head>
   <body>
     <div class="preloader">
@@ -36,12 +39,12 @@
           <div class="col-12">
             <span class="search-close-btn"><i class="fa fa-times"></i></span>
             <h3>Profile</h3>
-            <form>
+            <!-- <form>
               <div class="form-group">
                 <i class="fa fa-search"></i>
                 <input type="text" placeholder="Search Activities, Themes or Tours" />
               </div>
-              <!-- end form-group -->
+              (end form-group)
               <button type="submit">SEARCH</button>
             </form>
             <dl>
@@ -51,7 +54,45 @@
               <dd><a href="#">Waterfalls</a></dd>
               <dd><a href="#">Winter Tours</a></dd>
               <dd><a href="#">Glaciar Walk</a></dd>
-            </dl>
+            </dl> -->
+          </div>
+          <div class="container mt-5">
+            <div class="row">
+              <div class="col-lg-8 pb-5">
+                <form class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="account-fn">NAMA DEPAN</label>
+                      <input class="form-control" type="text" id="account-fn" value="Daniel" disabled="" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="account-ln">NAMA BELAKANG</label>
+                      <input class="form-control" type="text" id="account-ln" value="Adams" disabled="" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="account-email">E-MAIL</label>
+                      <input class="form-control" type="email" id="account-email" value="daniel.adams@example.com" disabled="" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="account-phone">No.HP</label>
+                      <input class="form-control" type="text" id="account-phone" value="+7 (805) 348 95 72" disabled="" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="account-pass">PASSWORD</label>
+                      <input class="form-control" type="password" id="account-pass" value="da" disabled="" />
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
           <!-- end col-12 -->
         </div>
@@ -110,7 +151,6 @@
             <li class="nav-item dropdown">
               <a class="nav-link">CHECKOUT</a>
               <ul class="dropdown-menu">
-                <li><a href="passengers.html">PASSGENGER</a></li>
                 <li><a href="booking.html">BOOKING</a></li>
                 <li><a href="summary.html">SUMMARY</a></li>
                 <li><a href="payment.html">PAYMENT</a></li>
@@ -125,10 +165,10 @@
                 <h2>Welcome Back</h2>
                 <form id="loginForm">
                   <div class="form-group">
-                    <input type="text" id="username" name="username" placeholder="Username" required />
+                    <input type="email" id="loginEmail" name="loginEmail" placeholder="Email" required />
                   </div>
                   <div class="form-group">
-                    <input type="password" id="password" name="password" placeholder="Password" required />
+                    <input type="password" id="loginPassword" name="loginPassword" placeholder="Password" required />
                   </div>
                   <button type="submit" class="login-btn">Login</button>
                 </form>
@@ -143,7 +183,10 @@
                 <h2>Sign Up</h2>
                 <form id="signupForm">
                   <div class="form-group">
-                    <input type="text" id="signupUsername" name="signupUsername" placeholder="Username" required />
+                    <input type="text" id="firstName" name="firstName" placeholder="First Name" required />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required />
                   </div>
                   <div class="form-group">
                     <input type="email" id="signupEmail" name="signupEmail" placeholder="Email" required />
@@ -166,7 +209,7 @@
             <div class="slide-inner bg-image" data-background="images/slide4.jpg">
               <div class="container">
                 <h2 data-swiper-parallax="-300">Eksplorasi Wisata Tersembunyi di Jakarta</h2>
-                <a href="#" class="link" data-swiper-parallax="-100"><img src="images/arrow-link.png" alt="Image" />Pelajari Lebih Lanjut</a>
+                <a href="#" class="link" data-swiper-parallax="-100"><img src="images/arrow-link.png" alt="Image" />LEARN MORE</a>
               </div>
               <!-- end container -->
             </div>
@@ -177,7 +220,7 @@
             <div class="slide-inner bg-image" data-background="images/slide2.jpg">
               <div class="container">
                 <h2 data-swiper-parallax="-300">Jelajahi Keindahan Pulau Bali</h2>
-                <a href="#" class="link" data-swiper-parallax="-100"><img src="images/arrow-link.png" alt="Image" />Pelajari Lebih Lanjut</a>
+                <a href="#" class="link" data-swiper-parallax="-100"><img src="images/arrow-link.png" alt="Image" />LEARN MORE</a>
               </div>
               <!-- end container -->
             </div>
@@ -188,7 +231,7 @@
             <div class="slide-inner bg-image" data-background="images/slide3.jpg">
               <div class="container">
                 <h2 data-swiper-parallax="-300">Sensasi Wisata Malam di Yogyakarta</h2>
-                <a href="#" class="link" data-swiper-parallax="-100"><img src="images/arrow-link.png" alt="Image" />Pelajari Lebih Lanjut</a>
+                <a href="#" class="link" data-swiper-parallax="-100"><img src="images/arrow-link.png" alt="Image" />LEARN MORE</a>
               </div>
               <!-- end container -->
             </div>
@@ -199,7 +242,7 @@
             <div class="slide-inner bg-image" data-background="images/slide1.jpg">
               <div class="container">
                 <h2 data-swiper-parallax="-300">Ekspedisi Keajaiban Kota Bandung</h2>
-                <a href="#" class="link" data-swiper-parallax="-100"><img src="images/arrow-link.png" alt="Image" />Pelajari Lebih Lanjut</a>
+                <a href="#" class="link" data-swiper-parallax="-100"><img src="images/arrow-link.png" alt="Image" />LEARN MORE</a>
               </div>
               <!-- end container -->
             </div>
@@ -242,7 +285,7 @@
                 <h3>namaTour</h3>
                 <ul>
                   <li>
-                    <div><img src="images/icon-date.png" alt="Image" /> <small>tanggalKetersediaan</small> <span>ALL YEAR</span></div>
+                    <div><img src="images/icon-date.png" alt="Image" /> <small>Ketersediaan</small> <span>ALL YEAR</span></div>
                   </li>
                   <li>
                     <div><img src="images/icon-time.png" alt="Image" /> <small>durasiTour</small> <span>3-10 DAYS</span></div>
@@ -266,7 +309,7 @@
                 <h3>namaTour</h3>
                 <ul>
                   <li>
-                    <div><img src="images/icon-date.png" alt="Image" /> <small>tanggalKetersediaan</small> <span>ALL YEAR</span></div>
+                    <div><img src="images/icon-date.png" alt="Image" /> <small>Ketersediaan</small> <span>ALL YEAR</span></div>
                   </li>
                   <li>
                     <div><img src="images/icon-time.png" alt="Image" /> <small>durasiTour</small> <span>3-10 DAYS</span></div>
@@ -290,7 +333,7 @@
                 <h3>namaTour</h3>
                 <ul>
                   <li>
-                    <div><img src="images/icon-date.png" alt="Image" /> <small>tanggalKetersediaan</small> <span>ALL YEAR</span></div>
+                    <div><img src="images/icon-date.png" alt="Image" /> <small>Ketersediaan</small> <span>ALL YEAR</span></div>
                   </li>
                   <li>
                     <div><img src="images/icon-time.png" alt="Image" /> <small>durasiTour</small> <span>3-10 DAYS</span></div>
@@ -314,7 +357,7 @@
                 <h3>namaTour</h3>
                 <ul>
                   <li>
-                    <div><img src="images/icon-date.png" alt="Image" /> <small>tanggalKetersediaan</small> <span>ALL YEAR</span></div>
+                    <div><img src="images/icon-date.png" alt="Image" /> <small>Ketersediaan</small> <span>ALL YEAR</span></div>
                   </li>
                   <li>
                     <div><img src="images/icon-time.png" alt="Image" /> <small>durasiTour</small> <span>3-10 DAYS</span></div>
@@ -338,7 +381,7 @@
                 <h3>namaTour</h3>
                 <ul>
                   <li>
-                    <div><img src="images/icon-date.png" alt="Image" /> <small>tanggalKetersediaan</small> <span>ALL YEAR</span></div>
+                    <div><img src="images/icon-date.png" alt="Image" /> <small>Ketersediaan</small> <span>ALL YEAR</span></div>
                   </li>
                   <li>
                     <div><img src="images/icon-time.png" alt="Image" /> <small>durasiTour</small> <span>3-10 DAYS</span></div>
@@ -362,7 +405,7 @@
                 <h3>namaTour</h3>
                 <ul>
                   <li>
-                    <div><img src="images/icon-date.png" alt="Image" /> <small>tanggalKetersediaan</small> <span>ALL YEAR</span></div>
+                    <div><img src="images/icon-date.png" alt="Image" /> <small>Ketersediaan</small> <span>ALL YEAR</span></div>
                   </li>
                   <li>
                     <div><img src="images/icon-time.png" alt="Image" /> <small>durasiTour</small> <span>3-10 DAYS</span></div>
@@ -378,7 +421,7 @@
             <!-- end tour-box -->
           </div>
           <!-- end col-4 -->
-          <div class="col-12 text-center"><a href="#" class="site-btn">MUAT LEBIH BANYAK</a></div>
+          <div class="col-12 text-center"><a href="#" class="site-btn">LOAD MORE</a></div>
           <!-- end col-12 -->
         </div>
         <!-- end row -->
