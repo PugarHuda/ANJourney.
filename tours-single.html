@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
     <link rel="stylesheet" href="css/style.css" />
+
+    <!-- link baru -->
+    <link rel="stylesheet" href="css/profile.css" />
   </head>
   <body>
     <div class="preloader">
@@ -35,13 +38,13 @@
         <div class="row">
           <div class="col-12">
             <span class="search-close-btn"><i class="fa fa-times"></i></span>
-            <h3>Make Quick Search to Find!</h3>
-            <form>
+            <h3>Profile</h3>
+            <!-- <form>
               <div class="form-group">
                 <i class="fa fa-search"></i>
                 <input type="text" placeholder="Search Activities, Themes or Tours" />
               </div>
-              <!-- end form-group -->
+              --end form-group
               <button type="submit">SEARCH</button>
             </form>
             <dl>
@@ -51,7 +54,45 @@
               <dd><a href="#">Waterfalls</a></dd>
               <dd><a href="#">Winter Tours</a></dd>
               <dd><a href="#">Glaciar Walk</a></dd>
-            </dl>
+            </dl> -->
+          </div>
+          <div class="container mt-5">
+            <div class="row">
+              <div class="col-lg-8 pb-5">
+                <form class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="account-fn">NAMA DEPAN</label>
+                      <input class="form-control" type="text" id="account-fn" value="Daniel" disabled="" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="account-ln">NAMA BELAKANG</label>
+                      <input class="form-control" type="text" id="account-ln" value="Adams" disabled="" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="account-email">E-MAIL</label>
+                      <input class="form-control" type="email" id="account-email" value="daniel.adams@example.com" disabled="" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="account-phone">No.HP</label>
+                      <input class="form-control" type="text" id="account-phone" value="+7 (805) 348 95 72" disabled="" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="account-pass">PASSWORD</label>
+                      <input class="form-control" type="password" id="account-pass" value="da" disabled="" />
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
           <!-- end col-12 -->
         </div>
@@ -133,7 +174,7 @@
                 <p class="signup-link">Don't have an account? <a href="#" id="signup-link">Sign Up</a></p>
               </div>
             </div>
-            
+
             <!-- The sign-up modal -->
             <div id="signupModal" class="modal">
               <div class="modal-content">
