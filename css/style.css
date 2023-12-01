@@ -6408,12 +6408,13 @@ input[type="password"]:focus {
   padding: 12px 20px;
   text-align: center;
   text-decoration: none;
-  display: block;
-  width: 100%;
+  /* display: block; */
+  width: calc(100% - 20px);
   border-radius: 25px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  justify-content: center;
 }
 
 .login-btn:hover {

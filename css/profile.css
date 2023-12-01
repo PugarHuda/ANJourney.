@@ -179,16 +179,12 @@ a.list-group-item,
   content: "";
 }
 
-.form-group .form-control {
+.col-md-6 .form-control {
   width: 100%;
-  border-color: #ff9019;
-  border-radius: 6px;
-}
-
-.search-box .form-group input[type="email"],
-input[type="password"] {
   text-align: left;
   padding: 0 20px;
+  border-color: #ff9019;
+  border-radius: 6px;
 }
 
 .search-box form .form-group input[type="text"] {
