@@ -124,20 +124,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link" href="index.html">HOME</a>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link">PAGES</a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a href="tours-list.html">TOUR LIST</a>
-                </li>
-                <li>
-                  <a a href="about-us.html">ABOUT US</a>
-                </li>
-                <li>
-                  <a href="blog-list.html">BLOG</a>
-                </li>
-              </ul>
-            </li>
+            <li class="nav-item"><a class="nav-link" href="tours-list.html">TOURS</a></li>
             <li class="nav-item dropdown">
               <a class="nav-link">ATTRACTIONS</a>
               <ul class="dropdown-menu">
@@ -147,15 +134,49 @@
                 <li><a href="attcBali.html">BALI</a></li>
               </ul>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link">CHECKOUT</a>
-              <ul class="dropdown-menu">
-                <li><a href="booking.html">BOOKING</a></li>
-                <li><a href="summary.html">SUMMARY</a></li>
-                <li><a href="payment.html">PAYMENT</a></li>
-              </ul>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="contact.html">CONTACT</a></li>
+            <li class="nav-item"><a class="nav-link" href="about-us.html">ABOUT US</a></li>
+            <li class="nav-item"><a id="login-link" class="nav-link" href="#">LOGIN</a></li>
+
+            <!-- The login modal -->
+            <div id="loginModal" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Welcome Back</h2>
+                <form id="loginForm">
+                  <div class="form-group">
+                    <input type="email" id="loginEmail" name="loginEmail" placeholder="Email" required />
+                  </div>
+                  <div class="form-group">
+                    <input type="password" id="loginPassword" name="loginPassword" placeholder="Password" required />
+                  </div>
+                  <button type="submit" class="login-btn">Login</button>
+                </form>
+                <p class="signup-link">Don't have an account? <a href="#" id="signup-link">Sign Up</a></p>
+              </div>
+            </div>
+            
+            <!-- The sign-up modal -->
+            <div id="signupModal" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Sign Up</h2>
+                <form id="signupForm">
+                  <div class="form-group">
+                    <input type="text" id="firstName" name="firstName" placeholder="First Name" required />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required />
+                  </div>
+                  <div class="form-group">
+                    <input type="email" id="signupEmail" name="signupEmail" placeholder="Email" required />
+                  </div>
+                  <div class="form-group">
+                    <input type="password" id="signupPassword" name="signupPassword" placeholder="Password" required />
+                  </div>
+                  <button type="submit" class="signup-btn">Sign Up</button>
+                </form>
+              </div>
+            </div>
           </ul>
         </nav>
         <!-- end navbar -->
