@@ -142,29 +142,30 @@ include "koneksi.php";
             <li class="nav-item"><a id="login-link" class="nav-link" href="#">LOGIN</a></li>
 
             <!-- The login modal -->
-            <div id="loginModal" class="modal">
-              <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Welcome Back</h2>
-                <form id="loginForm">
-                  <div class="form-group">
-                    <input type="email" id="loginEmail" name="loginEmail" placeholder="Email" required />
-                  </div>
-                  <div class="form-group">
-                    <input type="password" id="loginPassword" name="loginPassword" placeholder="Password" required />
-                  </div>
-                  <button type="submit" class="login-btn">Login</button>
-                </form>
-                <p class="signup-link">Don't have an account? <a href="#" id="signup-link">Sign Up</a></p>
-              </div>
-            </div>
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Selamat Datang Kembali</h2>
+    <form id="loginForm" method="POST" action="loginUser.php">
+      <div class="form-group">
+        <input type="email" id="loginEmail" name="email" placeholder="Email" required />
+      </div>
+      <div class="form-group">
+        <input type="password" id="loginPassword" name="password" placeholder="Password" required />
+      </div>
+      <button type="submit" class="login-btn">Login</button>
+    </form>
+    <p class="signup-link">Belum punya akun? <a href="#" id="signup-link">Daftar</a></p>
+  </div>
+</div>
+
 
             <!-- The sign-up modal -->
             <div id="signupModal" class="modal">
               <div class="modal-content">
                 <span class="close">&times;</span>
                 <h2>Sign Up</h2>
-                <form id="signupForm">
+                <form id="signupForm" method="post" action="registerUser.php">
                   <div class="form-group">
                     <input type="text" id="firstName" name="firstName" placeholder="First Name" required />
                   </div>

@@ -3,13 +3,14 @@ session_start();
 include 'koneksi.php';
 
 $username = $_POST['username'];
-$password = $_POST['password'];
-$password = md5($password);
+$password = $_POST['pwd'];
+// $password = md5($password);
 
 
 
 $prevQuery = mysqli_query($conn, "SELECT * FROM admin WHERE username = '$username'");
 $data = mysqli_fetch_array($prevQuery, MYSQLI_ASSOC);
+
 if ($password == $data['password'])
 {
     $_SESSION['huda'] = $data['id_admin'];
@@ -23,3 +24,5 @@ echo "<script>
 	    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=login.php">';
 
 ?>
+
+
