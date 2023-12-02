@@ -240,7 +240,6 @@ include "koneksi.php";
       <!-- end swiper-container -->
     </header>
     <!-- end header -->
-
     <!-- end find-advanture -->
     <section class="popular-tours">
       <div class="container">
