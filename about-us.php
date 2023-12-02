@@ -3,7 +3,7 @@ include "koneksi.php"
 ?>
 
 <!DOCTYPE html>
-< lang="zxx">
+<lang="zxx">
   <head>
     <!-- META TAGS -->
     <meta charset="utf-8" />

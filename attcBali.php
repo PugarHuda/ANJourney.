@@ -219,59 +219,32 @@ include "koneksi.php"
             <!-- end section-title -->
           </div>
           <!-- end col-12 -->
-          <div class="col-lg-6">
-            <a href="attractions-single.php">
-              <figure class="attractions-box">
-                <img src="images/attractions01-3x.jpg" alt="Image" />
-                <figcaption>Walk on Ice</figcaption>
-              </figure>
-            </a>
-          </div>
-          <!-- end col-6 -->
-          <div class="col-lg-6">
-            <a href="attractions-single.php">
-              <figure class="attractions-box">
-                <img src="images/attractions02-3x.jpg" alt="Image" />
-                <figcaption>Professional Photos</figcaption>
-              </figure>
-            </a>
-          </div>
-          <!-- end col-6 -->
-          <div class="col-lg-6">
-            <a href="attractions-single.php">
-              <figure class="attractions-box">
-                <img src="images/attractions03-3x.jpg" alt="Image" />
-                <figcaption>Mountain Views</figcaption>
-              </figure>
-            </a>
-          </div>
-          <!-- end col-6 -->
-          <div class="col-lg-6">
-            <a href="attractions-single.php">
-              <figure class="attractions-box">
-                <img src="images/attractions04-3x.jpg" alt="Image" />
-                <figcaption>South Coast Sights</figcaption>
-              </figure>
-            </a>
-          </div>
-          <!-- end col-6 -->
-          <div class="col-lg-6">
-            <a href="attractions-single.php">
-              <figure class="attractions-box">
-                <img src="images/attractions05-3x.jpg" alt="Image" />
-                <figcaption>Boat Enjoy</figcaption>
-              </figure>
-            </a>
-          </div>
-          <!-- end col-6 -->
-          <div class="col-lg-6">
-            <a href="attractions-single.php">
-              <figure class="attractions-box">
-                <img src="images/attractions06-3x.jpg" alt="Image" />
-                <figcaption>Green Rich Trail</figcaption>
-              </figure>
-            </a>
-          </div>
+        <?php
+// Query untuk mengambil data dari tabel detailwisata dan detailtour dengan JOIN
+$sql = "SELECT detailwisata.*, detailtour.* 
+        FROM detailwisata 
+        JOIN detailtour ON detailwisata.id_detailtour = detailtour.id_detailtour
+        WHERE detailtour.namaKota = 'Bali'
+        ORDER BY detailtour.id_detailtour";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo '<div class="col-lg-6">
+                <a href="attractions-single.php">
+                  <figure class="attractions-box">
+                    <img src="images/' . $row['gambarTour'] . '" alt="Image" />
+                    <figcaption>' . $row['judulWisata'] . '</figcaption>
+                  </figure>
+                </a>
+              </div>';
+    }
+} else {
+    echo "0 results";
+}
+?>
+
           <!-- end col-6 -->
           <!-- end col-12 -->
         </div>
@@ -292,60 +265,41 @@ include "koneksi.php"
             <!-- end section-title -->
           </div>
           <!-- end col-12 -->
-          <div class="col-lg-4">
-            <div class="tour-box">
-              <figure><img src="images/tour-thumb01.jpg" alt="Image" /></figure>
-              <div class="tour-content">
-                <small>FROM SKAFTAFELL</small>
-                <h3>Blue Ice Experience</h3>
-                <ul>
-                  <li><img src="images/icon-date.png" alt="Image" /> <small>Available</small> <span>ALL YEAR</span></li>
-                  <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small> <span>3-10 DAYS</span></li>
-                  <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small> <span>$166.750</span></li>
-                </ul>
-                <a href="#">SELECT DATES</a>
-              </div>
-              <!-- end tour-content -->
-            </div>
-            <!-- end tour-box -->
-          </div>
-          <!-- end col-4 -->
-          <div class="col-lg-4">
-            <div class="tour-box">
-              <figure><img src="images/tour-thumb02.jpg" alt="Image" /> <span class="tag">MOST POPULAR</span></figure>
-              <div class="tour-content">
-                <small>FROM SKAFTAFELL</small>
-                <h3>Blue Ice Experience</h3>
-                <ul>
-                  <li><img src="images/icon-date.png" alt="Image" /> <small>Available</small> <span>ALL YEAR</span></li>
-                  <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small> <span>3-10 DAYS</span></li>
-                  <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small> <span>$166.750</span></li>
-                </ul>
-                <a href="#">SELECT DATES</a>
-              </div>
-              <!-- end tour-content -->
-            </div>
-            <!-- end tour-box -->
-          </div>
-          <!-- end col-4 -->
-          <div class="col-lg-4">
-            <div class="tour-box">
-              <figure><img src="images/tour-thumb03.jpg" alt="Image" /></figure>
-              <div class="tour-content">
-                <small>FROM SKAFTAFELL</small>
-                <h3>Blue Ice Experience</h3>
-                <ul>
-                  <li><img src="images/icon-date.png" alt="Image" /> <small>Available</small> <span>ALL YEAR</span></li>
-                  <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small> <span>3-10 DAYS</span></li>
-                  <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small> <span>$166.750</span></li>
-                </ul>
-                <a href="#">SELECT DATES</a>
-              </div>
-              <!-- end tour-content -->
-            </div>
-            <!-- end tour-box -->
-          </div>
-          <!-- end col-4 -->
+                           <?php
+         // Query untuk mengambil data dari tabel popular tour
+$sql = "SELECT p.*, d.* FROM populartour p JOIN detailtour d ON p.id_detailTour = d.id_detailTour";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo '<div class="col-lg-4">
+                <div class="tour-box">
+                    <figure><img src="images/' . $row['gambarTour'] . '" alt="Image" /></figure>
+                    <div class="tour-content">
+                        <small>' . $row['namaKota'] . '</small>
+                        <h3>' . $row['namaTour'] . '</h3>
+                        <ul>
+                            <li>
+                                <div><img src="images/icon-date.png" alt="Image" /> <small>Ketersediaan</small> <span>' . $row['ketersediaanTour'] . '</span></div>
+                            </li>
+                            <li>
+                                <div><img src="images/icon-time.png" alt="Image" /> <small>Durasi</small> <span>' . $row['durasiTour'] . '</span></div>
+                            </li>
+                            <li>
+                                <div><img src="images/icon-tag.png" alt="Image" /> <small>Harga</small> <span>' . $row['hargaTour'] . '</span></div>
+                            </li>
+                        </ul>
+                        <a href="tours-single.php">PILIH TANGGAL</a>
+                    </div>
+                </div>
+            </div>';
+    }
+} else {
+    echo "0 results";
+}
+
+?>
+         
         </div>
         <!-- end row -->
       </div>

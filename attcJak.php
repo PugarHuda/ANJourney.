@@ -3,7 +3,7 @@ include "koneksi.php"
 ?>
 
 <!DOCTYPE html>
-< lang="zxx">
+<lang="zxx">
   <head>
     <!-- META TAGS -->
     <meta charset="utf-8" />
@@ -206,7 +206,7 @@ include "koneksi.php"
       <!-- end container -->
     </section>
     <!-- end attractions-header -->
-    <div class="attractions-hero-image bg-image" data-background="images/attractions-hero-3x.jpg"></div>
+    <div class="attractions-hero-image bg-image" data-background="images/slide4.jpg"></div>
     <!-- end attractions-hero-image -->
     <section class="attractions">
       <div class="container">
@@ -220,10 +220,13 @@ include "koneksi.php"
           </div>
           <!-- end col-12 -->
 <?php
-          // Query untuk mengambil data dari tabel detailwisata dan detailtour dengan JOIN
+// Query untuk mengambil data dari tabel detailwisata dan detailtour dengan JOIN
 $sql = "SELECT detailwisata.*, detailtour.* 
         FROM detailwisata 
-        JOIN detailtour ON detailwisata.id_detailtour = detailtour.id_detailtour";
+        JOIN detailtour ON detailwisata.id_detailtour = detailtour.id_detailtour
+        WHERE detailtour.namaKota = 'Jakarta'
+        ORDER BY detailtour.id_detailtour";
+
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -241,51 +244,7 @@ if ($result->num_rows > 0) {
     echo "0 results";
 }
 ?>
-          <!-- end col-6 -->
-          <div class="col-lg-6">
-            <a href="attractions-single.php">
-              <figure class="attractions-box">
-                <img src="images/attractions02-3x.jpg" alt="Image" />
-                <figcaption>Professional Photos</figcaption>
-              </figure>
-            </a>
-          </div>
-          <!-- end col-6 -->
-          <div class="col-lg-6">
-            <a href="attractions-single.php">
-              <figure class="attractions-box">
-                <img src="images/attractions03-3x.jpg" alt="Image" />
-                <figcaption>Mountain Views</figcaption>
-              </figure>
-            </a>
-          </div>
-          <!-- end col-6 -->
-          <div class="col-lg-6">
-            <a href="attractions-single.php">
-              <figure class="attractions-box">
-                <img src="images/attractions04-3x.jpg" alt="Image" />
-                <figcaption>South Coast Sights</figcaption>
-              </figure>
-            </a>
-          </div>
-          <!-- end col-6 -->
-          <div class="col-lg-6">
-            <a href="attractions-single.php">
-              <figure class="attractions-box">
-                <img src="images/attractions05-3x.jpg" alt="Image" />
-                <figcaption>Boat Enjoy</figcaption>
-              </figure>
-            </a>
-          </div>
-          <!-- end col-6 -->
-          <div class="col-lg-6">
-            <a href="attractions-single.php">
-              <figure class="attractions-box">
-                <img src="images/attractions06-3x.jpg" alt="Image" />
-                <figcaption>Green Rich Trail</figcaption>
-              </figure>
-            </a>
-          </div>
+
           <!-- end col-6 -->
           <div class="col-12 text-center"><a href="#" class="site-btn">LOAD MORE</a></div>
           <!-- end col-12 -->
