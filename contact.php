@@ -1,5 +1,9 @@
+<?php
+include "koneksi.php"
+?>
+
 <!DOCTYPE html>
-<html lang="zxx">
+<lang="zxx">
   <head>
     <!-- META TAGS -->
     <meta charset="utf-8" />
@@ -104,7 +108,7 @@
     <header class="header-int">
       <div class="container">
         <nav class="navbar dark">
-          <a href="index.html" class="navbar-brand"><img src="images/logo-dark.png" alt="Image" /></a>
+          <a href="index.php" class="navbar-brand"><img src="images/logo-dark.png" alt="Image" /></a>
           <div class="menu-btn">
             <div class="menu-circle-wrap">
               <div class="wave"></div>
@@ -124,12 +128,12 @@
             <li class="nav-item dropdown">
               <a class="nav-link">HOME</a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="tours-list.html">TOURS</a></li>
+            <li class="nav-item"><a class="nav-link" href="tours-list.php">TOURS</a></li>
             <li class="nav-item dropdown">
-              <a class="nav-link" href="attractions-single.html">ATTRACTIONS</a>
+              <a class="nav-link" href="attractions-single.php">ATTRACTIONS</a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="about-us.html">ABOUT US</a></li>
-            <li class="nav-item"><a class="nav-link" href="contact.html">CONTACT</a></li>
+            <li class="nav-item"><a class="nav-link" href="about-us.php">ABOUT US</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.php">CONTACT</a></li>
           </ul>
         </nav>
         <!-- end navbar -->
@@ -358,10 +362,10 @@
           <div class="col-lg-3 col-md-4">
             <h5>TENTANG KAMI</h5>
             <ul class="footer-menu">
-              <li><a href="about-us.html">Tentang Kami</a></li>
+              <li><a href="about-us.php">Tentang Kami</a></li>
 
               <li><a href="#">Tim Kami</a></li>
-              <li><a href="blog-list.html">Berita</a></li>
+              <li><a href="blog-list.php">Berita</a></li>
             </ul>
           </div>
           <!-- end col-3 -->
@@ -430,4 +434,4 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
     <script src="js/scripts.js"></script>
   </body>
-</html>
+    </html>

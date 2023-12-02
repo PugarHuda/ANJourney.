@@ -1,5 +1,9 @@
+
+<?php
+include "koneksi.php";
+?>
 <!DOCTYPE html>
-<html lang="zxx">
+<php lang="zxx">
   <head>
     <!-- META TAGS -->
     <meta charset="utf-8" />
@@ -104,7 +108,7 @@
     <header class="header-int">
       <div class="container">
         <nav class="navbar dark">
-          <a href="index.html" class="navbar-brand"><img src="images/anjBlack.png" alt="Image" /></a>
+          <a href="index.php" class="navbar-brand"><img src="images/anjBlack.png" alt="Image" /></a>
           <div class="menu-btn">
             <div class="menu-circle-wrap">
               <div class="wave"></div>
@@ -122,19 +126,19 @@
           <span class="search-btn"><i class="fa fa-search"></i></span>
           <ul class="navbar-nav">
             <li class="nav-item dropdown">
-              <a class="nav-link" href="index.html">HOME</a>
+              <a class="nav-link" href="index.php">HOME</a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="tours-list.html">TOURS</a></li>
+            <li class="nav-item"><a class="nav-link" href="tours-list.php">TOURS</a></li>
             <li class="nav-item dropdown">
               <a class="nav-link">ATTRACTIONS</a>
               <ul class="dropdown-menu">
-                <li><a href="attcJak.html">JAKARTA</a></li>
-                <li><a href="attcJog.html">YOGYAKARTA</a></li>
-                <li><a href="attcBan.html">BANDUNG</a></li>
-                <li><a href="attcBali.html">BALI</a></li>
+                <li><a href="attcJak.php">JAKARTA</a></li>
+                <li><a href="attcJog.php">YOGYAKARTA</a></li>
+                <li><a href="attcBan.php">BANDUNG</a></li>
+                <li><a href="attcBali.php">BALI</a></li>
               </ul>
             </li>
-            <li class="nav-item"><a class="nav-link" href="about-us.html">ABOUT US</a></li>
+            <li class="nav-item"><a class="nav-link" href="about-us.php">ABOUT US</a></li>
             <li class="nav-item"><a id="login-link" class="nav-link" href="#">LOGIN</a></li>
 
             <!-- The login modal -->
@@ -270,7 +274,7 @@
                       <div><img src="images/icon-tag.png" alt="Image" /> <small>FROM</small> <span>$166.750</span></div>
                     </li>
                   </ul>
-                  <a href="tours-single.html">SELECT DATES</a>
+                  <a href="tours-single.php">SELECT DATES</a>
                 </div>
                 <!-- end inner -->
               </div>
@@ -295,7 +299,7 @@
                     <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small> <span>3-10 DAYS</span></li>
                     <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small> <span>$166.5</span></li>
                   </ul>
-                  <a href="tours-single.html">SELECT DATES</a>
+                  <a href="tours-single.php">SELECT DATES</a>
                 </div>
                 <!-- end inner -->
               </div>
@@ -321,7 +325,7 @@
                     <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small> <span>3-10 DAYS</span></li>
                     <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small> <span>$166.5</span></li>
                   </ul>
-                  <a href="tours-single.html">SELECT DATES</a>
+                  <a href="tours-single.php">SELECT DATES</a>
                 </div>
                 <!-- end inner -->
               </div>
@@ -346,7 +350,7 @@
                     <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small> <span>3-10 DAYS</span></li>
                     <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small> <span>$166.5</span></li>
                   </ul>
-                  <a href="tours-single.html">SELECT DATES</a>
+                  <a href="tours-single.php">SELECT DATES</a>
                 </div>
                 <!-- end inner -->
               </div>
@@ -371,7 +375,7 @@
                     <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small> <span>3-10 DAYS</span></li>
                     <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small> <span>$166.5</span></li>
                   </ul>
-                  <a href="tours-single.html">SELECT DATES</a>
+                  <a href="tours-single.php">SELECT DATES</a>
                 </div>
                 <!-- end inner -->
               </div>
@@ -397,7 +401,7 @@
                     <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small> <span>3-10 DAYS</span></li>
                     <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small> <span>$166.5</span></li>
                   </ul>
-                  <a href="tours-single.html">SELECT DATES</a>
+                  <a href="tours-single.php">SELECT DATES</a>
                 </div>
                 <!-- end inner -->
               </div>
@@ -423,7 +427,7 @@
                     <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small> <span>3-10 DAYS</span></li>
                     <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small> <span>$166.5</span></li>
                   </ul>
-                  <a href="tours-single.html">SELECT DATES</a>
+                  <a href="tours-single.php">SELECT DATES</a>
                 </div>
                 <!-- end inner -->
               </div>
@@ -449,7 +453,7 @@
                     <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small> <span>3-10 DAYS</span></li>
                     <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small> <span>$166.5</span></li>
                   </ul>
-                  <a href="tours-single.html">SELECT DATES</a>
+                  <a href="tours-single.php">SELECT DATES</a>
                 </div>
                 <!-- end inner -->
               </div>
@@ -475,7 +479,7 @@
                     <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small> <span>3-10 DAYS</span></li>
                     <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small> <span>$166.5</span></li>
                   </ul>
-                  <a href="tours-single.html">SELECT DATES</a>
+                  <a href="tours-single.php">SELECT DATES</a>
                 </div>
                 <!-- end inner -->
               </div>
@@ -501,7 +505,7 @@
                     <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small> <span>3-10 DAYS</span></li>
                     <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small> <span>$166.5</span></li>
                   </ul>
-                  <a href="tours-single.html">SELECT DATES</a>
+                  <a href="tours-single.php">SELECT DATES</a>
                 </div>
                 <!-- end inner -->
               </div>
@@ -527,7 +531,7 @@
                     <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small> <span>3-10 DAYS</span></li>
                     <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small> <span>$166.5</span></li>
                   </ul>
-                  <a href="tours-single.html">SELECT DATES</a>
+                  <a href="tours-single.php">SELECT DATES</a>
                 </div>
                 <!-- end inner -->
               </div>
@@ -553,7 +557,7 @@
                     <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small> <span>3-10 DAYS</span></li>
                     <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small> <span>$166.5</span></li>
                   </ul>
-                  <a href="tours-single.html">SELECT DATES</a>
+                  <a href="tours-single.php">SELECT DATES</a>
                 </div>
                 <!-- end inner -->
               </div>
@@ -579,7 +583,7 @@
                     <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small> <span>3-10 DAYS</span></li>
                     <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small> <span>$166.5</span></li>
                   </ul>
-                  <a href="tours-single.html">SELECT DATES</a>
+                  <a href="tours-single.php">SELECT DATES</a>
                 </div>
                 <!-- end inner -->
               </div>
@@ -605,7 +609,7 @@
                     <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small> <span>3-10 DAYS</span></li>
                     <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small> <span>$166.5</span></li>
                   </ul>
-                  <a href="tours-single.html">SELECT DATES</a>
+                  <a href="tours-single.php">SELECT DATES</a>
                 </div>
                 <!-- end inner -->
               </div>
@@ -652,10 +656,10 @@
           <div class="col-lg-3 col-md-4">
             <h5>TENTANG KAMI</h5>
             <ul class="footer-menu">
-              <li><a href="about-us.html">Tentang Kami</a></li>
+              <li><a href="about-us.php">Tentang Kami</a></li>
 
               <li><a href="#">Tim Kami</a></li>
-              <li><a href="blog-list.html">Berita</a></li>
+              <li><a href="blog-list.php">Berita</a></li>
             </ul>
           </div>
           <!-- end col-3 -->
@@ -732,4 +736,4 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
     <script src="js/scripts.js"></script>
   </body>
-</html>
+    </html>

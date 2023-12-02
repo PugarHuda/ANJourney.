@@ -1,5 +1,9 @@
+<?php
+include "koneksi.php"
+?>
+
 <!doctype html>
-<html lang="zxx">
+<php lang="zxx">
 <head>
 <!-- META TAGS -->
 <meta charset="utf-8">
@@ -60,7 +64,7 @@
 <!-- end search-box -->
 <header class="header-int">
   <div class="container">
-    <nav class="navbar dark"> <a href="index.html" class="navbar-brand"><img src="images/logo-dark.png" alt="Image"></a>
+    <nav class="navbar dark"> <a href="index.php" class="navbar-brand"><img src="images/logo-dark.png" alt="Image"></a>
         <div class="menu-btn">
           <div class="menu-circle-wrap">
             <div class="wave"></div>
@@ -78,54 +82,54 @@
       <ul class="navbar-nav">
         <li class="nav-item dropdown"><a class="nav-link">HOME</a>
           <ul class="dropdown-menu">
-            <li><a href="index-denmark.html">DENMARK</a></li>
-            <li><a href="index-norway.html">NORWAY</a></li>
-            <li><a href="index-finland.html">FINLAND</a></li>
-            <li><a href="index-sweden.html">SWEDEN</a></li>
-            <li><a href="index-iceland.html">ICELAND</a></li>
+            <li><a href="index-denmark.php">DENMARK</a></li>
+            <li><a href="index-norway.php">NORWAY</a></li>
+            <li><a href="index-finland.php">FINLAND</a></li>
+            <li><a href="index-sweden.php">SWEDEN</a></li>
+            <li><a href="index-iceland.php">ICELAND</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown"><a class="nav-link">PAGES</a>
           <ul class="dropdown-menu">
             <li><a>TOUR</a>
               <ul class="sub-dropdown-menu">
-                <li><a href="tours-grid.html">TOUR GRID</a></li>
-                <li><a href="tours-list.html">TOUR LIST</a></li>
-                <li><a href="tours-single.html">TOUR SINGLE</a></li>
+                <li><a href="tours-grid.php">TOUR GRID</a></li>
+                <li><a href="tours-list.php">TOUR LIST</a></li>
+                <li><a href="tours-single.php">TOUR SINGLE</a></li>
               </ul>
             </li>
             <li><a>ABOUT US</a>
               <ul class="sub-dropdown-menu">
-                <li><a href="about-us.html">ABOUT US</a></li>
-                <li><a href="our-team.html">OUR TEAM</a></li>
+                <li><a href="about-us.php">ABOUT US</a></li>
+                <li><a href="our-team.php">OUR TEAM</a></li>
               </ul>
             </li>
             <li><a>BLOG</a>
               <ul class="sub-dropdown-menu">
-                <li><a href="blog-grid.html">BLOG POST GRID</a></li>
-                <li><a href="blog-list.html">BLOG POST LIST</a></li>
-                <li><a href="blog-single.html">BLOG POST SINGLE</a></li>
+                <li><a href="blog-grid.php">BLOG POST GRID</a></li>
+                <li><a href="blog-list.php">BLOG POST LIST</a></li>
+                <li><a href="blog-single.php">BLOG POST SINGLE</a></li>
               </ul>
             </li>
           </ul>
         </li>
         <li class="nav-item dropdown"><a class="nav-link">ATTRACTIONS</a>
           <ul class="dropdown-menu">
-            <li><a href="attractions-4cols.html">FOUR COLUMNS</a></li>
-            <li><a href="attractions-3cols.html">THREE COLUMNS</a></li>
-            <li><a href="attractions-2cols.html">TWO COLUMNS</a></li>
-            <li><a href="attractions-single.html">SINGLE PAGE</a></li>
+            <li><a href="attractions-4cols.php">FOUR COLUMNS</a></li>
+            <li><a href="attractions-3cols.php">THREE COLUMNS</a></li>
+            <li><a href="attractions-2cols.php">TWO COLUMNS</a></li>
+            <li><a href="attractions-single.php">SINGLE PAGE</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown"><a class="nav-link">CHECKOUT</a>
           <ul class="dropdown-menu">
-            <li><a href="passengers.html">PASSGENGER</a></li>
-            <li><a href="booking.html">BOOKING</a></li>
-            <li><a href="summary.html">SUMMARY</a></li>
-            <li><a href="payment.html">PAYMENT</a></li>
+            <li><a href="passengers.php">PASSGENGER</a></li>
+            <li><a href="booking.php">BOOKING</a></li>
+            <li><a href="summary.php">SUMMARY</a></li>
+            <li><a href="payment.php">PAYMENT</a></li>
           </ul>
         </li>
-        <li class="nav-item"><a class="nav-link" href="contact.html">CONTACT</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.php">CONTACT</a></li>
       </ul>
     </nav>
     <!-- end navbar -->
@@ -243,7 +247,7 @@
                 <li><div> <img src="images/icon-time.png" alt="Image"> <small>DURATION</small> <span>3-10 DAYS</span> </div></li>
                 <li><div> <img src="images/icon-tag.png" alt="Image"> <small>FROM</small> <span>$166.750</span> </div></li>
               </ul>
-            <a href="tours-single.html">SELECT DATES</a>
+            <a href="tours-single.php">SELECT DATES</a>
             </div>
           </div>
           <!-- end tour-content -->
@@ -265,7 +269,7 @@
                 <li><div> <img src="images/icon-time.png" alt="Image"> <small>DURATION</small> <span>3-10 DAYS</span> </div></li>
                 <li><div> <img src="images/icon-tag.png" alt="Image"> <small>FROM</small> <span>$166.750</span> </div></li>
               </ul>
-            <a href="tours-single.html">SELECT DATES</a>
+            <a href="tours-single.php">SELECT DATES</a>
             </div>
           </div>
           <!-- end tour-content -->
@@ -286,7 +290,7 @@
                 <li><div> <img src="images/icon-time.png" alt="Image"> <small>DURATION</small> <span>3-10 DAYS</span> </div></li>
                 <li><div> <img src="images/icon-tag.png" alt="Image"> <small>FROM</small> <span>$166.750</span> </div></li>
               </ul>
-            <a href="tours-single.html">SELECT DATES</a>
+            <a href="tours-single.php">SELECT DATES</a>
             </div>
           </div>
           <!-- end tour-content -->
@@ -308,7 +312,7 @@
                 <li><div> <img src="images/icon-time.png" alt="Image"> <small>DURATION</small> <span>3-10 DAYS</span> </div></li>
                 <li><div> <img src="images/icon-tag.png" alt="Image"> <small>FROM</small> <span>$166.750</span> </div></li>
               </ul>
-            <a href="tours-single.html">SELECT DATES</a>
+            <a href="tours-single.php">SELECT DATES</a>
             </div>
           </div>
           <!-- end tour-content -->
@@ -329,7 +333,7 @@
                 <li><div> <img src="images/icon-time.png" alt="Image"> <small>DURATION</small> <span>3-10 DAYS</span> </div></li>
                 <li><div> <img src="images/icon-tag.png" alt="Image"> <small>FROM</small> <span>$166.750</span> </div></li>
               </ul>
-            <a href="tours-single.html">SELECT DATES</a>
+            <a href="tours-single.php">SELECT DATES</a>
             </div>
           </div>
           <!-- end tour-content -->
@@ -350,7 +354,7 @@
                 <li><div> <img src="images/icon-time.png" alt="Image"> <small>DURATION</small> <span>3-10 DAYS</span> </div></li>
                 <li><div> <img src="images/icon-tag.png" alt="Image"> <small>FROM</small> <span>$166.750</span> </div></li>
               </ul>
-            <a href="tours-single.html">SELECT DATES</a>
+            <a href="tours-single.php">SELECT DATES</a>
             </div>
           </div>
           <!-- end tour-content -->
@@ -372,7 +376,7 @@
                 <li><div> <img src="images/icon-time.png" alt="Image"> <small>DURATION</small> <span>3-10 DAYS</span> </div></li>
                 <li><div> <img src="images/icon-tag.png" alt="Image"> <small>FROM</small> <span>$166.750</span> </div></li>
               </ul>
-            <a href="tours-single.html">SELECT DATES</a>
+            <a href="tours-single.php">SELECT DATES</a>
             </div>
           </div>
           <!-- end tour-content -->
@@ -394,7 +398,7 @@ Northern Lights</h3>
                 <li><div> <img src="images/icon-time.png" alt="Image"> <small>DURATION</small> <span>3-10 DAYS</span> </div></li>
                 <li><div> <img src="images/icon-tag.png" alt="Image"> <small>FROM</small> <span>$166.750</span> </div></li>
               </ul>
-            <a href="tours-single.html">SELECT DATES</a>
+            <a href="tours-single.php">SELECT DATES</a>
             </div>
           </div>
           <!-- end tour-content -->
@@ -416,7 +420,7 @@ Northern Lights</h3>
                 <li><div> <img src="images/icon-time.png" alt="Image"> <small>DURATION</small> <span>3-10 DAYS</span> </div></li>
                 <li><div> <img src="images/icon-tag.png" alt="Image"> <small>FROM</small> <span>$166.750</span> </div></li>
               </ul>
-            <a href="tours-single.html">SELECT DATES</a>
+            <a href="tours-single.php">SELECT DATES</a>
             </div>
           </div>
           <!-- end tour-content -->
@@ -546,4 +550,4 @@ Northern Lights</h3>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
 <script src="js/scripts.js"></script>
 </body>
-</html>
+    </html>

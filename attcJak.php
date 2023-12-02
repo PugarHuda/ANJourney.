@@ -1,5 +1,9 @@
+<?php
+include "koneksi.php"
+?>
+
 <!DOCTYPE html>
-<html lang="zxx">
+< lang="zxx">
   <head>
     <!-- META TAGS -->
     <meta charset="utf-8" />
@@ -104,7 +108,7 @@
     <header class="header-int">
       <div class="container">
         <nav class="navbar dark">
-          <a href="index.html" class="navbar-brand"><img src="images/anjBlack.png" alt="Image" /></a>
+          <a href="index.php" class="navbar-brand"><img src="images/anjBlack.png" alt="Image" /></a>
           <div class="menu-btn">
             <div class="menu-circle-wrap">
               <div class="wave"></div>
@@ -122,21 +126,19 @@
           <span class="search-btn"><i class="fa fa-search"></i></span>
           <ul class="navbar-nav">
             <li class="nav-item dropdown">
-              <a class="nav-link" a href="index.html">HOME</a>
+              <a class="nav-link" a href="index.php">HOME</a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="tours-list.html">TOURS</a></li>
-              </ul>
-            </li>
+            <li class="nav-item"><a class="nav-link" href="tours-list.php">TOURS</a></li>
             <li class="nav-item dropdown">
               <a class="nav-link">ATTRACTIONS</a>
               <ul class="dropdown-menu">
-                <li><a href="attcJak.html">JAKARTA</a></li>
-                <li><a href="attcJog.html">YOGYAKARTA</a></li>
-                <li><a href="attcBan.html">BANDUNG</a></li>
-                <li><a href="attcBali.html">BALI</a></li>
+                <li><a href="attcJak.php">JAKARTA</a></li>
+                <li><a href="attcJog.php">YOGYAKARTA</a></li>
+                <li><a href="attcBan.php">BANDUNG</a></li>
+                <li><a href="attcBali.php">BALI</a></li>
               </ul>
             </li>
-            <li class="nav-item"><a class="nav-link" href="about-us.html">ABOUT US</a></li>
+            <li class="nav-item"><a class="nav-link" href="about-us.php">ABOUT US</a></li>
             <li class="nav-item"><a id="login-link" class="nav-link" href="#">LOGIN</a></li>
 
             <!-- The login modal -->
@@ -156,7 +158,7 @@
                 <p class="signup-link">Don't have an account? <a href="#" id="signup-link">Sign Up</a></p>
               </div>
             </div>
-            
+
             <!-- The sign-up modal -->
             <div id="signupModal" class="modal">
               <div class="modal-content">
@@ -217,17 +219,31 @@
             <!-- end section-title -->
           </div>
           <!-- end col-12 -->
-          <div class="col-lg-6">
-            <a href="attractions-single.html">
-              <figure class="attractions-box">
-                <img src="images/attractions01-3x.jpg" alt="Image" />
-                <figcaption>Walk on Ice</figcaption>
-              </figure>
-            </a>
-          </div>
+<?php
+          // Query untuk mengambil data dari tabel detailwisata dan detailtour dengan JOIN
+$sql = "SELECT detailwisata.*, detailtour.* 
+        FROM detailwisata 
+        JOIN detailtour ON detailwisata.id_detailtour = detailtour.id_detailtour";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo '<div class="col-lg-6">
+                <a href="attractions-single.php">
+                  <figure class="attractions-box">
+                    <img src="images/' . $row['gambarTour'] . '" alt="Image" />
+                    <figcaption>' . $row['judulWisata'] . '</figcaption>
+                  </figure>
+                </a>
+              </div>';
+    }
+} else {
+    echo "0 results";
+}
+?>
           <!-- end col-6 -->
           <div class="col-lg-6">
-            <a href="attractions-single.html">
+            <a href="attractions-single.php">
               <figure class="attractions-box">
                 <img src="images/attractions02-3x.jpg" alt="Image" />
                 <figcaption>Professional Photos</figcaption>
@@ -236,7 +252,7 @@
           </div>
           <!-- end col-6 -->
           <div class="col-lg-6">
-            <a href="attractions-single.html">
+            <a href="attractions-single.php">
               <figure class="attractions-box">
                 <img src="images/attractions03-3x.jpg" alt="Image" />
                 <figcaption>Mountain Views</figcaption>
@@ -245,7 +261,7 @@
           </div>
           <!-- end col-6 -->
           <div class="col-lg-6">
-            <a href="attractions-single.html">
+            <a href="attractions-single.php">
               <figure class="attractions-box">
                 <img src="images/attractions04-3x.jpg" alt="Image" />
                 <figcaption>South Coast Sights</figcaption>
@@ -254,7 +270,7 @@
           </div>
           <!-- end col-6 -->
           <div class="col-lg-6">
-            <a href="attractions-single.html">
+            <a href="attractions-single.php">
               <figure class="attractions-box">
                 <img src="images/attractions05-3x.jpg" alt="Image" />
                 <figcaption>Boat Enjoy</figcaption>
@@ -263,7 +279,7 @@
           </div>
           <!-- end col-6 -->
           <div class="col-lg-6">
-            <a href="attractions-single.html">
+            <a href="attractions-single.php">
               <figure class="attractions-box">
                 <img src="images/attractions06-3x.jpg" alt="Image" />
                 <figcaption>Green Rich Trail</figcaption>
@@ -291,60 +307,41 @@
             <!-- end section-title -->
           </div>
           <!-- end col-12 -->
-          <div class="col-lg-4">
-            <div class="tour-box">
-              <figure><img src="images/tour-thumb01.jpg" alt="Image" /></figure>
-              <div class="tour-content">
-                <small>FROM SKAFTAFELL</small>
-                <h3>Blue Ice Experience</h3>
-                <ul>
-                  <li><img src="images/icon-date.png" alt="Image" /> <small>Available</small> <span>ALL YEAR</span></li>
-                  <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small> <span>3-10 DAYS</span></li>
-                  <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small> <span>$166.750</span></li>
-                </ul>
-                <a href="#">SELECT DATES</a>
-              </div>
-              <!-- end tour-content -->
-            </div>
-            <!-- end tour-box -->
-          </div>
-          <!-- end col-4 -->
-          <div class="col-lg-4">
-            <div class="tour-box">
-              <figure><img src="images/tour-thumb02.jpg" alt="Image" /> <span class="tag">MOST POPULAR</span></figure>
-              <div class="tour-content">
-                <small>FROM SKAFTAFELL</small>
-                <h3>Blue Ice Experience</h3>
-                <ul>
-                  <li><img src="images/icon-date.png" alt="Image" /> <small>Available</small> <span>ALL YEAR</span></li>
-                  <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small> <span>3-10 DAYS</span></li>
-                  <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small> <span>$166.750</span></li>
-                </ul>
-                <a href="#">SELECT DATES</a>
-              </div>
-              <!-- end tour-content -->
-            </div>
-            <!-- end tour-box -->
-          </div>
-          <!-- end col-4 -->
-          <div class="col-lg-4">
-            <div class="tour-box">
-              <figure><img src="images/tour-thumb03.jpg" alt="Image" /></figure>
-              <div class="tour-content">
-                <small>FROM SKAFTAFELL</small>
-                <h3>Blue Ice Experience</h3>
-                <ul>
-                  <li><img src="images/icon-date.png" alt="Image" /> <small>Available</small> <span>ALL YEAR</span></li>
-                  <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small> <span>3-10 DAYS</span></li>
-                  <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small> <span>$166.750</span></li>
-                </ul>
-                <a href="#">SELECT DATES</a>
-              </div>
-              <!-- end tour-content -->
-            </div>
-            <!-- end tour-box -->
-          </div>
-          <!-- end col-4 -->
+                   <?php
+         // Query untuk mengambil data dari tabel popular tour
+$sql = "SELECT p.*, d.* FROM populartour p JOIN detailtour d ON p.id_detailTour = d.id_detailTour";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo '<div class="col-lg-4">
+                <div class="tour-box">
+                    <figure><img src="images/' . $row['gambarTour'] . '" alt="Image" /></figure>
+                    <div class="tour-content">
+                        <small>' . $row['namaKota'] . '</small>
+                        <h3>' . $row['namaTour'] . '</h3>
+                        <ul>
+                            <li>
+                                <div><img src="images/icon-date.png" alt="Image" /> <small>Ketersediaan</small> <span>' . $row['ketersediaanTour'] . '</span></div>
+                            </li>
+                            <li>
+                                <div><img src="images/icon-time.png" alt="Image" /> <small>Durasi</small> <span>' . $row['durasiTour'] . '</span></div>
+                            </li>
+                            <li>
+                                <div><img src="images/icon-tag.png" alt="Image" /> <small>Harga</small> <span>' . $row['hargaTour'] . '</span></div>
+                            </li>
+                        </ul>
+                        <a href="tours-single.php">PILIH TANGGAL</a>
+                    </div>
+                </div>
+            </div>';
+    }
+} else {
+    echo "0 results";
+}
+
+?>
+          
         </div>
         <!-- end row -->
       </div>
@@ -357,10 +354,10 @@
           <div class="col-lg-3 col-md-4">
             <h5>TENTANG KAMI</h5>
             <ul class="footer-menu">
-              <li><a href="about-us.html">Tentang Kami</a></li>
+              <li><a href="about-us.php">Tentang Kami</a></li>
 
               <li><a href="#">Tim Kami</a></li>
-              <li><a href="blog-list.html">Berita</a></li>
+              <li><a href="blog-list.php">Berita</a></li>
             </ul>
           </div>
           <!-- end col-3 -->
@@ -429,4 +426,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
     <script src="js/scripts.js"></script>
   </body>
-</html>
+    </html>
+<?php mysqli_close($conn); ?>

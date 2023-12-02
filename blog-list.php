@@ -1,3 +1,7 @@
+
+<?php
+include "koneksi.php"
+?>
 <!DOCTYPE html>
 <html lang="zxx">
   <head>
@@ -104,7 +108,7 @@
     <header class="header-int">
       <div class="container">
         <nav class="navbar dark">
-          <a href="index.html" class="navbar-brand"><img src="images/anjBlack.png" alt="Image" /></a>
+          <a href="index.php" class="navbar-brand"><img src="images/anjBlack.png" alt="Image" /></a>
           <div class="menu-btn">
             <div class="menu-circle-wrap">
               <div class="wave"></div>
@@ -122,19 +126,19 @@
           <span class="search-btn"><i class="fa fa-search"></i></span>
           <ul class="navbar-nav">
             <li class="nav-item dropdown">
-              <a class="nav-link" href="index.html">HOME</a>
+              <a class="nav-link" href="index.php">HOME</a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="tours-list.html">TOURS</a></li>
+            <li class="nav-item"><a class="nav-link" href="tours-list.php">TOURS</a></li>
             <li class="nav-item dropdown">
               <a class="nav-link">ATTRACTIONS</a>
               <ul class="dropdown-menu">
-                <li><a href="attcJak.html">JAKARTA</a></li>
-                <li><a href="attcJog.html">YOGYAKARTA</a></li>
-                <li><a href="attcBan.html">BANDUNG</a></li>
-                <li><a href="attcBali.html">BALI</a></li>
+                <li><a href="attcJak.php">JAKARTA</a></li>
+                <li><a href="attcJog.php">YOGYAKARTA</a></li>
+                <li><a href="attcBan.php">BANDUNG</a></li>
+                <li><a href="attcBali.php">BALI</a></li>
               </ul>
             </li>
-            <li class="nav-item"><a class="nav-link" href="about-us.html">ABOUT US</a></li>
+            <li class="nav-item"><a class="nav-link" href="about-us.php">ABOUT US</a></li>
             <li class="nav-item"><a id="login-link" class="nav-link" href="#">LOGIN</a></li>
 
             <!-- The login modal -->
@@ -222,12 +226,12 @@
               <figure class="post-image"><img src="images/blog-thumb01.jpg" alt="Image" /></figure>
               <div class="post-content">
                 <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-                <a href="blog-single.html"><h3>An Enchanted Ice Cave in Midst of Denmark</h3></a>
+                <a href="blog-single.php"><h3>An Enchanted Ice Cave in Midst of Denmark</h3></a>
                 <p>
                   Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus mus. Cras eleifend tellus sed congue ectetur velit turpis faucibus odio eget penatibus et magnis dis turient montes nascetur ridiculus volutpat
                   odio lectus eu erat.
                 </p>
-                <a href="blog-single.html" class="read-more">READ MORE</a>
+                <a href="blog-single.php" class="read-more">READ MORE</a>
               </div>
               <!-- end post-content -->
             </div>
@@ -239,12 +243,12 @@
               <figure class="post-image"><img src="images/blog-thumb02.jpg" alt="Image" /></figure>
               <div class="post-content">
                 <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-                <a href="blog-single.html"><h3>Laugavegur Trek Classic (Huts) for Camping</h3></a>
+                <a href="blog-single.php"><h3>Laugavegur Trek Classic (Huts) for Camping</h3></a>
                 <p>
                   Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus mus. Cras eleifend tellus sed congue ectetur velit turpis faucibus odio eget penatibus et magnis dis turient montes nascetur ridiculus volutpat
                   odio lectus eu erat.
                 </p>
-                <a href="blog-single.html" class="read-more">READ MORE</a>
+                <a href="blog-single.php" class="read-more">READ MORE</a>
               </div>
               <!-- end post-content -->
             </div>
@@ -256,12 +260,12 @@
               <figure class="post-image"><img src="images/blog-thumb03.jpg" alt="Image" /></figure>
               <div class="post-content">
                 <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-                <a href="blog-single.html"><h3>How to Reach the Peak Without Exhausting</h3></a>
+                <a href="blog-single.php"><h3>How to Reach the Peak Without Exhausting</h3></a>
                 <p>
                   Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus mus. Cras eleifend tellus sed congue ectetur velit turpis faucibus odio eget penatibus et magnis dis turient montes nascetur ridiculus volutpat
                   odio lectus eu erat.
                 </p>
-                <a href="blog-single.html" class="read-more">READ MORE</a>
+                <a href="blog-single.php" class="read-more">READ MORE</a>
               </div>
               <!-- end post-content -->
             </div>
@@ -273,12 +277,12 @@
               <figure class="post-image"><img src="images/blog-thumb04.jpg" alt="Image" /></figure>
               <div class="post-content">
                 <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-                <a href="blog-single.html"><h3>Finish Carbon Emissions by Planting Trees</h3></a>
+                <a href="blog-single.php"><h3>Finish Carbon Emissions by Planting Trees</h3></a>
                 <p>
                   Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus mus. Cras eleifend tellus sed congue ectetur velit turpis faucibus odio eget penatibus et magnis dis turient montes nascetur ridiculus volutpat
                   odio lectus eu erat.
                 </p>
-                <a href="blog-single.html" class="read-more">READ MORE</a>
+                <a href="blog-single.php" class="read-more">READ MORE</a>
               </div>
               <!-- end post-content -->
             </div>
@@ -290,12 +294,12 @@
               <figure class="post-image"><img src="images/blog-thumb05.jpg" alt="Image" /></figure>
               <div class="post-content">
                 <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-                <a href="blog-single.html"><h3>Driving in Denmark - Road Safety & Rules</h3></a>
+                <a href="blog-single.php"><h3>Driving in Denmark - Road Safety & Rules</h3></a>
                 <p>
                   Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus mus. Cras eleifend tellus sed congue ectetur velit turpis faucibus odio eget penatibus et magnis dis turient montes nascetur ridiculus volutpat
                   odio lectus eu erat.
                 </p>
-                <a href="blog-single.html" class="read-more">READ MORE</a>
+                <a href="blog-single.php" class="read-more">READ MORE</a>
               </div>
               <!-- end post-content -->
             </div>
@@ -307,12 +311,12 @@
               <figure class="post-image"><img src="images/blog-thumb06.jpg" alt="Image" /></figure>
               <div class="post-content">
                 <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-                <a href="blog-single.html"><h3>Iceland's Northern Lights (Aurora Borealis)</h3></a>
+                <a href="blog-single.php"><h3>Iceland's Northern Lights (Aurora Borealis)</h3></a>
                 <p>
                   Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus mus. Cras eleifend tellus sed congue ectetur velit turpis faucibus odio eget penatibus et magnis dis turient montes nascetur ridiculus volutpat
                   odio lectus eu erat.
                 </p>
-                <a href="blog-single.html" class="read-more">READ MORE</a>
+                <a href="blog-single.php" class="read-more">READ MORE</a>
               </div>
               <!-- end post-content -->
             </div>
@@ -333,10 +337,10 @@
           <div class="col-lg-3 col-md-4">
             <h5>TENTANG KAMI</h5>
             <ul class="footer-menu">
-              <li><a href="about-us.html">Tentang Kami</a></li>
+              <li><a href="about-us.php">Tentang Kami</a></li>
 
               <li><a href="#">Tim Kami</a></li>
-              <li><a href="blog-list.html">Berita</a></li>
+              <li><a href="blog-list.php">Berita</a></li>
             </ul>
           </div>
           <!-- end col-3 -->
@@ -413,4 +417,4 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
     <script src="js/scripts.js"></script>
   </body>
-</html>
+    </html>

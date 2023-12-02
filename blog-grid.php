@@ -1,5 +1,9 @@
+<?php
+include "koneksi.php"
+?>
+
 <!doctype html>
-<html lang="zxx">
+<lang="zxx">
 <head>
 <!-- META TAGS -->
 <meta charset="utf-8">
@@ -60,7 +64,7 @@
 <!-- end search-box -->
 <header class="header-int">
   <div class="container">
-    <nav class="navbar dark"> <a href="index.html" class="navbar-brand"><img src="images/logo-dark.png" alt="Image"></a>
+    <nav class="navbar dark"> <a href="index.php" class="navbar-brand"><img src="images/logo-dark.png" alt="Image"></a>
         <div class="menu-btn">
           <div class="menu-circle-wrap">
             <div class="wave"></div>
@@ -78,54 +82,54 @@
       <ul class="navbar-nav">
         <li class="nav-item dropdown"><a class="nav-link">HOME</a>
           <ul class="dropdown-menu">
-            <li><a href="index-denmark.html">DENMARK</a></li>
-            <li><a href="index-norway.html">NORWAY</a></li>
-            <li><a href="index-finland.html">FINLAND</a></li>
-            <li><a href="index-sweden.html">SWEDEN</a></li>
-            <li><a href="index-iceland.html">ICELAND</a></li>
+            <li><a href="index-denmark.php">DENMARK</a></li>
+            <li><a href="index-norway.php">NORWAY</a></li>
+            <li><a href="index-finland.php">FINLAND</a></li>
+            <li><a href="index-sweden.php">SWEDEN</a></li>
+            <li><a href="index-iceland.php">ICELAND</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown"><a class="nav-link">PAGES</a>
           <ul class="dropdown-menu">
             <li><a>TOUR</a>
               <ul class="sub-dropdown-menu">
-                <li><a href="tours-grid.html">TOUR GRID</a></li>
-                <li><a href="tours-list.html">TOUR LIST</a></li>
-                <li><a href="tours-single.html">TOUR SINGLE</a></li>
+                <li><a href="tours-grid.php">TOUR GRID</a></li>
+                <li><a href="tours-list.php">TOUR LIST</a></li>
+                <li><a href="tours-single.php">TOUR SINGLE</a></li>
               </ul>
             </li>
             <li><a>ABOUT US</a>
               <ul class="sub-dropdown-menu">
-                <li><a href="about-us.html">ABOUT US</a></li>
-                <li><a href="our-team.html">OUR TEAM</a></li>
+                <li><a href="about-us.php">ABOUT US</a></li>
+                <li><a href="our-team.php">OUR TEAM</a></li>
               </ul>
             </li>
             <li><a>BLOG</a>
               <ul class="sub-dropdown-menu">
-                <li><a href="blog-grid.html">BLOG POST GRID</a></li>
-                <li><a href="blog-list.html">BLOG POST LIST</a></li>
-                <li><a href="blog-single.html">BLOG POST SINGLE</a></li>
+                <li><a href="blog-grid.php">BLOG POST GRID</a></li>
+                <li><a href="blog-list.php">BLOG POST LIST</a></li>
+                <li><a href="blog-single.php">BLOG POST SINGLE</a></li>
               </ul>
             </li>
           </ul>
         </li>
         <li class="nav-item dropdown"><a class="nav-link">ATTRACTIONS</a>
           <ul class="dropdown-menu">
-            <li><a href="attractions-4cols.html">FOUR COLUMNS</a></li>
-            <li><a href="attractions-3cols.html">THREE COLUMNS</a></li>
-            <li><a href="attractions-2cols.html">TWO COLUMNS</a></li>
-            <li><a href="attractions-single.html">SINGLE PAGE</a></li>
+            <li><a href="attractions-4cols.php">FOUR COLUMNS</a></li>
+            <li><a href="attractions-3cols.php">THREE COLUMNS</a></li>
+            <li><a href="attractions-2cols.php">TWO COLUMNS</a></li>
+            <li><a href="attractions-single.php">SINGLE PAGE</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown"><a class="nav-link">CHECKOUT</a>
           <ul class="dropdown-menu">
-            <li><a href="passengers.html">PASSGENGER</a></li>
-            <li><a href="booking.html">BOOKING</a></li>
-            <li><a href="summary.html">SUMMARY</a></li>
-            <li><a href="payment.html">PAYMENT</a></li>
+            <li><a href="passengers.php">PASSGENGER</a></li>
+            <li><a href="booking.php">BOOKING</a></li>
+            <li><a href="summary.php">SUMMARY</a></li>
+            <li><a href="payment.php">PAYMENT</a></li>
           </ul>
         </li>
-        <li class="nav-item"><a class="nav-link" href="contact.html">CONTACT</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.php">CONTACT</a></li>
       </ul>
     </nav>
     <!-- end navbar -->
@@ -207,9 +211,9 @@
         <div class="blog-post-grid post">
           <figure class="post-image"> <img src="images/blog-thumb01.jpg" alt="Image"> </figure>
           <div class="post-content"> <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-            <a href="blog-single.html"><h3>An Enchanted Ice Cave in Midst of Denmark</h3></a>
+            <a href="blog-single.php"><h3>An Enchanted Ice Cave in Midst of Denmark</h3></a>
             <p>Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus mus. Cras eleifend tellus sed congue ectetur velit turpis faucibus odio eget penatibus et magnis dis turient montes nascetur ridiculus volutpat odio lectus eu erat.</p>
-            <a href="blog-single.html" class="read-more">READ MORE</a> </div>
+            <a href="blog-single.php" class="read-more">READ MORE</a> </div>
           <!-- end post-content -->
         </div>
         <!-- end blog-post -->
@@ -219,9 +223,9 @@
         <div class="blog-post-grid post">
           <figure class="post-image"> <img src="images/blog-thumb02.jpg" alt="Image"> </figure>
           <div class="post-content"> <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-            <a href="blog-single.html"><h3>Laugavegur Trek Classic (Huts) for Camping</h3></a>
+            <a href="blog-single.php"><h3>Laugavegur Trek Classic (Huts) for Camping</h3></a>
             <p>Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus mus. Cras eleifend tellus sed congue ectetur velit turpis faucibus odio eget penatibus et magnis dis turient montes nascetur ridiculus volutpat odio lectus eu erat.</p>
-            <a href="blog-single.html" class="read-more">READ MORE</a> </div>
+            <a href="blog-single.php" class="read-more">READ MORE</a> </div>
           <!-- end post-content -->
         </div>
         <!-- end blog-post -->
@@ -231,9 +235,9 @@
         <div class="blog-post-grid post">
           <figure class="post-image"> <img src="images/blog-thumb03.jpg" alt="Image"> </figure>
           <div class="post-content"> <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-            <a href="blog-single.html"><h3>How to Reach the Peak Without Exhausting</h3></a>
+            <a href="blog-single.php"><h3>How to Reach the Peak Without Exhausting</h3></a>
             <p>Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus mus. Cras eleifend tellus sed congue ectetur velit turpis faucibus odio eget penatibus et magnis dis turient montes nascetur ridiculus volutpat odio lectus eu erat.</p>
-            <a href="blog-single.html" class="read-more">READ MORE</a> </div>
+            <a href="blog-single.php" class="read-more">READ MORE</a> </div>
           <!-- end post-content -->
         </div>
         <!-- end blog-post -->
@@ -243,9 +247,9 @@
         <div class="blog-post-grid post">
           <figure class="post-image"> <img src="images/blog-thumb04.jpg" alt="Image"> </figure>
           <div class="post-content"> <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-            <a href="blog-single.html"><h3>Finish Carbon Emissions by Planting Trees</h3></a>
+            <a href="blog-single.php"><h3>Finish Carbon Emissions by Planting Trees</h3></a>
             <p>Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus mus. Cras eleifend tellus sed congue ectetur velit turpis faucibus odio eget penatibus et magnis dis turient montes nascetur ridiculus volutpat odio lectus eu erat.</p>
-            <a href="blog-single.html" class="read-more">READ MORE</a> </div>
+            <a href="blog-single.php" class="read-more">READ MORE</a> </div>
           <!-- end post-content -->
         </div>
         <!-- end blog-post -->
@@ -255,9 +259,9 @@
         <div class="blog-post-grid post">
           <figure class="post-image"> <img src="images/blog-thumb05.jpg" alt="Image"> </figure>
           <div class="post-content"> <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-            <a href="blog-single.html"><h3>Driving in Denmark - Road Safety & Rules</h3></a>
+            <a href="blog-single.php"><h3>Driving in Denmark - Road Safety & Rules</h3></a>
             <p>Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus mus. Cras eleifend tellus sed congue ectetur velit turpis faucibus odio eget penatibus et magnis dis turient montes nascetur ridiculus volutpat odio lectus eu erat.</p>
-            <a href="blog-single.html" class="read-more">READ MORE</a> </div>
+            <a href="blog-single.php" class="read-more">READ MORE</a> </div>
           <!-- end post-content -->
         </div>
         <!-- end blog-post -->
@@ -267,9 +271,9 @@
         <div class="blog-post-grid post">
           <figure class="post-image"> <img src="images/blog-thumb06.jpg" alt="Image"> </figure>
           <div class="post-content"> <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-            <a href="blog-single.html"><h3>Iceland's Northern Lights (Aurora Borealis)</h3></a>
+            <a href="blog-single.php"><h3>Iceland's Northern Lights (Aurora Borealis)</h3></a>
             <p>Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus mus. Cras eleifend tellus sed congue ectetur velit turpis faucibus odio eget penatibus et magnis dis turient montes nascetur ridiculus volutpat odio lectus eu erat.</p>
-            <a href="blog-single.html" class="read-more">READ MORE</a> </div>
+            <a href="blog-single.php" class="read-more">READ MORE</a> </div>
           <!-- end post-content -->
         </div>
         <!-- end blog-post -->
@@ -279,9 +283,9 @@
         <div class="blog-post-grid post">
           <figure class="post-image"> <img src="images/blog-thumb07.jpg" alt="Image"> </figure>
           <div class="post-content"> <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-            <a href="blog-single.html"><h3>The Most Challenging Trek in Finland</h3></a>
+            <a href="blog-single.php"><h3>The Most Challenging Trek in Finland</h3></a>
             <p>Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus mus. Cras eleifend tellus sed congue ectetur velit turpis faucibus odio eget penatibus et magnis dis turient montes nascetur ridiculus volutpat odio lectus eu erat.</p>
-            <a href="blog-single.html" class="read-more">READ MORE</a> </div>
+            <a href="blog-single.php" class="read-more">READ MORE</a> </div>
           <!-- end post-content -->
         </div>
         <!-- end blog-post -->
@@ -291,9 +295,9 @@
         <div class="blog-post-grid post">
           <figure class="post-image"> <img src="images/blog-thumb08.jpg" alt="Image"> </figure>
           <div class="post-content"> <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-            <a href="blog-single.html"><h3>Laugavegur Trek Classic (Huts) for Camping</h3></a>
+            <a href="blog-single.php"><h3>Laugavegur Trek Classic (Huts) for Camping</h3></a>
             <p>Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus mus. Cras eleifend tellus sed congue ectetur velit turpis faucibus odio eget penatibus et magnis dis turient montes nascetur ridiculus volutpat odio lectus eu erat.</p>
-            <a href="blog-single.html" class="read-more">READ MORE</a> </div>
+            <a href="blog-single.php" class="read-more">READ MORE</a> </div>
           <!-- end post-content -->
         </div>
         <!-- end blog-post -->
@@ -303,9 +307,9 @@
         <div class="blog-post-grid post">
           <figure class="post-image"> <img src="images/blog-thumb09.jpg" alt="Image"> </figure>
           <div class="post-content"> <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-            <a href="blog-single.html"><h3>Visiting the Ice Cave With Tour Friends</h3></a>
+            <a href="blog-single.php"><h3>Visiting the Ice Cave With Tour Friends</h3></a>
             <p>Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus mus. Cras eleifend tellus sed congue ectetur velit turpis faucibus odio eget penatibus et magnis dis turient montes nascetur ridiculus volutpat odio lectus eu erat.</p>
-            <a href="blog-single.html" class="read-more">READ MORE</a> </div>
+            <a href="blog-single.php" class="read-more">READ MORE</a> </div>
           <!-- end post-content -->
         </div>
         <!-- end blog-post -->
@@ -315,9 +319,9 @@
         <div class="blog-post-grid post">
           <figure class="post-image"> <img src="images/blog-thumb10.jpg" alt="Image"> </figure>
           <div class="post-content"> <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-            <a href="blog-single.html"><h3>Best Kayaking Sites You Should Experience</h3></a>
+            <a href="blog-single.php"><h3>Best Kayaking Sites You Should Experience</h3></a>
             <p>Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus mus. Cras eleifend tellus sed congue ectetur velit turpis faucibus odio eget penatibus et magnis dis turient montes nascetur ridiculus volutpat odio lectus eu erat.</p>
-            <a href="blog-single.html" class="read-more">READ MORE</a> </div>
+            <a href="blog-single.php" class="read-more">READ MORE</a> </div>
           <!-- end post-content -->
         </div>
         <!-- end blog-post -->
@@ -327,9 +331,9 @@
         <div class="blog-post-grid post">
           <figure class="post-image"> <img src="images/blog-thumb11.jpg" alt="Image"> </figure>
           <div class="post-content"> <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-            <a href="blog-single.html"><h3>Joyful Underwater Tour in Northern Europe</h3></a>
+            <a href="blog-single.php"><h3>Joyful Underwater Tour in Northern Europe</h3></a>
             <p>Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus mus. Cras eleifend tellus sed congue ectetur velit turpis faucibus odio eget penatibus et magnis dis turient montes nascetur ridiculus volutpat odio lectus eu erat.</p>
-            <a href="blog-single.html" class="read-more">READ MORE</a> </div>
+            <a href="blog-single.php" class="read-more">READ MORE</a> </div>
           <!-- end post-content -->
         </div>
         <!-- end blog-post -->
@@ -340,7 +344,7 @@
           <figure class="post-image"> <img src="images/blog-thumb12.jpg" alt="Image"> </figure>
           <div class="post-content"> <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
             <h3>Living on the Edge With Your Tour Mates</h3>
-            <a href="blog-single.html" class="read-more">READ MORE</a> </div>
+            <a href="blog-single.php" class="read-more">READ MORE</a> </div>
           <!-- end post-content -->
         </div>
         <!-- end blog-post -->
@@ -477,4 +481,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
 <script src="js/scripts.js"></script>
 </body>
-</html>
+    </html>
