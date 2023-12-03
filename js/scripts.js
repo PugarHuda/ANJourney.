@@ -451,3 +451,4 @@ signupForm.addEventListener('submit', (event) => {
 });
 
 })(jQuery);
+
