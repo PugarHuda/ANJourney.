@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_POST['judul']) ) {
+if (!isset($_POST['judulBerita']) ) {
   header('Location:update_berita.php');
   exit;
 }
@@ -8,21 +8,21 @@ include "koneksi.php";
 
 date_default_timezone_set('Asia/Bangkok');
 
-$judul= $_POST['judul'];
+$judulBerita= $_POST['judulBerita'];
 $ids = $_POST['ids'];
-$isi= $_POST['isi'];
-$kategori= $_POST['kategori'];
-$tanggal= $_POST['tanggal'];
+$deskripsiBerita= $_POST['deskripsiBerita'];
+$penguploadBerita= $_POST['penguploadBerita'];
+$tanggalBerita= $_POST['tanggalBerita'];
 
-$dater2=date_create("$tanggal");
-$tanggal = date_format($dater2,"Y-m-d");
+$dater2=date_create("$tanggalBerita");
+$tanggalBerita = date_format($dater2,"Y-m-d");
 
 
 
  if ($_FILES['fileToUpload']['size'] == 0 && $_FILES['fileToUpload']['error'] == 0 || $_FILES["fileToUpload"]["name"]=="")
 {
     $newfilename = "-";
-    $update_query2 = mysqli_query($conn, "UPDATE `berita` SET `judul` = '$judul', `isi` = '$isi', `tanggal` = '$tanggal', `gambar` = '$newfilename', `id_kategori` = '$kategori' WHERE `berita`.`id_berita` = $ids;");
+    $update_query2 = mysqli_query($conn, "UPDATE `berita` SET `judulBerita` = '$judulBerita', `deskripsiBerita` = '$deskripsiBerita', `tanggalBerita` = '$tanggalBerita', `gambarBerita` = '$newfilename', `penguploadBerita` = '$penguploadBerita' WHERE `berita`.`id_berita` = $ids;");
     if ($update_query2){
     echo "<script>
     alert ('Berita berhasil diubah');
@@ -39,7 +39,7 @@ $tanggal = date_format($dater2,"Y-m-d");
 }
 
 else{
-$target_dir = "assets/images/blog/";
+$target_dir = "images";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -79,18 +79,18 @@ if ($uploadOk == 0) {
 }
 
 else {
-  $get_data = mysqli_query($conn, "SELECT gambar FROM berita where id_berita='$ids'");
+  $get_data = mysqli_query($conn, "SELECT gambarBerita FROM berita where id_berita='$ids'");
   $hasil = mysqli_fetch_array($get_data, MYSQLI_ASSOC);
-  if($hasil['gambar']<>"-")
+  if($hasil['gambarBerita']<>"-")
   {
-      unlink("assets/images/blog/".$hasil['gambar']);
+      unlink("images/".$hasil['gambarBerita']);
   }
 
 $temp = explode(".", $_FILES["fileToUpload"]["name"]);
 $newfilename = round(microtime(true)) . '.' . end($temp);
 if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], "$target_dir" . $newfilename)){
 
-  $update_query = mysqli_query($conn, "UPDATE `berita` SET `judul` = '$judul', `isi` = '$isi', `tanggal` = '$tanggal', `gambar` = '$newfilename', `id_kategori` = '$kategori' WHERE `berita`.`id_berita` = $ids;");
+  $update_query = mysqli_query($conn, "UPDATE `berita` SET `judulBerita` = '$judulBerita', `deskripsiBerita` = '$deskripsiBerita', `tanggalBerita` = '$tanggalBerita', `gambarBerita` = '$newfilename', `penguploadBerita` = '$penguploadBerita' WHERE `berita`.`id_berita` = $ids;");
   if ($update_query){
   echo "<script>
   alert ('Berita berhasil diubah');

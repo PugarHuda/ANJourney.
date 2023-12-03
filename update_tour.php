@@ -9,13 +9,13 @@ include "header.php";
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Berita</h1>
+            <h1 class="m-0">Tour</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="admin.php">Home</a></li>
-              <li class="breadcrumb-item"><a href="berita.php">Berita</a></li>
-              <li class="breadcrumb-item active">Add Berita</li>
+              <li class="breadcrumb-item"><a href="daftarTour.php">Tour</a></li>
+              <li class="breadcrumb-item active">Add Tour</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -36,56 +36,106 @@ include "header.php";
           <div class="col-md-12">
                          <div class="card">
                            <div class="card-header">
-                             <h3 class="card-title">Form Tambah Berita</h3>
+                             <h3 class="card-title">Form Tambah Tour</h3>
                            </div>
                            <div class="card-body">
 
 
 
                             <?php
-$result = mysqli_query($conn, "SELECT * FROM berita WHERE id_berita = $_GET[id] ORDER BY id_berita DESC");
+$result = mysqli_query($conn, "SELECT * FROM detailtour WHERE id_detailtour = $_GET[id] ORDER BY id_detailtour DESC");
 $rows = mysqli_fetch_array($result, MYSQLI_ASSOC);
 ?>
 
 
 
-                                  <form role="form" method="POST" action="proses_update_berita.php"enctype="multipart/form-data">
+                                  <form role="form" method="POST" action="proses_update_tour.php"enctype="multipart/form-data">
 
                                                 <div class="form-group row">
-                                                <div class="col-sm-2 col-form-label"><label for="exampleInputJudul">Judul Berita</label></div><div class="col-sm-10"> <input  required type="text" class="form-control" id="judulBerita" placeholder="Masukan Judul Berita" name="judulBerita" value="<?php echo $rows['judulBerita']; ?>"></div>
+                                                <div class="col-sm-2 col-form-label"><label for="exampleInputJudul">Nama Kota</label></div><div class="col-sm-10"> <input  required type="text" class="form-control" id="namaKota" placeholder="Masukan nama kota" name="namaKota" value="<?php echo $rows['namaKota']; ?>"></div>
                                                 </div>
-                                                  <input  required type="hidden" class="form-control" name="ids" value="<?php echo $rows['id_berita']; ?>">
+                                                  <input  required type="hidden" class="form-control" name="ids" value="<?php echo $rows['id_detailtour']; ?>">
                                                 <div class="form-group row">
-                                                <div class="col-sm-2 col-form-label"><label for="exampleInputKategori">Pengupload</label></div><div class="col-sm-10"><input  required type="text" class="form-control" id="penguploadBerita" placeholder="Masukan Judul Berita" name="penguploadBerita" value="<?php echo $rows['judulBerita']; ?>"></div>
+                                                <div class="col-sm-2 col-form-label"><label for="exampleInputKategori">Nama Tour</label></div><div class="col-sm-10"><input  required type="text" class="form-control" id="namaTour" placeholder="Masukan Judul Berita" name="namaTour" value="<?php echo $rows['namaTour']; ?>"></div>
 
                                                 
                                               </div></div>
 
                                                 <div class="form-group row">
-                                                <div class="col-sm-2 col-form-label"><label for="exampleInputIsi">Deskripsi</label></div><div class="col-sm-10"> <textarea required class="form-control" id="deskripsiBerita" placeholder="Masukan Deskripsi Berita" name="deskripsiBerita"><?php echo $rows['deskripsiBerita']; ?></textarea></div>
+                                               <div class="col-sm-2 col-form-label"><label for="exampleInputKategori">Ketersediaan Tour</label></div><div class="col-sm-10" class="form-control"></div>
+
+<select name="ketersediaanTour" class="form-control select2" data-placeholder="Pilih Ketersediaan Tour">
+    <?php
+    // Ambil ketersediaanTour yang terkait dengan detailtour yang sedang diolah
+    $gets = mysqli_query($conn, "SELECT GROUP_CONCAT(ketersediaanTour) as ketersediaan_tour FROM detailtour WHERE id_detailtour = '$rows[id_detailtour]'");
+    $baris = mysqli_fetch_array($gets, MYSQLI_ASSOC);
+    $data = $baris['ketersediaan_tour'];
+    $ketersediaan_lain = explode(',', $data);
+
+    // Ambil semua ketersediaanTour
+    $results = mysqli_query($conn, "SELECT DISTINCT ketersediaanTour FROM detailtour");
+    $option = '';
+
+    // Susun opsi ketersediaanTour
+    while ($row = mysqli_fetch_array($results, MYSQLI_ASSOC)) {
+        $ketersediaanTour = $row['ketersediaanTour'];
+        $selected = (in_array($ketersediaanTour, $ketersediaan_lain)) ? "selected" : "";
+        $option .= '<option ' . $selected . ' value="' . $ketersediaanTour . '">' . $ketersediaanTour . '</option>';
+    }
+
+    echo $option;
+    ?>
+</select>
+
+
                                                 </div>
                                                 <div class="form-group row">
-                                                <div class="col-sm-2 col-form-label"><label for="exampleInputTgl">Tanggal</label></div>
-                                                <div class="col-sm-10">
+                                                <div class="col-sm-2 col-form-label"><label for="exampleInputJudul">Durasi Tour</label></div><div class="col-sm-10"> <input  required type="text" class="form-control" id="durasiTour" placeholder="Masukan nama kota" name="durasiTour" value="<?php echo $rows['durasiTour']; ?>"></div>
+                                                </div>
 
 
+                                                <div class="form-group row">
+                                                <div class="col-sm-2 col-form-label"><label for="exampleInputJudul">Harga Tour</label></div><div class="col-sm-10"> <input  required type="text" class="form-control" id="hargaTour" placeholder="Masukan harga tour" name="hargaTour" value="<?php echo $rows['hargaTour']; ?>"></div>
+                                                </div>
+                                                
+                                               <div class="form-group row">
+                                               <div class="col-sm-2 col-form-label"><label for="exampleInputKategori">Ketersediaan Tour</label></div><div class="col-sm-10"></div>
 
+<select name="kategoriTour" class="form-control select2" data-placeholder="Pilih Kategori">
+    <?php
+    // Ambil kategori yang terkait dengan detailtour yang sedang diolah
+    $gets = mysqli_query($conn, "SELECT GROUP_CONCAT(kategoriTour) as kategori_tour FROM detailtour WHERE id_detailtour = '$rows[id_detailtour]'");
+    $baris = mysqli_fetch_array($gets, MYSQLI_ASSOC);
+    $data = $baris['kategori_tour'];
+    $kategori_lain = explode(',', $data);
 
+    // Ambil semua kategori
+    $results = mysqli_query($conn, "SELECT DISTINCT kategoriTour FROM detailtour");
+    $option = '';
 
+    // Susun opsi kategori
+    while ($row = mysqli_fetch_array($results, MYSQLI_ASSOC)) {
+        $kategoriTour = $row['kategoriTour'];
+        $selected = (in_array($kategoriTour, $kategori_lain)) ? "selected" : "";
+        $option .= '<option ' . $selected . ' value="' . $kategoriTour . '">' . $kategoriTour . '</option>';
+    }
 
-                                                  <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                        </div>
-                                                        <input  required type="text" class="form-control  datepicker" name="tanggalBerita" value="<?php echo date("m/d/Y", strtotime($rows['tanggalBerita'])); ?>">
-                                                        </div>
-                                                    </div>
+    echo $option;
+    ?>
+</select>
+
+                                                </div>
+                                                <div class="form-group row">
+                                                <div class="col-sm-2 col-form-label"><label for="exampleInputJudul">Deskripsi Tour</label></div><div class="col-sm-10"> <input  required type="text" class="form-control" id="deskripsiTour" placeholder="Masukan deskripsi tour" name="deskripsiTour" value="<?php echo $rows['deskripsiTour']; ?>"></div>
+                                                </div>
+                                                
+
                                                 </div>
                                                   <div class="form-group row">
                                                     <div class="col-sm-2 col-form-label">
                                                   <label for="exampleInputFile">File input</label></div><div class="col-sm-10">
                                                   <input   type="file" id="exampleInputFile" name="fileToUpload" >
-                                                  <p class="help-block"><?php echo $rows['gambarBerita']; ?></p>
+                                                  <p class="help-block"><?php echo $rows['gambarTour']; ?></p>
                                                   <label  style=" color:red"class="control-label" for="inputWarning"><i class="fa fa-bell-o"></i> File Max 1 mb (Wajib dalam format PNG/ JPG)</label></div>
                                                 </div>
                                               <div class="box-footer">

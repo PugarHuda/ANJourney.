@@ -149,11 +149,33 @@ $row = mysqli_fetch_array($prevQuery, MYSQLI_ASSOC);
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="daftarTour.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Kategori</p>
+                  <p>Tours</p>
                 </a>
               </li>
+                <li class="nav-item">
+                <a href="daftarWisata,php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Wisata</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="daftarPayment.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Payment</p>
+                </a>
+              </li>
+
+                <li class="nav-item">
+                <a href="daftarUser.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>User</p>
+                </a>
+              </li>
+
+
 
             </ul>
           </li>

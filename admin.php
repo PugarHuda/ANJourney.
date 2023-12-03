@@ -33,7 +33,12 @@ include "koneksi.php";
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                  <?php
+                $query = mysqli_query($conn, "SELECT COUNT(id_detailwisata) as jumlah FROM detailwisata");
+                $dataDetailWisata = mysqli_fetch_array($query, MYSQLI_ASSOC);
+                ?>
+
+                <h3><?php echo $dataDetailWisata['jumlah'];?></h3>
 
                 <p>Wisata</p>
               </div>
@@ -68,7 +73,12 @@ include "koneksi.php";
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
+                  <?php
+                $query = mysqli_query($conn, "SELECT COUNT(id_user) as jumlah FROM user");
+                $dataUser = mysqli_fetch_array($query, MYSQLI_ASSOC);
+                ?>
+
+                <h3><?php echo $dataUser['jumlah'];?></h3>
 
                 <p>User Registrations</p>
               </div>
@@ -84,7 +94,13 @@ include "koneksi.php";
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>65</h3>
+                 <?php
+                $query = mysqli_query($conn, "SELECT COUNT(id_detailtour) as jumlah FROM detailtour");
+                $dataTour = mysqli_fetch_array($query, MYSQLI_ASSOC);
+                ?>
+
+                <h3><?php echo $dataTour['jumlah'];?></h3>
+
 
                 <p>Tour</p>
               </div>
@@ -99,7 +115,13 @@ include "koneksi.php";
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>65</h3>
+                 <?php
+                $query = mysqli_query($conn, "SELECT COUNT(id_payment) as jumlah FROM payment");
+                $dataPayment = mysqli_fetch_array($query, MYSQLI_ASSOC);
+                ?>
+
+                <h3><?php echo $dataPayment['jumlah'];?></h3>
+
 
                 <p>Payment</p>
               </div>
