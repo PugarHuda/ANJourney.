@@ -223,14 +223,14 @@ include "koneksi.php"
         <!-- end container -->
     </section>
     <!-- end attractions-header -->
-    <div class="attractions-hero-image bg-image" data-background="images/slide2.jpg"></div>
+    <div class="attractions-hero-image bg-image" data-background="images/slide3.jpg"></div>
     <!-- end attractions-hero-image -->
     <section class="attractions">
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
                     <div class="section-title">
-                        <h2>The Most Awarded Adventure<br />Tour Company in Europe</h2>
+                        <h2>The Most Awarded Adventure<br />Tour Company in Indonesia</h2>
                         <img src="images/title-seperator.png" alt="Image" />
                     </div>
                     <!-- end section-title -->

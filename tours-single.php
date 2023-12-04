@@ -249,7 +249,9 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
                     <div class="col-lg-4">
                         <p><?php echo $detailRow['deskripsiTour']; ?></p>
-                        <a href="payment.php" class="site-btn">BOOK TOUR</a>
+                        <a href="payment.php?id=<?php echo $detailRow['id_detailtour']; ?>" class="site-btn">BOOK
+                            TOUR</a>
+
                     </div>
                     <!-- end col-4 -->
 
