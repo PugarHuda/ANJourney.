@@ -208,8 +208,8 @@ include "koneksi.php";
                     <div class="slide-inner bg-image" data-background="images/slide4.jpg">
                         <div class="container">
                             <h2 data-swiper-parallax="-300">Eksplorasi Wisata Tersembunyi di Jakarta</h2>
-                            <a href="#" class="link" data-swiper-parallax="-100"><img src="images/arrow-link.png"
-                                    alt="Image" />LEARN MORE</a>
+                            <a href="index.php" class="link" data-swiper-parallax="-100"><img
+                                    src="images/arrow-link.png" alt="Image" />LEARN MORE</a>
                         </div>
                         <!-- end container -->
                     </div>
@@ -220,8 +220,8 @@ include "koneksi.php";
                     <div class="slide-inner bg-image" data-background="images/slide2.jpg">
                         <div class="container">
                             <h2 data-swiper-parallax="-300">Jelajahi Keindahan Pulau Bali</h2>
-                            <a href="#" class="link" data-swiper-parallax="-100"><img src="images/arrow-link.png"
-                                    alt="Image" />LEARN MORE</a>
+                            <a href="index.php" class="link" data-swiper-parallax="-100"><img
+                                    src="images/arrow-link.png" alt="Image" />LEARN MORE</a>
                         </div>
                         <!-- end container -->
                     </div>
@@ -232,8 +232,8 @@ include "koneksi.php";
                     <div class="slide-inner bg-image" data-background="images/slide3.jpg">
                         <div class="container">
                             <h2 data-swiper-parallax="-300">Sensasi Wisata Malam di Yogyakarta</h2>
-                            <a href="#" class="link" data-swiper-parallax="-100"><img src="images/arrow-link.png"
-                                    alt="Image" />LEARN MORE</a>
+                            <a href="index.php" class="link" data-swiper-parallax="-100"><img
+                                    src="images/arrow-link.png" alt="Image" />LEARN MORE</a>
                         </div>
                         <!-- end container -->
                     </div>
@@ -244,8 +244,8 @@ include "koneksi.php";
                     <div class="slide-inner bg-image" data-background="images/slide1.jpg">
                         <div class="container">
                             <h2 data-swiper-parallax="-300">Ekspedisi Keajaiban Kota Bandung</h2>
-                            <a href="#" class="link" data-swiper-parallax="-100"><img src="images/arrow-link.png"
-                                    alt="Image" />LEARN MORE</a>
+                            <a href="index.php" class="link" data-swiper-parallax="-100"><img
+                                    src="images/arrow-link.png" alt="Image" />LEARN MORE</a>
                         </div>
                         <!-- end container -->
                     </div>
@@ -353,7 +353,8 @@ if ($result->num_rows > 0) {
 
             <?php
 // Query untuk mengambil data dari tabel activities
-$sql = "SELECT * FROM detailtour ORDER BY kategoriTour";
+$sql = "SELECT * FROM detailtour ORDER BY RAND()";
+
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -401,13 +402,14 @@ if ($result->num_rows > 0) {
                         <!-- end col-12 -->
                         <?php
 // Query untuk mengambil data dari tabel berita
-$sql = "SELECT * FROM berita LIMIT 3";
+$sql = "SELECT * FROM berita ORDER BY RAND() LIMIT 3";
+
 $result = $conn->query($sql);
         if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         echo '<div class="col-lg-4">
                 <div class="blog-post">
-                  <figure class="post-image"><img src="' . $row['gambarBerita'] . '" alt="Image" /></figure>
+                  <figure class="post-image"><img src="images/' . $row['gambarBerita'] . '" alt="Image" /></figure>
                   <div class="post-content">
                     <small>' . $row['tanggalBerita'] . ' <span>|</span>' . $row['penguploadBerita'] . '</small>
                     <a href="blog-single.php"><h3>' . $row['judulBerita'] . '</h3></a>

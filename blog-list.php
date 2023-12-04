@@ -244,7 +244,7 @@ $result = $conn->query($sql);
 if ($result) {
     // Loop untuk menampilkan data berita
     while ($row = $result->fetch_assoc()) {
-?>
+        ?>
                 <!-- Mulai col-12 -->
                 <div class="col-12 column">
                     <div class="blog-post-list post">
@@ -253,13 +253,14 @@ if ($result) {
                         <div class="post-content">
                             <small><?php echo $row['tanggalBerita']; ?> <span>|</span> BY
                                 <?php echo $row['penguploadBerita']; ?></small>
-                            <a href="blog-single.php">
+                            <a href="blog-single.php?id=<?php echo $row['id_berita']; ?>">
                                 <h3><?php echo $row['judulBerita']; ?></h3>
                             </a>
                             <p>
                                 <?php echo $row['deskripsiBerita']; ?>
                             </p>
-                            <a href="blog-single.php" class="read-more">READ MORE</a>
+                            <a href="blog-single.php?id=<?php echo $row['id_berita']; ?>" class="read-more">READ
+                                MORE</a>
                         </div>
                         <!-- end post-content -->
                     </div>

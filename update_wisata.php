@@ -81,7 +81,7 @@ $rows = mysqli_fetch_array($result, MYSQLI_ASSOC);
                         </div>
                         <div class="col-sm-10">
                             <input type="file" id="exampleInputFile" name="fileToUpload">
-                            <p class="help-block"><?php echo $rows['gambarTour']; ?></p>
+                            <p class="help-block"><?php echo $rows['gambarWisata']; ?></p>
                             <label style=" color:red" class="control-label" for="inputWarning"><i
                                     class="fa fa-bell-o"></i> File Max 1 mb (Wajib dalam format PNG/ JPG)</label>
                         </div>

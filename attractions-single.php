@@ -181,7 +181,7 @@ if ($result->num_rows > 0) {
         ?>
                     <div class="col-12">
                         <h2><?php echo $row['namaTour']; ?></h2>
-                        <img src="images/<?php echo $row['gambarTour']; ?>" alt="Image" />
+                        <!-- <img src="images/<?php echo $row['gambarTour']; ?>" alt="Image" /> -->
                         <img src="images/title-seperator.png" alt="Image" />
                         <p>
                             <?php echo $row['deskripsiTour']; ?>
@@ -202,7 +202,32 @@ if ($result->num_rows > 0) {
             <!-- end container -->
         </section>
         <!-- end attractions-header -->
-        <div class="attractions-hero-image bg-image" data-background="images/attractions-hero.jpg"></div>
+        <?php
+// Ambil parameter kategori dari URL jika tersedia
+$kategoriFilter = isset($_GET['kategori']) ? $_GET['kategori'] : '';
+
+// Buat query SQL dengan filter kategori dan batasan 1 hasil
+$sql = "SELECT * FROM detailtour";
+if (!empty($kategoriFilter)) {
+    $sql .= " WHERE kategoriTour = '$kategoriFilter'";
+}
+
+$sql .= " LIMIT 1"; // Tambahkan LIMIT 1 pada akhir query
+
+$result = $conn->query($sql);
+
+// Periksa apakah query berhasil dieksekusi
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        ?>
+        <div class="attractions-hero-image bg-image" data-background="images/<?php echo $row['gambarTour']; ?>"></div>
+        <?php
+    }
+} else {
+    echo "0 results";
+}
+?>
+
         <!-- end attractions-hero-image -->
         <section class="attractions-desc">
             <div class="container">
@@ -255,18 +280,35 @@ if ($result->num_rows > 0) {
         <!-- end attraction-desc -->
         <div class="swiper-blog-carousel">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="images/attraction-carousel01.jpg" alt="Image" /></div>
-                <div class="swiper-slide"><img src="images/attraction-carousel02.jpg" alt="Image" /></div>
-                <div class="swiper-slide"><img src="images/attraction-carousel03.jpg" alt="Image" /></div>
+                <?php
+        // Ambil data gambarWisata dari tabel detailwisata
+        $sql = "SELECT gambarWisata FROM detailwisata";
+        $result = $conn->query($sql);
+
+        // Periksa apakah query berhasil dieksekusi
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+        ?>
+                <div class="swiper-slide">
+                    <img src="images/<?php echo $row['gambarWisata']; ?>" alt="Image" />
+                </div>
+                <?php
+            }
+        } else {
+            echo "0 results";
+        }
+        ?>
             </div>
-            <!-- end swiper-wrapper -->
-            <!-- Add Pagination -->
-            <div class="swiper-button-prev">
-                <div class="arrow-left"></div>
-            </div>
-            <div class="swiper-button-next">
-                <div class="arrow-right"></div>
-            </div>
+        </div>
+
+        <!-- end swiper-wrapper -->
+        <!-- Add Pagination -->
+        <div class="swiper-button-prev">
+            <div class="arrow-left"></div>
+        </div>
+        <div class="swiper-button-next">
+            <div class="arrow-right"></div>
+        </div>
         </div>
         <!-- end swiper-blog-carousel -->
         <section class="things-todo">
@@ -274,13 +316,13 @@ if ($result->num_rows > 0) {
                 <div class="row no-gutters">
                     <div class="col-12">
                         <div class="section-title">
-                            <h2>Things To Do</h2>
-                            <img src="images/title-seperator.png" alt="Image" />
+                            <!-- <h2>Things To Do</h2> -->
+                            <!-- <img src="images/title-seperator.png" alt="Image" /> -->
                         </div>
                         <!-- end section-title -->
                     </div>
                     <!-- end col-12 -->
-                    <div class="col-md-6 border-right">
+                    <!-- <div class="col-md-6 border-right">
                         <ul class="pull-left">
                             <li><img src="images/attractions-icon01.jpg" alt="Image" /> Climbing Glaciers</li>
                             <li><img src="images/attractions-icon02.jpg" alt="Image" /> Setting up Camps at Night</li>
@@ -288,9 +330,9 @@ if ($result->num_rows > 0) {
                             <li><img src="images/attractions-icon04.jpg" alt="Image" /> Hiking The Icy Trails</li>
                             <li><img src="images/attractions-icon05.jpg" alt="Image" /> Kayaking in Ocean</li>
                         </ul>
-                    </div>
+                    </div> -->
                     <!--end col-6 -->
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                         <ul class="pull-right">
                             <li><img src="images/attractions-icon06.jpg" alt="Image" /> Skiing on the Ice</li>
                             <li><img src="images/attractions-icon07.jpg" alt="Image" /> Take Photos</li>
@@ -298,7 +340,7 @@ if ($result->num_rows > 0) {
                             <li><img src="images/attractions-icon09.jpg" alt="Image" /> Water Scooters</li>
                             <li><img src="images/attractions-icon10.jpg" alt="Image" /> Surfing in the Ocean</li>
                         </ul>
-                    </div>
+                    </div> -->
                     <!--end col-6 -->
                 </div>
                 <!-- end row -->
@@ -317,21 +359,33 @@ if ($result->num_rows > 0) {
                         <!-- end section-title -->
                     </div>
                     <!-- end col-12 -->
+                    <?php
+// Query untuk mendapatkan data dari tabel detailtour dengan kategori Kesenian
+$sql = "SELECT * FROM detailtour ORDER BY RAND() LIMIT 6 ";
+$result = $conn->query($sql);
+
+if ($result) {
+    // Loop untuk menampilkan data tour
+    while ($row = $result->fetch_assoc()) {
+?>
+                    <!-- Mulai col-lg-4 -->
                     <div class="col-lg-4">
                         <div class="tour-box">
-                            <figure><img src="images/tour-thumb01.jpg" alt="Image" /></figure>
+                            <figure><img src="images/<?php echo $row['gambarTour']; ?>" alt="Image" /> <span
+                                    class="tag">MOST POPULAR</span>
+                            </figure>
                             <div class="tour-content">
-                                <small>FROM SKAFTAFELL</small>
-                                <h3>Blue Ice Experience</h3>
+                                <small>FROM <?php echo $row['namaKota']; ?></small>
+                                <h3><?php echo $row['namaTour']; ?></h3>
                                 <ul>
                                     <li><img src="images/icon-date.png" alt="Image" /> <small>Available</small>
-                                        <span>ALL YEAR</span>
+                                        <span><?php echo $row['ketersediaanTour']; ?></span>
                                     </li>
                                     <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small>
-                                        <span>3-10 DAYS</span>
+                                        <span><?php echo $row['durasiTour']; ?></span>
                                     </li>
                                     <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small>
-                                        <span>$166.750</span>
+                                        <span><?php echo $row['hargaTour']; ?></span>
                                     </li>
                                 </ul>
                                 <a href="#">SELECT DATES</a>
@@ -340,60 +394,18 @@ if ($result->num_rows > 0) {
                         </div>
                         <!-- end tour-box -->
                     </div>
+                    <!-- end col-lg-4 -->
+                    <?php
+    }
+
+    // Bebaskan hasil query
+    $result->free();
+} else {
+    echo "Error: " . $conn->error;
+}
+?>
                     <!-- end col-4 -->
-                    <div class="col-lg-4">
-                        <div class="tour-box">
-                            <figure><img src="images/tour-thumb02.jpg" alt="Image" /> <span class="tag">MOST
-                                    POPULAR</span></figure>
-                            <div class="tour-content">
-                                <small>FROM SKAGEN</small>
-                                <h3>Kayaking by Glacier</h3>
-                                <ul>
-                                    <li><img src="images/icon-date.png" alt="Image" /> <small>Available</small>
-                                        <span>ALL YEAR</span>
-                                    </li>
-                                    <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small>
-                                        <span>3-10 DAYS</span>
-                                    </li>
-                                    <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small>
-                                        <span>$166.750</span>
-                                    </li>
-                                </ul>
-                                <a href="#">SELECT DATES</a>
-                            </div>
-                            <!-- end tour-content -->
-                        </div>
-                        <!-- end tour-box -->
-                    </div>
-                    <!-- end col-4 -->
-                    <div class="col-lg-4">
-                        <div class="tour-box">
-                            <figure><img src="images/tour-thumb03.jpg" alt="Image" /></figure>
-                            <div class="tour-content">
-                                <small>FROM SKAGEN</small>
-                                <h3>Glacier Discovery</h3>
-                                <ul>
-                                    <li><img src="images/icon-date.png" alt="Image" /> <small>Available</small>
-                                        <span>ALL YEAR</span>
-                                    </li>
-                                    <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small>
-                                        <span>3-10 DAYS</span>
-                                    </li>
-                                    <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small>
-                                        <span>$166.750</span>
-                                    </li>
-                                </ul>
-                                <a href="#">SELECT DATES</a>
-                            </div>
-                            <!-- end tour-content -->
-                        </div>
-                        <!-- end tour-box -->
-                    </div>
-                    <!-- end col-4 -->
-                </div>
-                <!-- end row -->
-            </div>
-            <!-- end container -->
+
         </section>
         <!-- end related-tours -->
         <section class="related-blog">
@@ -406,71 +418,36 @@ if ($result->num_rows > 0) {
                         </div>
                         <!-- end section-title -->
                     </div>
-                    <!-- end col-12 -->
-                    <div class="col-lg-6">
-                        <div class="blog-post">
-                            <figure class="post-image"><img src="images/relatedblog_thumb01.jpg" alt="Image" /></figure>
-                            <div class="post-content">
-                                <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-                                <a href="blog-single.php">
-                                    <h3>An Enchanted Ice Cave in Midst of Denmark</h3>
-                                </a>
-                                <a href="blog-single.php" class="read-more">READ MORE</a>
-                            </div>
-                            <!-- end post-content -->
+                    <?php
+                   
+                    $sqlBerita = "SELECT * FROM berita";
+                    $resultBerita = $conn->query($sqlBerita);
+
+                    if ($resultBerita->num_rows > 0) {
+                    $rowBerita = $resultBerita->fetch_assoc();
+                    ?>
+                    <div class="blog-post">
+                        <figure class="post-image"><img src="images/<?php echo $rowBerita['gambarBerita']; ?>"
+                                alt="Image" />
+                        </figure>
+                        <div class="post-content">
+                            <small><?php echo $rowBerita['tanggalBerita']; ?> <span>|</span>BY
+                                <?php echo $rowBerita['penguploadBerita']; ?></small>
+                            <a href="blog-single.php?id=<?php echo $rowBerita['id_berita']; ?>">
+                                <h3><?php echo $rowBerita['judulBerita']; ?></h3>
+                            </a>
+                            <a href="blog-single.php?id=<?php echo $rowBerita['id_berita']; ?>" class="read-more">READ
+                                MORE</a>
                         </div>
-                        <!-- end blog-post -->
+                        <!-- end post-content -->
                     </div>
-                    <!-- end col-6 -->
-                    <div class="col-lg-6">
-                        <div class="blog-post">
-                            <figure class="post-image"><img src="images/relatedblog_thumb02.jpg" alt="Image" /></figure>
-                            <div class="post-content">
-                                <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-                                <a href="blog-single.php">
-                                    <h3>An Enchanted Ice Cave in Midst of Denmark</h3>
-                                </a>
-                                <a href="blog-single.php" class="read-more">READ MORE</a>
-                            </div>
-                            <!-- end post-content -->
-                        </div>
-                        <!-- end blog-post -->
-                    </div>
-                    <!-- end col-6 -->
-                    <div class="col-lg-6">
-                        <div class="blog-post">
-                            <figure class="post-image"><img src="images/relatedblog_thumb03.jpg" alt="Image" /></figure>
-                            <div class="post-content">
-                                <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-                                <a href="blog-single.php">
-                                    <h3>An Enchanted Ice Cave in Midst of Denmark</h3>
-                                </a>
-                                <a href="blog-single.php" class="read-more">READ MORE</a>
-                            </div>
-                            <!-- end post-content -->
-                        </div>
-                        <!-- end blog-post -->
-                    </div>
-                    <!-- end col-6 -->
-                    <div class="col-lg-6">
-                        <div class="blog-post">
-                            <figure class="post-image"><img src="images/relatedblog_thumb04.jpg" alt="Image" /></figure>
-                            <div class="post-content">
-                                <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-                                <a href="blog-single.php">
-                                    <h3>An Enchanted Ice Cave in Midst of Denmark</h3>
-                                </a>
-                                <a href="blog-single.php" class="read-more">READ MORE</a>
-                            </div>
-                            <!-- end post-content -->
-                        </div>
-                        <!-- end blog-post -->
-                    </div>
-                    <!-- end col-6 -->
-                </div>
-                <!-- end row -->
-            </div>
-            <!-- end container -->
+                    <!-- end blog-post -->
+                    <?php
+    } else {
+        echo "Tidak ada berita yang tersedia.";
+    }
+    ?>
+
         </section>
         <!-- end related-blog -->
         <footer class="footer">

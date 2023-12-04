@@ -213,11 +213,11 @@ include "koneksi.php";
                         <h6>YOU SEARCHED</h6>
                         <h2>Tur Paling Populer</h2>
                         <?php
-                $query = mysqli_query($conn, "SELECT COUNT(id_detailwisata) as jumlah FROM detailwisata");
+                $query = mysqli_query($conn, "SELECT COUNT(id_detailtour) as jumlah FROM detailtour");
                 $dataDetailWisata = mysqli_fetch_array($query, MYSQLI_ASSOC);
                 ?>
-                        <p>ketemu <strong><?php echo $dataDetailWisata['jumlah'];?> Tour</strong>, Use the filters below
-                            to refine the search.</p>
+                        <p>ketemu <strong><?php echo $dataDetailWisata['jumlah'];?> Tour</strong>, silahkan cari yang
+                            paling cocok untuk anda.</p>
                     </div>
                     <!-- end col-12 -->
                     <div class="col-12">

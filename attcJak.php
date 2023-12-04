@@ -235,7 +235,7 @@ include "koneksi.php"
                 <div class="row">
                     <div class="col-12 text-center">
                         <div class="section-title">
-                            <h2>The Most Awarded Adventure<br />Tour Company in Europe</h2>
+                            <h2>The Most Awarded Adventure<br />Tour Company in Indonesia</h2>
                             <img src="images/title-seperator.png" alt="Image" />
                         </div>
                         <!-- end section-title -->
@@ -257,7 +257,7 @@ if ($result->num_rows > 0) {
                 <a href="attractions-single.php?id=' . $row['id_detailtour'] . '&kategori=' . $row['kategoriTour'] . '">
                     <figure class="attractions-box">
                         <img src="images/' . $row['gambarTour'] . '" alt="Image" />
-                        <figcaption>' . $row['judulWisata'] . '</figcaption>
+                        <figcaption>' . $row['namaTour'] . '</figcaption>
                     </figure>
                 </a>
               </div>';

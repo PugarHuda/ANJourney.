@@ -388,7 +388,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                         <li>
                             <figure><img src="images/overview-icon08.png" alt="Image" /></figure>
                             <small>LANGUAGE</small>
-                            <h6>ENGLISH</h6>
+                            <h6>INDONESIAN</h6>
                         </li>
                         <!-- end li -->
                     </ul>
@@ -416,50 +416,33 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                 <div class="col-12">
                     <div class="attraction-carousel">
                         <div class="swiper-wrapper">
+
+                            <?php
+            // Ambil data dari tabel detailwisata
+            $sql = "SELECT * FROM detailwisata";
+            $result = $conn->query($sql);
+
+            if ($result) {
+                // Loop untuk menampilkan data detailwisata
+                while ($row = $result->fetch_assoc()) {
+            ?>
+                            <!-- Mulai swiper-slide -->
                             <div class="swiper-slide">
                                 <figure class="attraction-box">
-                                    <img src="images/attractions01-3x.jpg" alt="Image" />
-                                    <figcaption>Camping in Valley</figcaption>
+                                    <img src="images/<?php echo $row['gambarWisata']; ?>" alt="Image" />
+                                    <figcaption><?php echo $row['judulWisata']; ?></figcaption>
                                 </figure>
                             </div>
                             <!-- end swiper-slide -->
-                            <div class="swiper-slide">
-                                <figure class="attraction-box">
-                                    <img src="images/attractions02-3x.jpg" alt="Image" />
-                                    <figcaption>Underwater Tour</figcaption>
-                                </figure>
-                            </div>
-                            <!-- end swiper-slide -->
-                            <div class="swiper-slide">
-                                <a href="#">
-                                    <figure class="attraction-box">
-                                        <img src="images/attractions03-3x.jpg" alt="Image" />
-                                        <figcaption>Lake Views</figcaption>
-                                    </figure>
-                                </a>
-                            </div>
-                            <!-- end swiper-slide -->
-                            <div class="swiper-slide">
-                                <figure class="attraction-box">
-                                    <img src="images/attractions04-3x.jpg" alt="Image" />
-                                    <figcaption>Ice Treking</figcaption>
-                                </figure>
-                            </div>
-                            <!-- end swiper-slide -->
-                            <div class="swiper-slide">
-                                <figure class="attraction-box">
-                                    <img src="images/attractions05-3x.jpg" alt="Image" />
-                                    <figcaption>Climb the Ice</figcaption>
-                                </figure>
-                            </div>
-                            <!-- end swiper-slide -->
-                            <div class="swiper-slide">
-                                <figure class="attraction-box">
-                                    <img src="images/attractions06-3x.jpg" alt="Image" />
-                                    <figcaption>Boat Enjoy</figcaption>
-                                </figure>
-                            </div>
-                            <!-- end swiper-slide -->
+                            <?php
+                }
+                // Bebaskan hasil query
+                $result->free();
+            } else {
+                echo "Error: " . $conn->error;
+            }
+            ?>
+
                         </div>
                         <!-- end  swiper-wrapper -->
                         <div class="swiper-button-prev">
@@ -472,108 +455,104 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                     <!-- end attraction-carousel -->
                 </div>
                 <!-- end col-12 -->
-            </div>
-            <!-- end row -->
-        </div>
-        <!-- end container -->
-    </section>
-    <!-- end tour-attraction -->
 
-    <!-- end tour-location -->
+                <!-- end tour-attraction -->
 
-    <section class="tour-information">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-title">
-                        <h2>Related Information</h2>
-                        <img src="images/title-seperator.png" alt="Image" />
-                    </div>
-                    <!-- end section-title -->
-                </div>
-                <!-- end col-12 -->
-                <div class="col-lg-7">
-                    <h3>Frequently Asked Questions</h3>
-                    <div class="accordion" id="accordion">
-                        <div class="card">
-                            <div class="card-header no-border" id="headingOne"><a data-toggle="collapse"
-                                    href="#collapseOne" aria-expanded="true">How long in advance do I need
-                                    to
-                                    book?</a>
-                            </div>
-                            <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                                <div class="card-body">
-                                    <p>Worci varius natoque penatibus et magnis dis turient montes nascetur
-                                        ridiculus
-                                        mus cras eleifend tellus sed congue ectetur velit upis aucibus odio
-                                        eget
-                                        volutpat.</p>
-                                </div>
-                                <!-- end card-body -->
-                            </div>
-                            <!-- end collapse -->
-                        </div>
-                        <!-- end card -->
-                        <div class="card">
-                            <div class="card-header" id="headingTwo"><a class="collapsed" data-toggle="collapse"
-                                    href="#collapseTwo"> What if my hotel is not
-                                    listed in the PU selection?</a>
-                            </div>
-                            <div id="collapseTwo" class="collapse" data-parent="#accordion">
-                                <div class="card-body">
-                                    <p>Worci varius natoque penatibus et magnis dis turient montes nascetur
-                                        ridiculus
-                                        mus cras eleifend tellus sed congue ectetur velit upis aucibus odio
-                                        eget
-                                        volutpat.</p>
-                                </div>
-                                <!-- end card-body -->
-                            </div>
-                            <!-- end collapse -->
-                        </div>
-                        <!-- end card -->
-                        <div class="card">
-                            <div class="card-header" id="headingThree"><a class="collapsed" data-toggle="collapse"
-                                    href="#collapseThree"> When does the pick up
-                                    start?</a></div>
-                            <div id="collapseThree" class="collapse" data-parent="#accordion">
-                                <div class="card-body">
-                                    <p>Worci varius natoque penatibus et magnis dis turient montes nascetur
-                                        ridiculus
-                                        mus cras eleifend tellus sed congue ectetur velit upis aucibus odio
-                                        eget
-                                        volutpat.</p>
-                                </div>
-                                <!-- end card-body -->
-                            </div>
-                            <!-- end collapse -->
-                        </div>
-                        <!-- end card -->
-                    </div>
-                    <!-- end accordion -->
-                </div>
-                <!-- end col-7 -->
+                <!-- end tour-location -->
 
-                <!-- end col-5 -->
-            </div>
-            <!-- end row -->
-        </div>
-        <!-- end container -->
-    </section>
-    <!-- end tour-information -->
-    <section class="related-blog">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-title">
-                        <h2>Related Blog Posts</h2>
-                        <img src="images/title-seperator.png" alt="Image" />
+                <section class="tour-information">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section-title">
+                                    <h2>Related Information</h2>
+                                    <img src="images/title-seperator.png" alt="Image" />
+                                </div>
+                                <!-- end section-title -->
+                            </div>
+                            <!-- end col-12 -->
+                            <div class="col-lg-7">
+                                <h3>Frequently Asked Questions</h3>
+                                <div class="accordion" id="accordion">
+                                    <div class="card">
+                                        <div class="card-header no-border" id="headingOne"><a data-toggle="collapse"
+                                                href="#collapseOne" aria-expanded="true">How long in advance do I need
+                                                to
+                                                book?</a>
+                                        </div>
+                                        <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                            <div class="card-body">
+                                                <p>Worci varius natoque penatibus et magnis dis turient montes nascetur
+                                                    ridiculus
+                                                    mus cras eleifend tellus sed congue ectetur velit upis aucibus odio
+                                                    eget
+                                                    volutpat.</p>
+                                            </div>
+                                            <!-- end card-body -->
+                                        </div>
+                                        <!-- end collapse -->
+                                    </div>
+                                    <!-- end card -->
+                                    <div class="card">
+                                        <div class="card-header" id="headingTwo"><a class="collapsed"
+                                                data-toggle="collapse" href="#collapseTwo"> What if my hotel is not
+                                                listed in the PU selection?</a>
+                                        </div>
+                                        <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                                            <div class="card-body">
+                                                <p>Worci varius natoque penatibus et magnis dis turient montes nascetur
+                                                    ridiculus
+                                                    mus cras eleifend tellus sed congue ectetur velit upis aucibus odio
+                                                    eget
+                                                    volutpat.</p>
+                                            </div>
+                                            <!-- end card-body -->
+                                        </div>
+                                        <!-- end collapse -->
+                                    </div>
+                                    <!-- end card -->
+                                    <div class="card">
+                                        <div class="card-header" id="headingThree"><a class="collapsed"
+                                                data-toggle="collapse" href="#collapseThree"> When does the pick up
+                                                start?</a></div>
+                                        <div id="collapseThree" class="collapse" data-parent="#accordion">
+                                            <div class="card-body">
+                                                <p>Worci varius natoque penatibus et magnis dis turient montes nascetur
+                                                    ridiculus
+                                                    mus cras eleifend tellus sed congue ectetur velit upis aucibus odio
+                                                    eget
+                                                    volutpat.</p>
+                                            </div>
+                                            <!-- end card-body -->
+                                        </div>
+                                        <!-- end collapse -->
+                                    </div>
+                                    <!-- end card -->
+                                </div>
+                                <!-- end accordion -->
+                            </div>
+                            <!-- end col-7 -->
+
+                            <!-- end col-5 -->
+                        </div>
+                        <!-- end row -->
                     </div>
-                    <!-- end section-title -->
-                </div>
-                <!-- end col-12 -->
-                <div class="col-lg-6">
-                    <?php
+                    <!-- end container -->
+                </section>
+                <!-- end tour-information -->
+                <section class="related-blog">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section-title">
+                                    <h2>Related Blog Posts</h2>
+                                    <img src="images/title-seperator.png" alt="Image" />
+                                </div>
+                                <!-- end section-title -->
+                            </div>
+                            <!-- end col-12 -->
+                            <div class="col-lg-6">
+                                <?php
     // Query untuk mengambil data dari tabel berita
     $sqlBerita = "SELECT * FROM berita ORDER BY tanggalBerita DESC LIMIT 4";
     $resultBerita = $conn->query($sqlBerita);
@@ -581,84 +560,86 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     if ($resultBerita->num_rows > 0) {
         $rowBerita = $resultBerita->fetch_assoc();
     ?>
-                    <div class="blog-post">
-                        <figure class="post-image"><img src="<?php echo $rowBerita['gambarBerita']; ?>" alt="Image" />
-                        </figure>
-                        <div class="post-content">
-                            <small><?php echo $rowBerita['tanggalBerita']; ?> <span>|</span>BY
-                                <?php echo $rowBerita['penguploadBerita']; ?></small>
-                            <a href="blog-single.php?id=<?php echo $rowBerita['id_berita']; ?>">
-                                <h3><?php echo $rowBerita['judulBerita']; ?></h3>
-                            </a>
-                            <a href="blog-single.php?id=<?php echo $rowBerita['id_berita']; ?>" class="read-more">READ
-                                MORE</a>
-                        </div>
-                        <!-- end post-content -->
-                    </div>
-                    <!-- end blog-post -->
-                    <?php
+                                <div class="blog-post">
+                                    <figure class="post-image"><img
+                                            src="images/<?php echo $rowBerita['gambarBerita']; ?>" alt="Image" />
+                                    </figure>
+                                    <div class="post-content">
+                                        <small><?php echo $rowBerita['tanggalBerita']; ?> <span>|</span>BY
+                                            <?php echo $rowBerita['penguploadBerita']; ?></small>
+                                        <a href="blog-single.php?id=<?php echo $rowBerita['id_berita']; ?>">
+                                            <h3><?php echo $rowBerita['judulBerita']; ?></h3>
+                                        </a>
+                                        <a href="blog-single.php?id=<?php echo $rowBerita['id_berita']; ?>"
+                                            class="read-more">READ
+                                            MORE</a>
+                                    </div>
+                                    <!-- end post-content -->
+                                </div>
+                                <!-- end blog-post -->
+                                <?php
     } else {
         echo "Tidak ada berita yang tersedia.";
     }
     ?>
-                </div>
+                            </div>
 
 
-            </div>
-            <!-- end row -->
-        </div>
-        <!-- end container -->
-    </section>
-    <!-- end related-blog -->
-    <section class="related-tours">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-title">
-                        <h2>Related Adventure Tours</h2>
-                        <img src="images/title-seperator.png" alt="Image" />
+                        </div>
+                        <!-- end row -->
                     </div>
-                    <!-- end section-title -->
-                </div>
-                <!-- end col-12 -->
+                    <!-- end container -->
+                </section>
+                <!-- end related-blog -->
+                <section class="related-tours">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section-title">
+                                    <h2>Related Adventure Tours</h2>
+                                    <img src="images/title-seperator.png" alt="Image" />
+                                </div>
+                                <!-- end section-title -->
+                            </div>
+                            <!-- end col-12 -->
 
-                <?php
+                            <?php
 // Query untuk mendapatkan data dari tabel detailtour dengan kategori Kesenian
-$sql = "SELECT * FROM detailtour WHERE kategoriTour = 'Kesenian' ORDER BY namaTour";
+$sql = "SELECT * FROM detailtour WHERE namaKota = 'Yogyakarta'";
 $result = $conn->query($sql);
 
 if ($result) {
     // Loop untuk menampilkan data tour
     while ($row = $result->fetch_assoc()) {
 ?>
-                <!-- Mulai col-lg-4 -->
-                <div class="col-lg-4">
-                    <div class="tour-box">
-                        <figure><img src="images/<?php echo $row['gambarTour']; ?>" alt="Image" /> <span
-                                class="tag">MOST POPULAR</span>
-                        </figure>
-                        <div class="tour-content">
-                            <small>FROM <?php echo $row['namaKota']; ?></small>
-                            <h3><?php echo $row['namaTour']; ?></h3>
-                            <ul>
-                                <li><img src="images/icon-date.png" alt="Image" /> <small>Available</small>
-                                    <span><?php echo $row['ketersediaanTour']; ?></span>
-                                </li>
-                                <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small>
-                                    <span><?php echo $row['durasiTour']; ?></span>
-                                </li>
-                                <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small>
-                                    <span><?php echo $row['hargaTour']; ?></span>
-                                </li>
-                            </ul>
-                            <a href="#">SELECT DATES</a>
-                        </div>
-                        <!-- end tour-content -->
-                    </div>
-                    <!-- end tour-box -->
-                </div>
-                <!-- end col-lg-4 -->
-                <?php
+                            <!-- Mulai col-lg-4 -->
+                            <div class="col-lg-4">
+                                <div class="tour-box">
+                                    <figure><img src="images/<?php echo $row['gambarTour']; ?>" alt="Image" /> <span
+                                            class="tag">MOST POPULAR</span>
+                                    </figure>
+                                    <div class="tour-content">
+                                        <small>FROM <?php echo $row['namaKota']; ?></small>
+                                        <h3><?php echo $row['namaTour']; ?></h3>
+                                        <ul>
+                                            <li><img src="images/icon-date.png" alt="Image" /> <small>Available</small>
+                                                <span><?php echo $row['ketersediaanTour']; ?></span>
+                                            </li>
+                                            <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small>
+                                                <span><?php echo $row['durasiTour']; ?></span>
+                                            </li>
+                                            <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small>
+                                                <span><?php echo $row['hargaTour']; ?></span>
+                                            </li>
+                                        </ul>
+                                        <a href="#">SELECT DATES</a>
+                                    </div>
+                                    <!-- end tour-content -->
+                                </div>
+                                <!-- end tour-box -->
+                            </div>
+                            <!-- end col-lg-4 -->
+                            <?php
     }
 
     // Bebaskan hasil query
@@ -669,102 +650,105 @@ if ($result) {
 ?>
 
 
-                <!-- end container -->
-    </section>
-    <!-- end related-tours -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-4">
-                    <h5>TENTANG KAMI</h5>
-                    <ul class="footer-menu">
-                        <li><a href="about-us.php">Tentang Kami</a></li>
+                            <!-- end container -->
+                </section>
+                <!-- end related-tours -->
+                <footer class="footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4">
+                                <h5>TENTANG KAMI</h5>
+                                <ul class="footer-menu">
+                                    <li><a href="about-us.php">Tentang Kami</a></li>
 
-                        <li><a href="#">Tim Kami</a></li>
-                        <li><a href="blog-list.php">Berita</a></li>
-                    </ul>
-                </div>
-                <!-- end col-3 -->
-                <div class="col-lg-3 col-md-4">
-                    <h5>Layanan</h5>
-                    <ul class="footer-menu">
-                        <li><a href="#">Terms of Payment</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Difficulty Levels</a></li>
-                    </ul>
-                </div>
-                <!-- end col-3 -->
-                <div class="col-lg-3 col-md-4">
-                    <h5>Hubungi Kami</h5>
-                    <address>
-                        ATHENA INC.<br />
-                        Jakal km 14.5, Yogyakarta<br />
-                        Telp: 123 456 7890<br />
-                        <a href="#">info@athenacomp.com</a>
-                    </address>
-                </div>
-                <!-- end col-3 -->
+                                    <li><a href="#">Tim Kami</a></li>
+                                    <li><a href="blog-list.php">Berita</a></li>
+                                </ul>
+                            </div>
+                            <!-- end col-3 -->
+                            <div class="col-lg-3 col-md-4">
+                                <h5>Layanan</h5>
+                                <ul class="footer-menu">
+                                    <li><a href="#">Terms of Payment</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href="#">Difficulty Levels</a></li>
+                                </ul>
+                            </div>
+                            <!-- end col-3 -->
+                            <div class="col-lg-3 col-md-4">
+                                <h5>Hubungi Kami</h5>
+                                <address>
+                                    ATHENA INC.<br />
+                                    Jakal km 14.5, Yogyakarta<br />
+                                    Telp: 123 456 7890<br />
+                                    <a href="#">info@athenacomp.com</a>
+                                </address>
+                            </div>
+                            <!-- end col-3 -->
 
-                <!-- end col-3 -->
-                <div class="col-12">
-                    <ul class="social-media">
-                        <li>
-                            <a href="#"><i class="fa fa-tripadvisor"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- end col-12 -->
-                <div class="col-12"><span class="copyright">&copy; ATHENA</span></div>
-                <!-- end col-12 -->
-            </div>
-            <!-- end row -->
-        </div>
-        <!-- end container -->
-    </footer>
-    <!-- JS FILES -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <script>
-    // PRELOADER
-    (function($) {
-        $(window).on("load", function() {
-            $("body").addClass("page-loaded");
-        });
+                            <!-- end col-3 -->
+                            <div class="col-12">
+                                <ul class="social-media">
+                                    <li>
+                                        <a href="#"><i class="fa fa-tripadvisor"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fa fa-youtube-play"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fa fa-instagram"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- end col-12 -->
+                            <div class="col-12"><span class="copyright">&copy; ATHENA</span></div>
+                            <!-- end col-12 -->
+                        </div>
+                        <!-- end row -->
+                    </div>
+                    <!-- end container -->
+                </footer>
+                <!-- JS FILES -->
+                <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+                    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+                <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+                <script>
+                // PRELOADER
+                (function($) {
+                    $(window).on("load", function() {
+                        $("body").addClass("page-loaded");
+                    });
 
-        $(".data-range-picker a").daterangepicker({
-            linkedCalendars: false,
-        });
+                    $(".data-range-picker a").daterangepicker({
+                        linkedCalendars: false,
+                    });
 
-        $(".daterangepicker").addClass("blog-picker");
-    })(jQuery);
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
-    <script src="js/swiper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-    <script src="js/scripts.js"></script>
-    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCUCRAdytmMnSNnCdu0Ll8Ldy8Oap-CpKQ&callback">
-    </script>
-    <script src="js/googlemaps.min.js"></script>
-    <script src="js/route-map.js"></script>
+                    $(".daterangepicker").addClass("blog-picker");
+                })(jQuery);
+                </script>
+                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                    crossorigin="anonymous">
+                </script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+                    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+                    crossorigin="anonymous">
+                </script>
+                <script src="js/swiper.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+                <script src="js/scripts.js"></script>
+                <script
+                    src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCUCRAdytmMnSNnCdu0Ll8Ldy8Oap-CpKQ&callback">
+                </script>
+                <script src="js/googlemaps.min.js"></script>
+                <script src="js/route-map.js"></script>
 </body>
 
 </html>
