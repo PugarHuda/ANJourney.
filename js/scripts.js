@@ -451,3 +451,7 @@ signupForm.addEventListener('submit', (event) => {
 });
 
 })(jQuery);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 764f9a64e49671a11d031fcf6d4f5def845d5ca9

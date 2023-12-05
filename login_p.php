@@ -3,8 +3,8 @@ session_start();
 include 'koneksi.php';
 
 $username = $_POST['username'];
-$password = $_POST['password'];
-$password = md5($password);
+$password = $_POST['pwd'];
+// $password = md5($password);
 
 
 
@@ -23,3 +23,5 @@ echo "<script>
 	    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=login.php">';
 
 ?>
+
+
