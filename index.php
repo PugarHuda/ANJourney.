@@ -134,7 +134,7 @@ include "koneksi.php";
                     </div>
                 </div>
                 <!-- end menu-btn -->
-                <span class="search-btn"><i class="fa fa-search"></i></span>
+                <span><i class="fa fa-search"></i></span>
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="index.php">HOME</a>
