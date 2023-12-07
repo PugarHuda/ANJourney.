@@ -147,7 +147,7 @@ include "koneksi.php"
                     </li>
                     <li class="nav-item"><a class="nav-link" href="tours-list.php">TOURS</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link">KATEGORI</a>
+                        <a class="nav-link">CATEGORY</a>
                         <ul class="dropdown-menu">
                             <li><a href="attcJak.php">TARI</a></li>
                             <li><a href="attcJog.php">TEATER</a></li>

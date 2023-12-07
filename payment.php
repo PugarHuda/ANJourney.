@@ -142,12 +142,12 @@ include "koneksi.php"
                         </li>
                         <li class="nav-item"><a class="nav-link" href="tours-list.php">TOURS</a></li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link">ATTRACTIONS</a>
+                            <a class="nav-link">CATEGORY</a>
                             <ul class="dropdown-menu">
-                                <li><a href="attcJak.php">JAKARTA</a></li>
-                                <li><a href="attcJog.php">YOGYAKARTA</a></li>
-                                <li><a href="attcBan.php">BANDUNG</a></li>
-                                <li><a href="attcBali.php">BALI</a></li>
+                                <li><a href="katTari.php">TARI</a></li>
+                                <li><a href="katTea.php">TEATER</a></li>
+                                <li><a href="katMus.php">MUSIK</a></li>
+                                <li><a href="katPam.php">PAMERAN VISUAL</a></li>
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="about-us.php">ABOUT US</a></li>
