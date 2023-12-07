@@ -213,7 +213,7 @@ include "koneksi.php";
                 <div class="swiper-slide">
                     <div class="slide-inner bg-image" data-background="images/teater.jpg">
                         <div class="container">
-                            <h2 data-swiper-parallax="-300">Rasakan Persembahan Seni Teater yang Menginspirasi</h2>
+                            <h2 data-swiper-parallax="-300">Rasakan Persembahan Seni Teater Yang Menginspirasi</h2>
                             <a href="index.php" class="link" data-swiper-parallax="-100"></a>
                         </div>
                         <!-- end container -->
