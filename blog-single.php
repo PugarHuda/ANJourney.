@@ -9,7 +9,7 @@ include "koneksi.php"
     <!-- META TAGS -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>ANJourney | for Tour Operators & Travel Agencies around Nation</title>
+    <title>ANJourney </title>
     <meta name="author" content="GFX Partner" />
     <meta name="description" content="ANJourney | for Tour Operators & Travel Agencies around Nation" />
     <meta name="keywords"
@@ -134,19 +134,24 @@ include "koneksi.php"
                     </div>
                 </div>
                 <!-- end menu-btn -->
-                <span class="search-btn"><i class="fa fa-search"></i></span>
+                <span class="search-btn"><i class="bi bi-person-circle"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    </svg>
+                </span>
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="index.php">HOME</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="tours-list.php">TOURS</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link">ATTRACTIONS</a>
+                        <a class="nav-link">CATEGORY</a>
                         <ul class="dropdown-menu">
-                            <li><a href="attcJak.php">JAKARTA</a></li>
-                            <li><a href="attcJog.php">YOGYAKARTA</a></li>
-                            <li><a href="attcBan.php">BANDUNG</a></li>
-                            <li><a href="attcBali.php">BALI</a></li>
+                            <li><a href="katTari.php">TARI</a></li>
+                            <li><a href="katTea.php">TEATER</a></li>
+                            <li><a href="katMus.php">MUSIK</a></li>
+                            <li><a href="katPam.php">PAMERAN VISUAL</a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="about-us.php">ABOUT US</a></li>
@@ -198,6 +203,7 @@ include "koneksi.php"
                         </div>
                     </div>
                 </ul>
+        </nav>
             </nav>
             <!-- end navbar -->
         </div>

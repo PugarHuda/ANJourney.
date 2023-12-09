@@ -9,7 +9,7 @@
     <!-- META TAGS -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>ANJourney | for Tour Operators & Travel Agencies around Nation</title>
+    <title>ANJourney</title>
     <meta name="author" content="GFX Partner" />
     <meta name="description" content="ANJourney | for Tour Operators & Travel Agencies around Nation" />
     <meta name="keywords"
@@ -134,19 +134,24 @@
                     </div>
                 </div>
                 <!-- end menu-btn -->
-                <span class="search-btn"><i class="fa fa-search"></i></span>
+                <span class="search-btn"><i class="bi bi-person-circle"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    </svg>
+                </span>
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="index.php">HOME</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="tours-list.php">TOURS</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link">ATTRACTIONS</a>
+                        <a class="nav-link">CATEGORY</a>
                         <ul class="dropdown-menu">
-                            <li><a href="attcJak.php">JAKARTA</a></li>
-                            <li><a href="attcJog.php">YOGYAKARTA</a></li>
-                            <li><a href="attcBan.php">BANDUNG</a></li>
-                            <li><a href="attcBali.php">MALANG</a></li>
+                            <li><a href="katTari.php">TARI</a></li>
+                            <li><a href="katTea.php">TEATER</a></li>
+                            <li><a href="katMus.php">MUSIK</a></li>
+                            <li><a href="katPam.php">PAMERAN VISUAL</a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="about-us.php">ABOUT US</a></li>
@@ -168,8 +173,7 @@
                                 </div>
                                 <button type="submit" class="login-btn">Login</button>
                             </form>
-                            <p class="signup-link">Don't have an account? <a href="#" id="signup-link">Sign Up</a>
-                            </p>
+                            <p class="signup-link">Don't have an account? <a href="#" id="signup-link">Sign Up</a></p>
                         </div>
                     </div>
 
@@ -199,6 +203,7 @@
                         </div>
                     </div>
                 </ul>
+        </nav>
             </nav>
             <!-- end navbar -->
         </div>
@@ -233,7 +238,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
                 <body>
                     <div class="col-lg-8">
-                        <h6>FROM <?php echo $detailRow['namaKota']; ?></h6>
+                        <!-- <h6>FROM <?php echo $detailRow['namaKota']; ?></h6> -->
                         <h2><?php echo $detailRow['namaTour']; ?></h2>
 
                         <!-- Filter -->
@@ -242,16 +247,62 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                         </div>
                         <!-- end filter -->
 
-                        <div class="price">Price: <strong><?php echo $detailRow['hargaTour']; ?></strong></div>
+                        <div class="price">Price: <strong><?php echo $detailRow['hargaTour']; ?></strong></div><br>
+                        <br> <div class="price">Tanggal: <strong></strong></div>
                         <!-- end price -->
                     </div>
                     <!-- end col-8 -->
 
                     <div class="col-lg-4">
                         <p><?php echo $detailRow['deskripsiTour']; ?></p>
-                        <a href="payment.php?id=<?php echo $detailRow['id_detailtour']; ?>" class="site-btn">BOOK
-                            TOUR</a>
+                        <a class="site-btn" id="login-link" class="nav-link" href="#">BOOK TOUR</a>
 
+                        <div id="loginModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <h2>Welcome Back</h2>
+                                <form id="loginForm">
+                                    <div class="form-group">
+                                        <input type="email" id="loginEmail" name="loginEmail" placeholder="Email"
+                                            required />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" id="loginPassword" name="loginPassword"
+                                            placeholder="Password" required />
+                                    </div>
+                                    <button button type="submit" class="login-btn">Login</button>
+                                </form>
+                                <p class="signup-link">Don't have an account? <a href="#" id="signup-link">Sign Up</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- The sign-up modal -->
+                    <div id="signupModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <h2>Sign Up</h2>
+                            <form id="signupForm">
+                                <div class="form-group">
+                                    <input type="text" id="firstName" name="firstName" placeholder="First Name"
+                                        required />
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required />
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" id="signupEmail" name="signupEmail" placeholder="Email"
+                                        required />
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" id="signupPassword" name="signupPassword"
+                                        placeholder="Password" required />
+                                </div>
+                                <button type="submit" class="signup-btn">Sign Up</button>
+                            </form>
+                        </div>
+                    </div>
+                            
                     </div>
                     <!-- end col-4 -->
 
@@ -282,18 +333,18 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             <div class="row">
                 <div class="col-12 text-center">
                     <div class="section-title">
-                        <h2>Our Most Popular Trekking Trail Ending With Camps At Night</h2>
+                        <h2>Pengetahuan</h2>
                         <img src="images/title-seperator.png" alt="Image" />
                     </div>
                     <!-- end section-title -->
                 </div>
                 <!-- end col-12 -->
                 <div class="col-lg-6">
-                    <p>Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus mus.
-                        Cras
-                        eleifend
-                        tellus sed congue ectetur velit turpis faucibus odio eget volutpat odio lectus eu
-                        erat.</p>
+                    <p>Seni pertunjukan tari memiliki akar yang melintasi waktu dan budaya, 
+                        menjadi ungkapan unik dari kreativitas dan identitas manusia sepanjang sejarah. 
+                        Dari zaman prasejarah hingga era modern, tari telah menjadi bahasa universal yang menyampaikan 
+                        emosi, cerita, dan kebudayaan. Dalam era globalisasi ini, seni pertunjukan tari terus berkembang, menggabungkan unsur-unsur budaya yang beragam. 
+                        Festival-festival tari internasional dan perkembangan teknologi membuka pintu bagi penonton di seluruh dunia untuk menyaksikan dan menghargai keindahan serta kompleksitas seni pertunjukan tari.</p>
                     <p>
                         Pellentesque vestibulum fermentum velit non placerat aecenas in hendrerit justo
                         quisque quis
@@ -346,55 +397,45 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>Tour Overview</h2>
+                        <h2>Gambaran Umum Tur</h2>
                         <img src="images/title-seperator.png" alt="Image" />
                     </div>
                     <!-- end section-title -->
                 </div>
                 <!-- end col-12 -->
                 <div class="col-12">
-                    <ul>
-                        <li>
-                            <figure><img src="images/overview-icon01.png" alt="Image" /></figure>
-                            <small>AVAILABLE</small>
-                            <h6>ALL YEAR</h6>
-                        </li>
-                        <!-- end li -->
-                        <li>
-                            <figure><img src="images/overview-icon02.png" alt="Image" /></figure>
-                            <small>DURATION</small>
-                            <h6>9-10 HOURS</h6>
-                        </li>
-                        <!-- end li -->
-                        <li>
-                            <!-- end li -->
-                        <li>
-                            <figure><img src="images/overview-icon04.png" alt="Image" /></figure>
-                            <small>GROUP SIZE</small>
-                            <h6>UP TO 15</h6>
-                        </li>
-                        <!-- end li -->
-                        <li>
-                            <figure><img src="images/overview-icon05.png" alt="Image" /></figure>
-                            <small>ON THE ICE</small>
-                            <h6>UP TO 2 HOURS</h6>
-                        </li>
-                        <!-- end li -->
-                        <li>
-                        <li>
-                            <figure><img src="images/overview-icon07.png" alt="Image" /></figure>
-                            <small>MINUMUM AGE</small>
-                            <h6>10 YEARS</h6>
-                        </li>
-                        <!-- end li -->
-                        <li>
-                            <figure><img src="images/overview-icon08.png" alt="Image" /></figure>
-                            <small>LANGUAGE</small>
-                            <h6>INDONESIAN</h6>
-                        </li>
-                        <!-- end li -->
-                    </ul>
-                </div>
+            <ul>
+              <li>
+                <figure><img src="images/overview-icon01.png" alt="Image" /></figure>
+                <small>KETERSEDIAAN</small>
+                <h6>DATABASE</h6>
+              </li>
+              <!-- end li -->
+              <li>
+                <figure><img src="images/overview-icon04.png" alt="Image" /></figure>
+                <small>DURASI</small>
+                <h6>DATABASE</h6>
+              </li>
+              <!-- end li -->
+             
+              <!-- end li -->
+              <li>
+                <figure><img src="images/overview-icon06.png" alt="Image" /></figure>
+                <small>BAHASA</small>
+                <h6>DATABASE</h6>
+              </li>
+              <!-- end li -->
+              <li>
+                <figure><img src="images/icon-tag.png" alt="Image" /></figure>
+                <small>JUMLAH TIKET</small>
+                <h6>DATABASE</h6>
+              </li>
+              <!-- end li -->
+             
+              <!-- end li -->
+              <!-- end li -->
+            </ul>
+          </div>
                 <!--end col-12 -->
             </div>
             <!-- end row -->
@@ -409,7 +450,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             <div class="row">
                 <div class="col-12 text-center">
                     <div class="section-title">
-                        <h2>Tour Attraction</h2>
+                        <h2>Galeri</h2>
                         <img src="images/title-seperator.png" alt="Image" />
                     </div>
                     <!-- end section-title -->
@@ -474,21 +515,16 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                             </div>
                             <!-- end col-12 -->
                             <div class="col-lg-7">
-                                <h3>Frequently Asked Questions</h3>
+                                <h3>Pertanyaan yang Sering Diajukan</h3>
                                 <div class="accordion" id="accordion">
                                     <div class="card">
                                         <div class="card-header no-border" id="headingOne"><a data-toggle="collapse"
-                                                href="#collapseOne" aria-expanded="true">How long in advance do I need
-                                                to
-                                                book?</a>
+                                                href="#collapseOne" aria-expanded="true">Apakah termasuk dengan Transportasi?
+                                               </a>
                                         </div>
                                         <div id="collapseOne" class="collapse show" data-parent="#accordion">
                                             <div class="card-body">
-                                                <p>Worci varius natoque penatibus et magnis dis turient montes nascetur
-                                                    ridiculus
-                                                    mus cras eleifend tellus sed congue ectetur velit upis aucibus odio
-                                                    eget
-                                                    volutpat.</p>
+                                                <p>Tidak. Kami memfokuskan pada pengalaman tujuan wisata itu sendiri tanpa menyediakan layanan transportasi.</p>
                                             </div>
                                             <!-- end card-body -->
                                         </div>
@@ -497,16 +533,11 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                                     <!-- end card -->
                                     <div class="card">
                                         <div class="card-header" id="headingTwo"><a class="collapsed"
-                                                data-toggle="collapse" href="#collapseTwo"> What if my hotel is not
-                                                listed in the PU selection?</a>
+                                                data-toggle="collapse" href="#collapseTwo"> Apakah termasuk dengan tempat penginapan?</a>
                                         </div>
                                         <div id="collapseTwo" class="collapse" data-parent="#accordion">
                                             <div class="card-body">
-                                                <p>Worci varius natoque penatibus et magnis dis turient montes nascetur
-                                                    ridiculus
-                                                    mus cras eleifend tellus sed congue ectetur velit upis aucibus odio
-                                                    eget
-                                                    volutpat.</p>
+                                                <p>Tidak. Kami memfokuskan pada pengalaman tujuan wisata itu sendiri tanpa menyediakan layanan transportasi.</p>
                                             </div>
                                             <!-- end card-body -->
                                         </div>
@@ -515,15 +546,10 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                                     <!-- end card -->
                                     <div class="card">
                                         <div class="card-header" id="headingThree"><a class="collapsed"
-                                                data-toggle="collapse" href="#collapseThree"> When does the pick up
-                                                start?</a></div>
+                                                data-toggle="collapse" href="#collapseThree"> Bagaimana kebijakan pembatalan atau pengembalian uang jika ada perubahan rencana?</a></div>
                                         <div id="collapseThree" class="collapse" data-parent="#accordion">
                                             <div class="card-body">
-                                                <p>Worci varius natoque penatibus et magnis dis turient montes nascetur
-                                                    ridiculus
-                                                    mus cras eleifend tellus sed congue ectetur velit upis aucibus odio
-                                                    eget
-                                                    volutpat.</p>
+                                                <p>Mohon maaf, untuk tiket yang telah dibeli tidak dapat dikembalikan dalam bentuk apapun.</p>
                                             </div>
                                             <!-- end card-body -->
                                         </div>
@@ -547,7 +573,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                         <div class="row">
                             <div class="col-12">
                                 <div class="section-title">
-                                    <h2>Related Blog Posts</h2>
+                                    <h2>Postingan Blog Terkait</h2>
                                     <img src="images/title-seperator.png" alt="Image" />
                                 </div>
                                 <!-- end section-title -->
@@ -598,7 +624,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                         <div class="row">
                             <div class="col-12">
                                 <div class="section-title">
-                                    <h2>Related Adventure Tours</h2>
+                                    <h2>Tur Pertunjukkan Terkait</h2>
                                     <img src="images/title-seperator.png" alt="Image" />
                                 </div>
                                 <!-- end section-title -->

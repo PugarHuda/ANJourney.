@@ -142,12 +142,12 @@ include "koneksi.php"
                         </li>
                         <li class="nav-item"><a class="nav-link" href="tours-list.php">TOURS</a></li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link">ATTRACTIONS</a>
+                            <a class="nav-link">CATEGORY</a>
                             <ul class="dropdown-menu">
-                                <li><a href="attcJak.php">JAKARTA</a></li>
-                                <li><a href="attcJog.php">YOGYAKARTA</a></li>
-                                <li><a href="attcBan.php">BANDUNG</a></li>
-                                <li><a href="attcBali.php">BALI</a></li>
+                                <li><a href="katTari.php">TARI</a></li>
+                                <li><a href="katTea.php">TEATER</a></li>
+                                <li><a href="katMus.php">MUSIK</a></li>
+                                <li><a href="katPam.php">PAMERAN VISUAL</a></li>
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="about-us.php">ABOUT US</a></li>
@@ -225,7 +225,7 @@ include "koneksi.php"
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
-                        <small><?php echo $detailRow['namaKota']; ?></small>
+                        <!-- <small><?php echo $detailRow['namaKota']; ?></small> -->
                         <h2><?php echo $detailRow['namaTour']; ?></h2>
                     </div>
                     <!-- end col-8 -->
@@ -264,10 +264,9 @@ include "koneksi.php"
                     <div class="col-lg-4">
                         <div class="steps">
                             <!-- <small>STEP 4</small> -->
-                            <h5>Payment Information</h5>
-                            <p>Please provide all the information of the person who is going to be making the
-                                transaction..</p>
-                            <span>PAYING AS A</span>
+                            <h5>Informasi Pembayaran</h5>
+                            <p>Mohon untuk mengisi informasi pembayaran di bawah ini...</p>
+                            <span>MEMBAYAR SEBAGAI</span>
 
                             <?php
             // ID user yang ingin ditampilkan (sesuaikan dengan kebutuhan Anda)
@@ -300,14 +299,14 @@ include "koneksi.php"
                     <div class="payment">
                         <form>
                             <div class="inner">
-                                <h6>PAYMENT INFORMATION</h6>
+                                <h6>INFORMASI PEMBAYARAN</h6>
                                 <!-- end form-group -->
                                 <div class="form-group big">
-                                    <input type="text" placeholder="Card Number" />
+                                    <input type="text" placeholder="Nomor Kartu" />
                                 </div>
                                 <!-- end form-group -->
                                 <div class="form-group big">
-                                    <input type="text" placeholder="Expiry Date" />
+                                    <input type="text" placeholder="Tanggal Kadaluarsa" />
                                 </div>
                                 <!-- end form-group -->
                                 <div class="form-group big">
@@ -315,7 +314,7 @@ include "koneksi.php"
                                 </div>
                                 <!-- end form-group -->
                                 <div class="form-group big coupon-field">
-                                    <input type="text" placeholder="Promotion Code" />
+                                    <input type="text" placeholder="Kode Promosi" />
                                     <button>APPLY</button>
                                 </div>
                                 <!-- end form-group -->
@@ -326,8 +325,7 @@ include "koneksi.php"
                     <!-- end payment -->
                 </div>
                 <!-- end col-8 -->
-                <button type="button" class="site-btn pull-right">MAKE
-                    PAYMENT</button>
+                <button type="button" class="site-btn pull-right">LAKUKAN PEMBAYARAN</button>
 
             </div>
             <!-- end row -->

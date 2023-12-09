@@ -26,6 +26,7 @@ include "koneksi.php";
     <link rel="stylesheet" href="css/daterangepicker.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
     <link rel="stylesheet" href="css/style.css" />
 
@@ -134,19 +135,24 @@ include "koneksi.php";
                     </div>
                 </div>
                 <!-- end menu-btn -->
-                <span class="search-btn"><i class="fa fa-search"></i></span>
+                <span class="search-btn"><i class="bi bi-person-circle"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    </svg>
+                </span>
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="index.php">HOME</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="tours-list.php">TOURS</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link">ATTRACTIONS</a>
+                        <a class="nav-link">CATEGORY</a>
                         <ul class="dropdown-menu">
-                            <li><a href="attcJak.php">JAKARTA</a></li>
-                            <li><a href="attcJog.php">YOGYAKARTA</a></li>
-                            <li><a href="attcBan.php">BANDUNG</a></li>
-                            <li><a href="attcBali.php">BALI</a></li>
+                            <li><a href="katTari.php">TARI</a></li>
+                            <li><a href="katTea.php">TEATER</a></li>
+                            <li><a href="katMus.php">MUSIK</a></li>
+                            <li><a href="katPam.php">PAMERAN VISUAL</a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="about-us.php">ABOUT US</a></li>
@@ -205,11 +211,10 @@ include "koneksi.php";
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <div class="slide-inner bg-image" data-background="images/slide4.jpg">
+                    <div class="slide-inner bg-image" data-background="images/teater.jpg">
                         <div class="container">
-                            <h2 data-swiper-parallax="-300">Eksplorasi Wisata Tersembunyi di Jakarta</h2>
-                            <a href="index.php" class="link" data-swiper-parallax="-100"><img
-                                    src="images/arrow-link.png" alt="Image" />LEARN MORE</a>
+                            <h2 data-swiper-parallax="-300">Rasakan Persembahan Seni Teater Yang Menginspirasi</h2>
+                            <a href="index.php" class="link" data-swiper-parallax="-100"></a>
                         </div>
                         <!-- end container -->
                     </div>
@@ -219,9 +224,8 @@ include "koneksi.php";
                 <div class="swiper-slide">
                     <div class="slide-inner bg-image" data-background="images/slide2.jpg">
                         <div class="container">
-                            <h2 data-swiper-parallax="-300">Jelajahi Keindahan Pulau Bali</h2>
-                            <a href="index.php" class="link" data-swiper-parallax="-100"><img
-                                    src="images/arrow-link.png" alt="Image" />LEARN MORE</a>
+                            <h2 data-swiper-parallax="-300">Nikmati Momen Euforia Tari Kecak Bali</h2>
+                            <a href="index.php" class="link" data-swiper-parallax="-100"></a>
                         </div>
                         <!-- end container -->
                     </div>
@@ -229,11 +233,10 @@ include "koneksi.php";
                 </div>
                 <!-- end swiper-slide -->
                 <div class="swiper-slide">
-                    <div class="slide-inner bg-image" data-background="images/slide3.jpg">
+                    <div class="slide-inner bg-image" data-background="images/musik.jpg">
                         <div class="container">
-                            <h2 data-swiper-parallax="-300">Sensasi Wisata Malam di Yogyakarta</h2>
-                            <a href="index.php" class="link" data-swiper-parallax="-100"><img
-                                    src="images/arrow-link.png" alt="Image" />LEARN MORE</a>
+                            <h2 data-swiper-parallax="-300">Nikmati Ritme Keindahan Musik Gamelan</h2>
+                            <a href="index.php" class="link" data-swiper-parallax="-100"></a>
                         </div>
                         <!-- end container -->
                     </div>
@@ -241,11 +244,10 @@ include "koneksi.php";
                 </div>
                 <!-- end swiper-slide -->
                 <div class="swiper-slide">
-                    <div class="slide-inner bg-image" data-background="images/slide1.jpg">
+                    <div class="slide-inner bg-image" data-background="images/museum.jpg">
                         <div class="container">
-                            <h2 data-swiper-parallax="-300">Ekspedisi Keajaiban Kota Bandung</h2>
-                            <a href="index.php" class="link" data-swiper-parallax="-100"><img
-                                    src="images/arrow-link.png" alt="Image" />LEARN MORE</a>
+                            <h2 data-swiper-parallax="-300">Menyingkap Misteri dan Keindahan Masa Lalu Melalui Museum</h2>
+                            <a href="index.php" class="link" data-swiper-parallax="-100"></a>
                         </div>
                         <!-- end container -->
                     </div>
@@ -275,11 +277,10 @@ include "koneksi.php";
                 <!-- end col-6 -->
                 <div class="col-lg-6">
                     <p class="section-desc">
-                        Di situs web kami, Anda akan menemukan koleksi yang komprehensif dari tur dan paket perjalanan
+                        Di situs web kami, Anda akan menemukan koleksi yang komprehensif dari paket kesenian
                         ke destinasi terkenal di beberapa kota di Indonesia. Kami berkomitmen untuk menyajikan
                         pengalaman perjalanan yang memikat dan unik,
-                        mulai dari jalan-jalan kota yang menakjubkan hingga petualangan alam yang luar biasa, serta
-                        perjalanan budaya yang kaya akan sejarah.
+                        mulai dari menelusuri sejarah dan kebudayaan memlalui karya seni baik dari seni tari, musik, atau museum yang menjadi ceriminan dari zaman tertentu
                     </p>
                 </div>
                 <!-- end col-6 -->
@@ -342,10 +343,9 @@ if ($result->num_rows > 0) {
 
                 <div class="col-lg-5">
                     <p class="section-desc">
-                        Kami memahami bahwa setiap orang memiliki preferensi dan minat yang berbeda dalam perjalanan.
-                        Oleh karena itu, kami menawarkan beragam pilihan tur yang dapat disesuaikan dengan keinginan
-                        Anda. Kami memiliki sesuatu untuk
-                        setiap jenis petualangan yang Anda cari.
+                        Kami memahami bahwa setiap orang memiliki preferensi dan minat yang berbeda dalam menikmati sebuah karya seni.
+                        Oleh karena itu, kami menawarkan beragam pilihan kategori yang dapat disesuaikan dengan keinginan
+                        Anda.
                     </p>
                 </div>
                 <!-- end col-6 -->
@@ -501,6 +501,7 @@ $result = $conn->query($sql);
                 integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
             <script>
             // PRELOADER
             (function($) {

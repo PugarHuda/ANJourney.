@@ -8,7 +8,7 @@ include "koneksi.php"
     <!-- META TAGS -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>ANJourney | for Tour Operators & Travel Agencies around Nation</title>
+    <title>ANJourney</title>
     <meta name="author" content="GFX Partner" />
     <meta name="description" content="ANJourney | for Tour Operators & Travel Agencies around Nation" />
     <meta name="keywords" content="tour, ice, trip, travel, agency, life, vacation, treking, boat, walking, climbing, transition, svg, html, css" />
@@ -123,65 +123,75 @@ include "koneksi.php"
             </div>
           </div>
           <!-- end menu-btn -->
-          <span class="search-btn"><i class="fa fa-search"></i></span>
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a class="nav-link" href="index.php">HOME</a>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="tours-list.php">TOURS</a></li>
-            <li class="nav-item dropdown">
-              <a class="nav-link">ATTRACTIONS</a>
-              <ul class="dropdown-menu">
-                <li><a href="attcJak.php">JAKARTA</a></li>
-                <li><a href="attcJog.php">YOGYAKARTA</a></li>
-                <li><a href="attcBan.php">BANDUNG</a></li>
-                <li><a href="attcBali.php">BALI</a></li>
-              </ul>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="about-us.php">ABOUT US</a></li>
-            <li class="nav-item"><a id="login-link" class="nav-link" href="#">LOGIN</a></li>
+          <span class="search-btn"><i class="bi bi-person-circle"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    </svg>
+                </span>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="index.php">HOME</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="tours-list.php">TOURS</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link">CATEGORY</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="katTari.php">TARI</a></li>
+                            <li><a href="katTea.php">TEATER</a></li>
+                            <li><a href="katMus.php">MUSIK</a></li>
+                            <li><a href="katPam.php">PAMERAN VISUAL</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="about-us.php">ABOUT US</a></li>
+                    <li class="nav-item"><a id="login-link" class="nav-link" href="#">LOGIN</a></li>
 
-            <!-- The login modal -->
-            <div id="loginModal" class="modal">
-              <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Welcome Back</h2>
-                <form id="loginForm">
-                  <div class="form-group">
-                    <input type="email" id="loginEmail" name="loginEmail" placeholder="Email" required />
-                  </div>
-                  <div class="form-group">
-                    <input type="password" id="loginPassword" name="loginPassword" placeholder="Password" required />
-                  </div>
-                  <button type="submit" class="login-btn">Login</button>
-                </form>
-                <p class="signup-link">Don't have an account? <a href="#" id="signup-link">Sign Up</a></p>
-              </div>
-            </div>
-            
-            <!-- The sign-up modal -->
-            <div id="signupModal" class="modal">
-              <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Sign Up</h2>
-                <form id="signupForm">
-                  <div class="form-group">
-                    <input type="text" id="firstName" name="firstName" placeholder="First Name" required />
-                  </div>
-                  <div class="form-group">
-                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required />
-                  </div>
-                  <div class="form-group">
-                    <input type="email" id="signupEmail" name="signupEmail" placeholder="Email" required />
-                  </div>
-                  <div class="form-group">
-                    <input type="password" id="signupPassword" name="signupPassword" placeholder="Password" required />
-                  </div>
-                  <button type="submit" class="signup-btn">Sign Up</button>
-                </form>
-              </div>
-            </div>
-          </ul>
+                    <!-- The login modal -->
+                    <div id="loginModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <h2>Welcome Back</h2>
+                            <form id="loginForm">
+                                <div class="form-group">
+                                    <input type="email" id="loginEmail" name="loginEmail" placeholder="Email"
+                                        required />
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" id="loginPassword" name="loginPassword"
+                                        placeholder="Password" required />
+                                </div>
+                                <button type="submit" class="login-btn">Login</button>
+                            </form>
+                            <p class="signup-link">Don't have an account? <a href="#" id="signup-link">Sign Up</a></p>
+                        </div>
+                    </div>
+
+                    <!-- The sign-up modal -->
+                    <div id="signupModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <h2>Sign Up</h2>
+                            <form id="signupForm">
+                                <div class="form-group">
+                                    <input type="text" id="firstName" name="firstName" placeholder="First Name"
+                                        required />
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required />
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" id="signupEmail" name="signupEmail" placeholder="Email"
+                                        required />
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" id="signupPassword" name="signupPassword"
+                                        placeholder="Password" required />
+                                </div>
+                                <button type="submit" class="signup-btn">Sign Up</button>
+                            </form>
+                        </div>
+                    </div>
+                </ul>
         </nav>
         <!-- end navbar -->
       </div>
@@ -196,8 +206,8 @@ include "koneksi.php"
               <h2>Tentang Kami</h2>
               <img src="images/title-seperator.png" alt="Image" />
               <p>
-                Selamat datang di ANJourney. Kami adalah kelompok pecinta petualangan yang berkomitmen untuk menciptakan pengalaman wisata tak terlupakan bagi pelanggan kami. Dengan pengalaman lebih dari dua tahun di industri pariwisata,
-                kami telah mempersembahkan kegembiraan dan kepuasan kepada ribuan pelanggan dari berbagai belahan masyarakat Indonesia. Kami menyediakan beberapa tour di kota Jakarta, Bandung, Bali, dan Yogyakarta.
+                Selamat datang di Artistic Nusantara Journey. Kami adalah kelompok yang berkomitmen untuk menciptakan pengalaman wisata seni tak terlupakan bagi pelanggan kami.
+                kami telah mempersembahkan kegembiraan dan kepuasan kepada pelanggan dari berbagai belahan masyarakat Indonesia. Kami menyediakan beberapa tour wisata seni di beberapa kota di Indonesia
               </p>
             </div>
             <!-- end section-title -->
@@ -234,7 +244,6 @@ include "koneksi.php"
                     Lorem ipsum dolor sit amet consectetur adipiscing elit. In erat est viverra fringilla euismod in fermentum sed augue. Nullam consectetur ligula id elementum hendrerit suspendisse potenti. Nulla facilisi sed sque lectus
                     venenatis quam venenatis euntum lectus molestie.
                   </p>
-                  <a href="#" class="read-more"><span>READ MORE</span></a>
                 </div>
                 <!-- end inner -->
               </div>
@@ -252,7 +261,7 @@ include "koneksi.php"
                     Lorem ipsum dolor sit amet consectetur adipiscing elit. In erat est viverra fringilla euismod in fermentum sed augue. Nullam consectetur ligula id elementum hendrerit suspendisse potenti. Nulla facilisi sed sque lectus
                     venenatis quam venenatis euntum lectus molestie.
                   </p>
-                  <a href="#" class="read-more"><span>READ MORE</span></a>
+
                 </div>
                 <!-- end inner -->
               </div>
@@ -265,10 +274,9 @@ include "koneksi.php"
                   <h4>Raisha Alma Sahara</h4>
                   <img src="images/title-seperator.png" alt="Image" />
                   <p>
-                    Lorem ipsum dolor sit amet consectetur adipiscing elit. In erat est viverra fringilla euismod in fermentum sed augue. Nullam consectetur ligula id elementum hendrerit suspendisse potenti. Nulla facilisi sed sque lectus
-                    venenatis quam venenatis euntum lectus molestie.
+                    Di projek ini, saya berperan sebagai seorang ui/ux designer. Selain itu, saya juga mengurus dokumen projek serta administrasi keuangan dalam projek ini.
                   </p>
-                  <a href="#" class="read-more"><span>READ MORE</span></a>
+
                 </div>
                 <!-- end inner -->
               </div>
@@ -280,13 +288,13 @@ include "koneksi.php"
               <figure><img src="images/history02.jpg" alt="Image" /></figure>
               <div class="content">
                 <div class="inner">
-                  <h4>Zaenal Mutaqen</h4>
+                  <h4>Zaenal Muttaqin</h4>
                   <img src="images/title-seperator.png" alt="Image" />
                   <p>
                     Lorem ipsum dolor sit amet consectetur adipiscing elit. In erat est viverra fringilla euismod in fermentum sed augue. Nullam consectetur ligula id elementum hendrerit suspendisse potenti. Nulla facilisi sed sque lectus
                     venenatis quam venenatis euntum lectus molestie.
                   </p>
-                  <a href="#" class="read-more"><span>READ MORE</span></a>
+
                 </div>
                 <!-- end inner -->
               </div>
