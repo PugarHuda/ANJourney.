@@ -413,8 +413,7 @@ if (isset($_GET['id'])) {
                             muncul sebagai bentuk formal pertunjukkan yang menggabungkan naskah drama, aktor
                             profesional, dan
                             penonton dalam sebuah pengalaman kolektif. Seiring waktu, munculnya seni wayang kulit
-                            di Asia,
-                            pertunjukan sirkus Romawi, opera Italia, dan teater kabuki Jepang, semuanya
+                            di Asia, pertunjukan sirkus Romawi, opera Italia, dan teater kabuki Jepang, semuanya
                             menciptakan keragaman
                             dalam seni pertunjukkan. Evolusi ini berlanjut ke era modern, di mana seni
                             pertunjukkan menjadi
