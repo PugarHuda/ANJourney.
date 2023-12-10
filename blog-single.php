@@ -504,21 +504,22 @@ if ($result) {
                                 <!-- end section-title -->
                             </div>
                             <!-- end col-12 -->
+                            <!-- end col-12 -->
                             <?php
 // Query untuk mengambil data dari tabel berita
 $sql = "SELECT * FROM berita ORDER BY RAND() LIMIT 3";
 
 $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
+if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         echo '<div class="col-lg-4">
                 <div class="blog-post">
                   <figure class="post-image"><img src="images/' . $row['gambarBerita'] . '" alt="Image" /></figure>
                   <div class="post-content">
                     <small>' . $row['tanggalBerita'] . ' <span>|</span>' . $row['penguploadBerita'] . '</small>
-                    <a href="blog-single.php"><h3>' . $row['judulBerita'] . '</h3></a>
+                    <a href="blog-single.php?id=' . $row['id_berita'] . '"><h3>' . $row['judulBerita'] . '</h3></a>
                     <p> </p>
-                    <a href="blog-single.php" class="read-more">READ MORE</a>
+                    <a href="blog-single.php?id=' . $row['id_berita'] . '" class="read-more">READ MORE</a>
                   </div>
                 </div>
               </div>';
@@ -527,6 +528,7 @@ $result = $conn->query($sql);
     echo "0 results";
 }
 ?>
+
                             <!-- end col-4  -->
                             <div class="col-12 text-center"><a href="blog-list.php" class="site-btn">KUNJUNGI BLOG
                                     KAMI</a>
