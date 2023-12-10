@@ -439,6 +439,17 @@ if (isset($_GET['id'])) {
                 <!-- end row -->
             </div>
             <!-- end container -->
+
+        </section>
+
+        <section class="tour-desc">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="section-title">
+                            <h2>Berbagai Kesenian di Indonesia</h2>
+                            <img src="images/title-seperator.png" alt="Image" />
+                        </div>
         </section>
         <!-- end attraction-desc -->
         <div class="swiper-blog-carousel">
@@ -541,10 +552,12 @@ if ($result) {
                                 <small>FROM <?php echo $row['namaKota']; ?></small>
                                 <h3><?php echo $row['namaTour']; ?></h3>
                                 <ul>
-                                    <li><img src="images/icon-date.png" alt="Image" /> <small>Available</small>
+                                    <li><img src="images/icon-date.png" alt="Image" />
+                                        <small>Available</small>
                                         <span><?php echo $row['ketersediaanTour']; ?></span>
                                     </li>
-                                    <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small>
+                                    <li><img src="images/icon-time.png" alt="Image" />
+                                        <small>Duration</small>
                                         <span><?php echo $row['durasiTour']; ?></span>
                                     </li>
                                     <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small>
@@ -677,7 +690,8 @@ if ($result) {
 
         <!-- JS FILES -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
+        </script>
         <script>
         // PRELOADER
         (function($) {
