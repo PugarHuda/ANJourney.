@@ -370,7 +370,7 @@ include "koneksi.php"
                                     <h4>Pugar Huda Mantoro</h4>
                                     <img src="images/title-seperator.png" alt="Image" />
                                     <p>
-                                        Saya adalah seorang Developer Backend. Pekerjaan saya fokus pada pengembangan
+                                        Saya sebagai seorang Developer Backend. Pekerjaan saya fokus pada pengembangan
                                         dan pemeliharaan bagian "mesin" dari situs web. Saya memiliki
                                         tanggung jawab merancang, membangun, dan mengoptimalkan logika server, database,
                                         dan fungsionalitas yang tidak terlihat oleh pengguna akhir.
