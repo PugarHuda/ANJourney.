@@ -119,7 +119,14 @@ include "koneksi.php"
                         </div>
                     </div>
                     <!-- end menu-btn -->
-                    <span class="search-btn"><i class="fa fa-search"></i></span>
+                    <span class="search-btn"><i class="bi bi-person-circle"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                            <path fill-rule="evenodd"
+                                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                        </svg>
+                    </span>
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="index.php">HOME</a>
@@ -135,16 +142,14 @@ include "koneksi.php"
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="about-us.php">ABOUT US</a></li>
-                        <li class="nav-item">
-                            <a id="login-logout-link" class="nav-link" href="#" onclick="toggleLoginStatus()">LOGIN</a>
-                        </li>
+                        <li class="nav-item"><a id="login-link" class="nav-link" href="#">LOGIN</a></li>
+
                         <!-- The login modal -->
                         <div id="loginModal" class="modal">
                             <div class="modal-content">
-                                <span class="close" onclick="closeLoginModal()">&times;</span>
+                                <span class="close">&times;</span>
                                 <h2>Welcome Back</h2>
-                                <form id="loginForm" method="POST" action="loginUser.php"
-                                    onsubmit="submitLoginForm(event)">
+                                <form id="loginForm">
                                     <div class="form-group">
                                         <input type="email" id="loginEmail" name="loginEmail" placeholder="Email"
                                             required />
@@ -160,91 +165,6 @@ include "koneksi.php"
                             </div>
                         </div>
 
-                        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-                        <script>
-                        function submitLoginForm(event) {
-                            event.preventDefault();
-
-                            var email = $("#loginEmail").val();
-                            var password = $("#loginPassword").val();
-
-                            $.ajax({
-                                type: "POST",
-                                url: "loginUser.php",
-                                data: {
-                                    loginEmail: email,
-                                    loginPassword: password
-                                },
-                                success: function(response) {
-                                    alert(response);
-                                    if (response.includes("Login berhasil")) {
-                                        closeLoginModal();
-                                        updateLoginStatus(true);
-                                    }
-                                },
-                                error: function(xhr, status, error) {
-                                    alert("Terjadi kesalahan saat melakukan login. Silakan coba lagi.");
-                                }
-                            });
-                        }
-
-                        function closeLoginModal() {
-                            $("#loginModal").hide();
-                        }
-
-                        function toggleLoginStatus() {
-                            var isLoggedIn = checkLoginStatus();
-
-                            if (isLoggedIn) {
-                                submitLogout();
-                            } else {
-                                openLoginModal();
-                            }
-                        }
-
-                        function openLoginModal() {
-                            // Tambahkan logika atau panggilan fungsi untuk menampilkan modal login di sini
-                            var isLoggedIn = checkLoginStatus();
-
-                            if (!isLoggedIn) {
-                                $("#loginModal").show();
-                            }
-                        }
-
-                        function submitLogout() {
-                            $.ajax({
-                                type: "POST",
-                                url: "logoutUser.php",
-                                success: function(response) {
-                                    alert(response);
-                                    updateLoginStatus(false);
-
-                                    // Redirect ke halaman login atau halaman lain yang sesuai
-                                    window.location.href =
-                                        "index.php"; // Gantilah "login.php" dengan halaman yang sesuai
-                                },
-                                error: function(xhr, status, error) {
-                                    alert("Terjadi kesalahan saat melakukan logout. Silakan coba lagi.");
-                                }
-                            });
-                        }
-
-
-                        function checkLoginStatus() {
-                            var isLoggedIn = <?php echo isset($_SESSION['user_email']) ? 'true' : 'false'; ?>;
-                            return isLoggedIn;
-                        }
-
-                        function updateLoginStatus(isLoggedIn) {
-                            var loginLogoutLink = $("#login-logout-link");
-
-                            if (isLoggedIn) {
-                                loginLogoutLink.text("LOGOUT");
-                            } else {
-                                loginLogoutLink.text("LOGIN");
-                            }
-                        }
-                        </script>
                         <!-- The sign-up modal -->
                         <div id="signupModal" class="modal">
                             <div class="modal-content">
@@ -272,6 +192,7 @@ include "koneksi.php"
                             </div>
                         </div>
                     </ul>
+                </nav>
                 </nav>
                 <!-- end navbar -->
             </div>

@@ -311,7 +311,7 @@ if ($result->num_rows > 0) {
 
 
                 <!-- end col-6 -->
-                <div class="col-12 text-center"><a href="#" class="site-btn">LOAD MORE</a></div>
+                <!-- <div class="col-12 text-center"><a href="#" class="site-btn">LOAD MORE</a></div> -->
                 <!-- end col-12 -->
             </div>
             <!-- end row -->
