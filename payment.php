@@ -48,22 +48,6 @@ include "koneksi.php"
                     <div class="col-12">
                         <span class="search-close-btn"><i class="fa fa-times"></i></span>
                         <h3>Profile</h3>
-                        <!-- <form>
-              <div class="form-group">
-                <i class="fa fa-search"></i>
-                <input type="text" placeholder="Search Activities, Themes or Tours" />
-              </div>
-              --end form-group
-              <button type="submit">SEARCH</button>
-            </form>
-            <dl>
-              <dt>Suggestions <i class="fa fa-long-arrow-right"></i></dt>
-              <dd><a href="#">Adventure</a></dd>
-              <dd><a href="#">Nothern Lights</a></dd>
-              <dd><a href="#">Waterfalls</a></dd>
-              <dd><a href="#">Winter Tours</a></dd>
-              <dd><a href="#">Glaciar Walk</a></dd>
-            </dl> -->
                     </div>
                     <div class="container mt-5">
                         <div class="row">
@@ -151,14 +135,16 @@ include "koneksi.php"
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="about-us.php">ABOUT US</a></li>
-                        <li class="nav-item"><a id="login-link" class="nav-link" href="#">LOGIN</a></li>
-
+                        <li class="nav-item">
+                            <a id="login-logout-link" class="nav-link" href="#" onclick="toggleLoginStatus()">LOGIN</a>
+                        </li>
                         <!-- The login modal -->
                         <div id="loginModal" class="modal">
                             <div class="modal-content">
-                                <span class="close">&times;</span>
+                                <span class="close" onclick="closeLoginModal()">&times;</span>
                                 <h2>Welcome Back</h2>
-                                <form id="loginForm">
+                                <form id="loginForm" method="POST" action="loginUser.php"
+                                    onsubmit="submitLoginForm(event)">
                                     <div class="form-group">
                                         <input type="email" id="loginEmail" name="loginEmail" placeholder="Email"
                                             required />
@@ -174,6 +160,91 @@ include "koneksi.php"
                             </div>
                         </div>
 
+                        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                        <script>
+                        function submitLoginForm(event) {
+                            event.preventDefault();
+
+                            var email = $("#loginEmail").val();
+                            var password = $("#loginPassword").val();
+
+                            $.ajax({
+                                type: "POST",
+                                url: "loginUser.php",
+                                data: {
+                                    loginEmail: email,
+                                    loginPassword: password
+                                },
+                                success: function(response) {
+                                    alert(response);
+                                    if (response.includes("Login berhasil")) {
+                                        closeLoginModal();
+                                        updateLoginStatus(true);
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    alert("Terjadi kesalahan saat melakukan login. Silakan coba lagi.");
+                                }
+                            });
+                        }
+
+                        function closeLoginModal() {
+                            $("#loginModal").hide();
+                        }
+
+                        function toggleLoginStatus() {
+                            var isLoggedIn = checkLoginStatus();
+
+                            if (isLoggedIn) {
+                                submitLogout();
+                            } else {
+                                openLoginModal();
+                            }
+                        }
+
+                        function openLoginModal() {
+                            // Tambahkan logika atau panggilan fungsi untuk menampilkan modal login di sini
+                            var isLoggedIn = checkLoginStatus();
+
+                            if (!isLoggedIn) {
+                                $("#loginModal").show();
+                            }
+                        }
+
+                        function submitLogout() {
+                            $.ajax({
+                                type: "POST",
+                                url: "logoutUser.php",
+                                success: function(response) {
+                                    alert(response);
+                                    updateLoginStatus(false);
+
+                                    // Redirect ke halaman login atau halaman lain yang sesuai
+                                    window.location.href =
+                                        "index.php"; // Gantilah "login.php" dengan halaman yang sesuai
+                                },
+                                error: function(xhr, status, error) {
+                                    alert("Terjadi kesalahan saat melakukan logout. Silakan coba lagi.");
+                                }
+                            });
+                        }
+
+
+                        function checkLoginStatus() {
+                            var isLoggedIn = <?php echo isset($_SESSION['user_email']) ? 'true' : 'false'; ?>;
+                            return isLoggedIn;
+                        }
+
+                        function updateLoginStatus(isLoggedIn) {
+                            var loginLogoutLink = $("#login-logout-link");
+
+                            if (isLoggedIn) {
+                                loginLogoutLink.text("LOGOUT");
+                            } else {
+                                loginLogoutLink.text("LOGIN");
+                            }
+                        }
+                        </script>
                         <!-- The sign-up modal -->
                         <div id="signupModal" class="modal">
                             <div class="modal-content">
@@ -270,7 +341,7 @@ include "koneksi.php"
 
                             <?php
             // ID user yang ingin ditampilkan (sesuaikan dengan kebutuhan Anda)
-            $userId = 2;
+            $userId = 1;
 
             // Query untuk mendapatkan data namaDepan dan namaBelakang dari tabel "user" berdasarkan ID
             $sql = "SELECT namaDepan, namaBelakang FROM user WHERE id_user = $userId";
@@ -302,20 +373,19 @@ include "koneksi.php"
                                 <h6>INFORMASI PEMBAYARAN</h6>
                                 <!-- end form-group -->
                                 <div class="form-group big">
-                                    <input type="text" placeholder="Nomor Kartu" />
+                                    <input type="text" placeholder="Nomor Kartu" required />
                                 </div>
                                 <!-- end form-group -->
                                 <div class="form-group big">
-                                    <input type="text" placeholder="Tanggal Kadaluarsa" />
+                                    <input type="text" placeholder="Tanggal Kadaluarsa" required />
                                 </div>
                                 <!-- end form-group -->
                                 <div class="form-group big">
-                                    <input type="text" placeholder="CVC/CVV" />
+                                    <input type="text" placeholder="CVC/CVV" required />
                                 </div>
                                 <!-- end form-group -->
                                 <div class="form-group big coupon-field">
                                     <input type="text" placeholder="Kode Promosi" />
-                                    <button>APPLY</button>
                                 </div>
                                 <!-- end form-group -->
                             </div>
@@ -325,7 +395,50 @@ include "koneksi.php"
                     <!-- end payment -->
                 </div>
                 <!-- end col-8 -->
-                <button type="button" class="site-btn pull-right">LAKUKAN PEMBAYARAN</button>
+                <!-- Tautan Bootstrap CSS -->
+                <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+                <!-- Tautan SweetAlert CSS -->
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+
+
+
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+                <button type="button" class="site-btn pull-right" onclick="lakukanPembayaran()">LAKUKAN
+                    PEMBAYARAN</button>
+
+                <!-- Skrip JavaScript kustom -->
+                <script>
+                function lakukanPembayaran() {
+                    // Mendapatkan nilai dari elemen formulir
+                    var nomorKartu = document.getElementById('nomorKartu').value;
+                    var tanggalKadaluarsa = document.getElementById('tanggalKadaluarsa').value;
+                    var cvcCvv = document.getElementById('cvcCvv').value;
+
+                    // Validasi formulir
+                    if (nomorKartu === '' || tanggalKadaluarsa === '' || cvcCvv === '') {
+                        // Menampilkan SweetAlert untuk formulir tidak lengkap
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Perhatian',
+                            text: 'Harap lengkapi semua kolom informasi pembayaran.'
+                        });
+                    } else {
+                        // Menampilkan SweetAlert pembayaran berhasil
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Pembayaran Berhasil',
+                            text: 'Terima kasih atas pembayarannya!'
+                        });
+                    }
+                }
+                </script>
+                <!-- Skrip Bootstrap dan SweetAlert JS -->
+                <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
             </div>
             <!-- end row -->

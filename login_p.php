@@ -24,5 +24,3 @@ echo "<script>
 	    echo '<META HTTP-EQUIV="Refresh" Content="0; URL=login.php">';
 
 ?>
-
-

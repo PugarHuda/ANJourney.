@@ -134,9 +134,11 @@ include "koneksi.php"
                 </div>
                 <!-- end menu-btn -->
                 <span class="search-btn"><i class="bi bi-person-circle"></i>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                        <path fill-rule="evenodd"
+                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
                     </svg>
                 </span>
                 <ul class="navbar-nav">
@@ -202,7 +204,7 @@ include "koneksi.php"
                         </div>
                     </div>
                 </ul>
-        </nav>
+            </nav>
             </nav>
             <!-- end navbar -->
         </div>
@@ -216,8 +218,13 @@ include "koneksi.php"
                     <h2>Pertunjukkan Musik</h2>
                     <img src="images/title-seperator.png" alt="Image" />
                     <p>
-                    Alat musik tradisional seperti gamelan, suling, kendang, rebab, dan gendang menghasilkan suara yang khas dan indah, memadukan ritme, melodi, dan harmoni yang khas bagi setiap pertunjukan. Pertunjukan musik tradisional seringkali dipadukan dengan tarian atau drama, menciptakan keseluruhan pengalaman artistik yang memukau.
-Pertunjukan musik tradisional juga memiliki peran penting dalam ritual adat, upacara keagamaan, atau perayaan budaya, menjadi sarana untuk merayakan identitas lokal serta menggambarkan sejarah dan nilai-nilai budaya yang diwariskan dari generasi ke generasi.
+                        Alat musik tradisional seperti gamelan, suling, kendang, rebab, dan gendang menghasilkan suara
+                        yang khas dan indah, memadukan ritme, melodi, dan harmoni yang khas bagi setiap pertunjukan.
+                        Pertunjukan musik tradisional seringkali dipadukan dengan tarian atau drama, menciptakan
+                        keseluruhan pengalaman artistik yang memukau.
+                        Pertunjukan musik tradisional juga memiliki peran penting dalam ritual adat, upacara keagamaan,
+                        atau perayaan budaya, menjadi sarana untuk merayakan identitas lokal serta menggambarkan sejarah
+                        dan nilai-nilai budaya yang diwariskan dari generasi ke generasi.
                     </p>
                 </div>
                 <!-- end col-12 -->
@@ -241,13 +248,8 @@ Pertunjukan musik tradisional juga memiliki peran penting dalam ritual adat, upa
                 </div>
                 <!-- end col-12 -->
                 <?php
-// Query untuk mengambil data dari tabel detailwisata dan detailtour dengan JOIN
-$sql = "SELECT detailwisata.*, detailtour.* 
-        FROM detailwisata 
-        JOIN detailtour ON detailwisata.id_detailtour = detailtour.id_detailtour
-        WHERE detailtour.namaKota = 'Jakarta'
-        ORDER BY detailtour.id_detailtour";
-
+// Query untuk mengambil data dari tabel detailtour dengan kategori "music" dan urutan acak
+$sql = "SELECT * FROM detailtour WHERE kategoriTour = 'music' ORDER BY RAND() LIMIT 4";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -262,12 +264,13 @@ if ($result->num_rows > 0) {
               </div>';
     }
 } else {
-    echo "0 results";
+    echo "0 hasil";
 }
 ?>
 
+
                 <!-- end col-6 -->
-            
+
                 <!-- end col-12 -->
             </div>
             <!-- end row -->
@@ -289,8 +292,11 @@ if ($result->num_rows > 0) {
                 <!-- end col-12 -->
 
                 <?php
-// Query untuk mengambil data dari tabel detailtour dengan urutan acak
-$sql = "SELECT * FROM detailtour ORDER BY RAND() LIMIT 3";
+// Kategori yang diinginkan (misalnya 'music')
+$kategori = 'music';
+
+// Query untuk mengambil data dari tabel detailtour dengan kategori tertentu dan urutan acak
+$sql = "SELECT * FROM detailtour WHERE kategoriTour = '$kategori' ORDER BY RAND() LIMIT 3";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

@@ -40,7 +40,7 @@ include "koneksi.php";
 
                             <h3><?php echo $dataDetailWisata['jumlah'];?></h3>
 
-                            <p>Wisata</p>
+                            <p>Pertunjukkan</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>

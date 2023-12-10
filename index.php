@@ -1,6 +1,11 @@
 <?php
+session_start(); // Mulai atau lanjutkan sesi
 include "koneksi.php";
+
+// Periksa apakah pengguna sudah login
+
 ?>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -8,7 +13,7 @@ include "koneksi.php";
     <!-- META TAGS -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>ANJourney | for Tour Operators & Travel Agencies around Nation</title>
+    <title>ANJourney</title>
     <meta name="author" content="GFX Partner" />
     <meta name="description" content="ANJourney | for Tour Operators & Travel Agencies around Nation" />
     <meta name="keywords"
@@ -26,7 +31,6 @@ include "koneksi.php";
     <link rel="stylesheet" href="css/daterangepicker.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
     <link rel="stylesheet" href="css/style.css" />
 
@@ -47,22 +51,6 @@ include "koneksi.php";
                 <div class="col-12">
                     <span class="search-close-btn"><i class="fa fa-times"></i></span>
                     <h3>Profile</h3>
-                    <!-- <form>
-              <div class="form-group">
-                <i class="fa fa-search"></i>
-                <input type="text" placeholder="Search Activities, Themes or Tours" />
-              </div>
-              (end form-group)
-              <button type="submit">SEARCH</button>
-            </form>
-            <dl>
-              <dt>Suggestions <i class="fa fa-long-arrow-right"></i></dt>
-              <dd><a href="#">Adventure</a></dd>
-              <dd><a href="#">Nothern Lights</a></dd>
-              <dd><a href="#">Waterfalls</a></dd>
-              <dd><a href="#">Winter Tours</a></dd>
-              <dd><a href="#">Glaciar Walk</a></dd>
-            </dl> -->
                 </div>
                 <div class="container mt-5">
                     <div class="row">
@@ -136,9 +124,11 @@ include "koneksi.php";
                 </div>
                 <!-- end menu-btn -->
                 <span class="search-btn"><i class="bi bi-person-circle"></i>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                        <path fill-rule="evenodd"
+                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
                     </svg>
                 </span>
                 <ul class="navbar-nav">
@@ -147,7 +137,7 @@ include "koneksi.php";
                     </li>
                     <li class="nav-item"><a class="nav-link" href="tours-list.php">TOURS</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link">CATEGORY</a>
+                        <a class="nav-link">KATEGORI</a>
                         <ul class="dropdown-menu">
                             <li><a href="katTari.php">TARI</a></li>
                             <li><a href="katTea.php">TEATER</a></li>
@@ -156,14 +146,15 @@ include "koneksi.php";
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="about-us.php">ABOUT US</a></li>
-                    <li class="nav-item"><a id="login-link" class="nav-link" href="#">LOGIN</a></li>
-
+                    <li class="nav-item">
+                        <a id="login-logout-link" class="nav-link" href="#" onclick="toggleLoginStatus()">LOGIN</a>
+                    </li>
                     <!-- The login modal -->
                     <div id="loginModal" class="modal">
                         <div class="modal-content">
-                            <span class="close">&times;</span>
+                            <span class="close" onclick="closeLoginModal()">&times;</span>
                             <h2>Welcome Back</h2>
-                            <form id="loginForm">
+                            <form id="loginForm" method="POST" action="loginUser.php" onsubmit="submitLoginForm(event)">
                                 <div class="form-group">
                                     <input type="email" id="loginEmail" name="loginEmail" placeholder="Email"
                                         required />
@@ -174,117 +165,215 @@ include "koneksi.php";
                                 </div>
                                 <button type="submit" class="login-btn">Login</button>
                             </form>
-                            <p class="signup-link">Don't have an account? <a href="#" id="signup-link">Sign Up</a></p>
+                            <p class="signup-link">Don't have an account? <a href="#" id="signup-link"
+                                    onclick="openSignUpModal()">Sign Up</a></p>
                         </div>
                     </div>
 
-                    <!-- The sign-up modal -->
-                    <div id="signupModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close">&times;</span>
-                            <h2>Sign Up</h2>
-                            <form id="signupForm">
-                                <div class="form-group">
-                                    <input type="text" id="firstName" name="firstName" placeholder="First Name"
-                                        required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" id="signupEmail" name="signupEmail" placeholder="Email"
-                                        required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" id="signupPassword" name="signupPassword"
-                                        placeholder="Password" required />
-                                </div>
-                                <button type="submit" class="signup-btn">Sign Up</button>
-                            </form>
-                        </div>
-                    </div>
-                </ul>
-            </nav>
-            <!-- end navbar -->
-        </div>
-        <!-- end container -->
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="slide-inner bg-image" data-background="images/teater.jpg">
-                        <div class="container">
-                            <h2 data-swiper-parallax="-300">Rasakan Persembahan Seni Teater Yang Menginspirasi</h2>
-                            <a href="index.php" class="link" data-swiper-parallax="-100"></a>
-                        </div>
-                        <!-- end container -->
-                    </div>
-                    <!-- end slide-inner -->
-                </div>
-                <!-- end swiper-slide -->
-                <div class="swiper-slide">
-                    <div class="slide-inner bg-image" data-background="images/slide2.jpg">
-                        <div class="container">
-                            <h2 data-swiper-parallax="-300">Nikmati Momen Euforia Tari Kecak Bali</h2>
-                            <a href="index.php" class="link" data-swiper-parallax="-100"></a>
-                        </div>
-                        <!-- end container -->
-                    </div>
-                    <!-- end slide-inner -->
-                </div>
-                <!-- end swiper-slide -->
-                <div class="swiper-slide">
-                    <div class="slide-inner bg-image" data-background="images/musik.jpg">
-                        <div class="container">
-                            <h2 data-swiper-parallax="-300">Nikmati Ritme Keindahan Musik Gamelan</h2>
-                            <a href="index.php" class="link" data-swiper-parallax="-100"></a>
-                        </div>
-                        <!-- end container -->
-                    </div>
-                    <!-- end slide-inner -->
-                </div>
-                <!-- end swiper-slide -->
-                <div class="swiper-slide">
-                    <div class="slide-inner bg-image" data-background="images/museum.jpg">
-                        <div class="container">
-                            <h2 data-swiper-parallax="-300">Menyingkap Misteri dan Keindahan Masa Lalu Melalui Museum</h2>
-                            <a href="index.php" class="link" data-swiper-parallax="-100"></a>
-                        </div>
-                        <!-- end container -->
-                    </div>
-                    <!-- end slide-inner -->
-                </div>
-                <!-- end swiper-slide -->
+                    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                    <script>
+                    function submitLoginForm(event) {
+                        event.preventDefault();
+
+                        var email = $("#loginEmail").val();
+                        var password = $("#loginPassword").val();
+
+                        $.ajax({
+                            type: "POST",
+                            url: "loginUser.php",
+                            data: {
+                                loginEmail: email,
+                                loginPassword: password
+                            },
+                            success: function(response) {
+                                alert(response);
+                                if (response.includes("Login berhasil")) {
+                                    closeLoginModal();
+                                    updateLoginStatus(true);
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                alert("Terjadi kesalahan saat melakukan login. Silakan coba lagi.");
+                            }
+                        });
+                    }
+
+                    function closeLoginModal() {
+                        $("#loginModal").hide();
+                    }
+
+
+
+                    function closeSignUpModal() {
+                        $("#signUpModal").hide();
+                    }
+
+                    function toggleLoginStatus() {
+                        var isLoggedIn = checkLoginStatus();
+
+                        if (isLoggedIn) {
+                            submitLogout();
+                        } else {
+                            openLoginModal();
+                        }
+                    }
+
+                    function openLoginModal() {
+                        // Tambahkan logika atau panggilan fungsi untuk menampilkan modal login di sini
+                        var isLoggedIn = checkLoginStatus();
+
+                        if (!isLoggedIn) {
+                            $("#loginModal").show();
+                        }
+                    }
+
+                    function submitLogout() {
+                        $.ajax({
+                            type: "POST",
+                            url: "logoutUser.php",
+                            success: function(response) {
+                                alert(response);
+                                updateLoginStatus(false);
+
+                                // Redirect ke halaman login atau halaman lain yang sesuai
+                                window.location.href =
+                                    "index.php"; // Gantilah "login.php" dengan halaman yang sesuai
+                            },
+                            error: function(xhr, status, error) {
+                                alert("Terjadi kesalahan saat melakukan logout. Silakan coba lagi.");
+                            }
+                        });
+                    }
+
+
+                    function checkLoginStatus() {
+                        var isLoggedIn = <?php echo isset($_SESSION['user_email']) ? 'true' : 'false'; ?>;
+                        return isLoggedIn;
+                    }
+
+                    function updateLoginStatus(isLoggedIn) {
+                        var loginLogoutLink = $("#login-logout-link");
+
+                        if (isLoggedIn) {
+                            loginLogoutLink.text("LOGOUT");
+                        } else {
+                            loginLogoutLink.text("LOGIN");
+                        }
+                    }
+                    </script>
+
+                    <!-- Tambahkan elemen HTML lainnya atau skrip JavaScript di sini -->
+</body>
+
+</html>
+
+<!-- The sign-up modal -->
+<div id="signupModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+            <div class="form-group">
+                <input type="text" id="firstName" name="firstName" placeholder="First Name" required />
             </div>
-            <!-- end swiper-wrapper -->
-            <div class="swiper-custom-pagination"></div>
-            <!-- end swiper-custom-pagination -->
+            <div class="form-group">
+                <input type="text" id="lastName" name="lastName" placeholder="Last Name" required />
+            </div>
+            <div class="form-group">
+                <input type="email" id="signupEmail" name="signupEmail" placeholder="Email" required />
+            </div>
+            <div class="form-group">
+                <input type="password" id="signupPassword" name="signupPassword" placeholder="Password" required />
+            </div>
+            <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+    </div>
+</div>
+</ul>
+</nav>
+<!-- end navbar -->
+</div>
+<!-- end container -->
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <div class="slide-inner bg-image" data-background="images/teater.jpg">
+                <div class="container">
+                    <h2 data-swiper-parallax="-300">Rasakan Persembahan Seni Teater yang Menginspirasi</h2>
+                    <a href="index.php" class="link" data-swiper-parallax="-100"></a>
+                </div>
+                <!-- end container -->
+            </div>
+            <!-- end slide-inner -->
         </div>
-        <!-- end swiper-container -->
-    </header>
-    <!-- end header -->
+        <!-- end swiper-slide -->
+        <div class="swiper-slide">
+            <div class="slide-inner bg-image" data-background="images/slide2.jpg">
+                <div class="container">
+                    <h2 data-swiper-parallax="-300">Nikmati Momen Euforia Tari Kecak Bali</h2>
+                    <a href="index.php" class="link" data-swiper-parallax="-100"></a>
+                </div>
+                <!-- end container -->
+            </div>
+            <!-- end slide-inner -->
+        </div>
+        <!-- end swiper-slide -->
+        <div class="swiper-slide">
+            <div class="slide-inner bg-image" data-background="images/musik.jpg">
+                <div class="container">
+                    <h2 data-swiper-parallax="-300">Nikmati Ritme Keindahan Musik Gamelan</h2>
+                    <a href="index.php" class="link" data-swiper-parallax="-100"></a>
+                </div>
+                <!-- end container -->
+            </div>
+            <!-- end slide-inner -->
+        </div>
+        <!-- end swiper-slide -->
+        <div class="swiper-slide">
+            <div class="slide-inner bg-image" data-background="images/museum.jpg">
+                <div class="container">
+                    <h2 data-swiper-parallax="-300">Menyingkap Misteri dan Keindahan Masa Lalu Melalui Museum
+                    </h2>
+                    <a href="index.php" class="link" data-swiper-parallax="-100"></a>
+                </div>
+                <!-- end container -->
+            </div>
+            <!-- end slide-inner -->
+        </div>
+        <!-- end swiper-slide -->
+    </div>
+    <!-- end swiper-wrapper -->
+    <div class="swiper-custom-pagination"></div>
+    <!-- end swiper-custom-pagination -->
+</div>
+<!-- end swiper-container -->
+</header>
+<!-- end header -->
 
-    <!-- end find-advanture -->
-    <section class="popular-tours">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="section-title">
-                        <h2>Temukan Tur Paling Populer</h2>
-                        <img src="images/title-seperator.png" alt="Image" />
-                    </div>
-                    <!-- end section-title -->
+<!-- end find-advanture -->
+<section class="popular-tours">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="section-title">
+                    <h2>Temukan Tur Paling Populer</h2>
+                    <img src="images/title-seperator.png" alt="Image" />
+
                 </div>
-                <!-- end col-6 -->
-                <div class="col-lg-6">
-                    <p class="section-desc">
-                        Di situs web kami, Anda akan menemukan koleksi yang komprehensif dari paket kesenian
-                        ke destinasi terkenal di beberapa kota di Indonesia. Kami berkomitmen untuk menyajikan
-                        pengalaman perjalanan yang memikat dan unik,
-                        mulai dari menelusuri sejarah dan kebudayaan memlalui karya seni baik dari seni tari, musik, atau museum yang menjadi ceriminan dari zaman tertentu
-                    </p>
-                </div>
-                <!-- end col-6 -->
-                <?php
+                <!-- end section-title -->
+            </div>
+            <!-- end col-6 -->
+            <div class="col-lg-6">
+                <p class="section-desc">
+                    Di situs web kami, Anda akan menemukan koleksi yang komprehensif dari paket kesenian
+                    ke destinasi terkenal di beberapa kota di Indonesia. Kami berkomitmen untuk menyajikan
+                    pengalaman perjalanan yang memikat dan unik,
+                    mulai dari menelusuri sejarah dan kebudayaan memlalui karya seni baik dari seni tari, musik,
+                    atau museum yang menjadi ceriminan dari zaman tertentu
+                </p>
+            </div>
+            <!-- end col-6 -->
+            <?php
 // Query untuk mengambil data dari tabel detailtour
 $sql = "SELECT * FROM detailtour ORDER BY RAND() LIMIT 6";
 $result = $conn->query($sql);
@@ -319,39 +408,41 @@ if ($result->num_rows > 0) {
 ?>
 
 
-                <!-- end col-4 -->
-                <div class="col-12 text-center"><a href="tours-list.php" class="site-btn">LOAD MORE</a></div>
-                <!-- end col-12 -->
-            </div>
-            <!-- end row -->
+            <!-- end col-4 -->
+            <div class="col-12 text-center"><a href="tours-list.php" class="site-btn">LOAD MORE</a></div>
+            <!-- end col-12 -->
         </div>
-        <!-- end container -->
-    </section>
-    <!-- end popular-tours -->
-    <section class="adventure-activities">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7">
-                    <div class="section-title">
-                        <h2>Aktifitas Tur</h2>
-                        <img src="images/title-seperator.png" alt="Image" />
-                    </div>
-                    <!-- end section-title -->
+        <!-- end row -->
+    </div>
+    <!-- end container -->
+</section>
+<!-- end popular-tours -->
+<section class="adventure-activities">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="section-title">
+                    <h2>Aktifitas Tur</h2>
+                    <img src="images/title-seperator.png" alt="Image" />
                 </div>
-                <!-- end col-6 -->
-                <!-- end row -->
-
-                <div class="col-lg-5">
-                    <p class="section-desc">
-                        Kami memahami bahwa setiap orang memiliki preferensi dan minat yang berbeda dalam menikmati sebuah karya seni.
-                        Oleh karena itu, kami menawarkan beragam pilihan kategori yang dapat disesuaikan dengan keinginan
-                        Anda.
-                    </p>
-                </div>
-                <!-- end col-6 -->
+                <!-- end section-title -->
             </div>
+            <!-- end col-6 -->
+            <!-- end row -->
 
-            <?php
+            <div class="col-lg-5">
+                <p class="section-desc">
+                    Kami memahami bahwa setiap orang memiliki preferensi dan minat yang berbeda dalam menikmati
+                    sebuah karya seni.
+                    Oleh karena itu, kami menawarkan beragam pilihan kategori yang dapat disesuaikan dengan
+                    keinginan
+                    Anda.
+                </p>
+            </div>
+            <!-- end col-6 -->
+        </div>
+
+        <?php
 // Query untuk mengambil data dari tabel activities
 $sql = "SELECT * FROM detailtour ORDER BY RAND()";
 
@@ -365,14 +456,15 @@ if ($result->num_rows > 0) {
 
     while ($row = $result->fetch_assoc()) {
         // Tambahkan tautan ke attractions-single.php dengan ID dan kategori sebagai parameter
-        echo '<div class="swiper-slide">
-                <a href="attractions-single.php?id=' . $row['id_detailtour'] . '&kategori=' . $row['kategoriTour'] . '">
-                  <figure class="activity-box">
-                    <img src="images/' . $row['gambarTour'] . '" alt="Image" />
-                    <figcaption>' . $row['kategoriTour'] . '</figcaption>
-                  </figure>
-                </a>
-              </div>';
+       echo '<div class="swiper-slide">
+        <a href="attractions-single.php?id=' . $row['id_detailtour'] . '">
+          <figure class="activity-box">
+            <img src="images/' . $row['gambarTour'] . '" alt="Image" />
+            <figcaption>' . $row['kategoriTour'] . '</figcaption>
+          </figure>
+        </a>
+      </div>';
+
     }
 
     echo '    </div>
@@ -389,32 +481,33 @@ if ($result->num_rows > 0) {
 }
 ?>
 
-            <section class="recent-blog">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="section-title">
-                                <h2>Berita Terbaru</h2>
-                                <img src="images/title-seperator.png" alt="Image" />
-                            </div>
-                            <!-- end section-title -->
+        <section class="recent-blog">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section-title">
+                            <h2>Berita Terbaru</h2>
+                            <img src="images/title-seperator.png" alt="Image" />
                         </div>
-                        <!-- end col-12 -->
-                        <?php
+                        <!-- end section-title -->
+                    </div>
+                    <!-- end col-12 -->
+                    <?php
 // Query untuk mengambil data dari tabel berita
 $sql = "SELECT * FROM berita ORDER BY RAND() LIMIT 3";
 
 $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
+
+if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         echo '<div class="col-lg-4">
                 <div class="blog-post">
                   <figure class="post-image"><img src="images/' . $row['gambarBerita'] . '" alt="Image" /></figure>
                   <div class="post-content">
                     <small>' . $row['tanggalBerita'] . ' <span>|</span>' . $row['penguploadBerita'] . '</small>
-                    <a href="blog-single.php"><h3>' . $row['judulBerita'] . '</h3></a>
+                    <a href="blog-single.php?id_berita=' . $row['id_berita'] . '"><h3>' . $row['judulBerita'] . '</h3></a>
                     <p> </p>
-                    <a href="blog-single.php" class="read-more">READ MORE</a>
+                    <a href="blog-single.php?id_berita=' . $row['id_berita'] . '" class="read-more">READ MORE</a>
                   </div>
                 </div>
               </div>';
@@ -423,120 +516,123 @@ $result = $conn->query($sql);
     echo "0 results";
 }
 ?>
-                        <!-- end col-4  -->
-                        <div class="col-12 text-center"><a href="blog-list.php" class="site-btn">KUNJUNGI BLOG KAMI</a>
-                        </div>
-                        <!-- end col-12 -->
+
+                    <!-- end col-4  -->
+                    <div class="col-12 text-center"><a href="blog-list.php" class="site-btn">KUNJUNGI BLOG KAMI</a>
                     </div>
-                    <!-- end row -->
+                    <!-- end col-12 -->
                 </div>
-                <!-- end container -->
-            </section>
-            <!-- end recent-blog -->
+                <!-- end row -->
+            </div>
+            <!-- end container -->
+        </section>
+        <!-- end recent-blog -->
 
-            <footer class="footer">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-4">
-                            <h5>TENTANG KAMI</h5>
-                            <ul class="footer-menu">
-                                <li><a href="about-us.php">Tentang Kami</a></li>
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-4">
+                        <h5>TENTANG KAMI</h5>
+                        <ul class="footer-menu">
+                            <li><a href="about-us.php">Tentang Kami</a></li>
 
-                                <li><a href="#">Tim Kami</a></li>
-                                <li><a href="blog-list.php">Berita</a></li>
-                            </ul>
-                        </div>
-                        <!-- end col-3 -->
-                        <div class="col-lg-3 col-md-4">
-                            <h5>Layanan</h5>
-                            <ul class="footer-menu">
-                                <li><a href="#">Terms of Payment</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Difficulty Levels</a></li>
-                            </ul>
-                        </div>
-                        <!-- end col-3 -->
-                        <div class="col-lg-3 col-md-4">
-                            <h5>Hubungi Kami</h5>
-                            <address>
-                                ATHENA INC.<br />
-                                Jakal km 14.5, Yogyakarta<br />
-                                Telp: 123 456 7890<br />
-                                <a href="#">info@athenacomp.com</a>
-                            </address>
-                        </div>
-                        <!-- end col-3 -->
-
-                        <!-- end col-3 -->
-                        <div class="col-12">
-                            <ul class="social-media">
-                                <li>
-                                    <a href="#"><i class="fa fa-tripadvisor"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-youtube-play"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- end col-12 -->
-                        <div class="col-12"><span class="copyright">&copy; ATHENA</span></div>
-                        <!-- end col-12 -->
+                            <li><a href="#">Tim Kami</a></li>
+                            <li><a href="blog-list.php">Berita</a></li>
+                        </ul>
                     </div>
-                    <!-- end row -->
+                    <!-- end col-3 -->
+                    <div class="col-lg-3 col-md-4">
+                        <h5>Layanan</h5>
+                        <ul class="footer-menu">
+                            <li><a href="#">Terms of Payment</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Difficulty Levels</a></li>
+                        </ul>
+                    </div>
+                    <!-- end col-3 -->
+                    <div class="col-lg-3 col-md-4">
+                        <h5>Hubungi Kami</h5>
+                        <address>
+                            ATHENA INC.<br />
+                            Jakal km 14.5, Yogyakarta<br />
+                            Telp: 123 456 7890<br />
+                            <a href="#">info@athenacomp.com</a>
+                        </address>
+                    </div>
+                    <!-- end col-3 -->
+
+                    <!-- end col-3 -->
+                    <div class="col-12">
+                        <ul class="social-media">
+                            <li>
+                                <a href="#"><i class="fa fa-tripadvisor"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-youtube-play"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- end col-12 -->
+                    <div class="col-12"><span class="copyright">&copy; ATHENA</span></div>
+                    <!-- end col-12 -->
                 </div>
-                <!-- end container -->
-            </footer>
+                <!-- end row -->
+            </div>
+            <!-- end container -->
+        </footer>
 
-            <!-- JS FILES -->
-            <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-                integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-            <script>
-            // PRELOADER
-            (function($) {
-                $(window).on("load", function() {
-                    $("body").addClass("page-loaded");
-                });
+        <!-- JS FILES -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+        </script>
+        <script>
+        // PRELOADER
+        (function($) {
+            $(window).on("load", function() {
+                $("body").addClass("page-loaded");
+            });
 
-                $(".datepicker__input").daterangepicker({
-                    autoUpdateInput: false,
-                    locale: {
-                        cancelLabel: "Clear",
-                    },
-                });
+            $(".datepicker__input").daterangepicker({
+                autoUpdateInput: false,
+                locale: {
+                    cancelLabel: "Clear",
+                },
+            });
 
-                $(".datepicker__input").on("apply.daterangepicker", function(ev, picker) {
-                    $(this).val(picker.startDate.format("MM/DD/YYYY") + " - " + picker.endDate.format(
-                        "MM/DD/YYYY"));
-                });
+            $(".datepicker__input").on("apply.daterangepicker", function(ev, picker) {
+                $(this).val(picker.startDate.format("MM/DD/YYYY") + " - " + picker.endDate.format(
+                    "MM/DD/YYYY"));
+            });
 
-                $(".datepicker__input").on("cancel.daterangepicker", function(ev, picker) {
-                    $(this).val("");
-                });
-            })(jQuery);
-            </script>
-            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-                crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-                integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-                crossorigin="anonymous"></script>
-            <script src="js/swiper.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script>
-            <script src="js/scripts.js"></script>
-</body>
+            $(".datepicker__input").on("cancel.daterangepicker", function(ev, picker) {
+                $(this).val("");
+            });
+        })(jQuery);
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+        </script>
+        <script src="js/swiper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script>
+        <script src="js/scripts.js"></script>
+        </body>
 
-</html>
-<?php mysqli_close($conn); ?>
+        </html>
+        <?php mysqli_close($conn); ?>

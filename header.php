@@ -163,7 +163,7 @@ $row = mysqli_fetch_array($prevQuery, MYSQLI_ASSOC);
                                 <li class="nav-item">
                                     <a href="daftarWisata.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Wisata</p>
+                                        <p>Pertunjukkan</p>
                                     </a>
                                 </li>
 

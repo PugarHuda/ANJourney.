@@ -135,75 +135,167 @@ include "koneksi.php"
                     </div>
                     <!-- end menu-btn -->
                     <span class="search-btn"><i class="bi bi-person-circle"></i>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                    </svg>
-                </span>
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="index.php">HOME</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="tours-list.php">TOURS</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link">CATEGORYI</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="katTari.php">TARI</a></li>
-                            <li><a href="katTea.php">TEATER</a></li>
-                            <li><a href="katMus.php">MUSIK</a></li>
-                            <li><a href="katPam.php">PAMERAN VISUAL</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="about-us.php">ABOUT US</a></li>
-                    <li class="nav-item"><a id="login-link" class="nav-link" href="#">LOGIN</a></li>
-
-                    <!-- The login modal -->
-                    <div id="loginModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close">&times;</span>
-                            <h2>Welcome Back</h2>
-                            <form id="loginForm">
-                                <div class="form-group">
-                                    <input type="email" id="loginEmail" name="loginEmail" placeholder="Email"
-                                        required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" id="loginPassword" name="loginPassword"
-                                        placeholder="Password" required />
-                                </div>
-                                <button type="submit" class="login-btn">Login</button>
-                            </form>
-                            <p class="signup-link">Don't have an account? <a href="#" id="signup-link">Sign Up</a></p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                            <path fill-rule="evenodd"
+                                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                        </svg>
+                    </span>
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="index.php">HOME</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="tours-list.php">TOURS</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link">CATEGORY</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="katTari.php">TARI</a></li>
+                                <li><a href="katTea.php">TEATER</a></li>
+                                <li><a href="katMus.php">MUSIK</a></li>
+                                <li><a href="katPam.php">PAMERAN VISUAL</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="about-us.php">ABOUT US</a></li>
+                        <li class="nav-item">
+                            <a id="login-logout-link" class="nav-link" href="#" onclick="toggleLoginStatus()">LOGIN</a>
+                        </li>
+                        <!-- The login modal -->
+                        <div id="loginModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close" onclick="closeLoginModal()">&times;</span>
+                                <h2>Welcome Back</h2>
+                                <form id="loginForm" method="POST" action="loginUser.php"
+                                    onsubmit="submitLoginForm(event)">
+                                    <div class="form-group">
+                                        <input type="email" id="loginEmail" name="loginEmail" placeholder="Email"
+                                            required />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" id="loginPassword" name="loginPassword"
+                                            placeholder="Password" required />
+                                    </div>
+                                    <button type="submit" class="login-btn">Login</button>
+                                </form>
+                                <p class="signup-link">Don't have an account? <a href="#" id="signup-link">Sign Up</a>
+                                </p>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- The sign-up modal -->
-                    <div id="signupModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close">&times;</span>
-                            <h2>Sign Up</h2>
-                            <form id="signupForm">
-                                <div class="form-group">
-                                    <input type="text" id="firstName" name="firstName" placeholder="First Name"
-                                        required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" id="signupEmail" name="signupEmail" placeholder="Email"
-                                        required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" id="signupPassword" name="signupPassword"
-                                        placeholder="Password" required />
-                                </div>
-                                <button type="submit" class="signup-btn">Sign Up</button>
-                            </form>
+                        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                        <script>
+                        function submitLoginForm(event) {
+                            event.preventDefault();
+
+                            var email = $("#loginEmail").val();
+                            var password = $("#loginPassword").val();
+
+                            $.ajax({
+                                type: "POST",
+                                url: "loginUser.php",
+                                data: {
+                                    loginEmail: email,
+                                    loginPassword: password
+                                },
+                                success: function(response) {
+                                    alert(response);
+                                    if (response.includes("Login berhasil")) {
+                                        closeLoginModal();
+                                        updateLoginStatus(true);
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    alert("Terjadi kesalahan saat melakukan login. Silakan coba lagi.");
+                                }
+                            });
+                        }
+
+                        function closeLoginModal() {
+                            $("#loginModal").hide();
+                        }
+
+                        function toggleLoginStatus() {
+                            var isLoggedIn = checkLoginStatus();
+
+                            if (isLoggedIn) {
+                                submitLogout();
+                            } else {
+                                openLoginModal();
+                            }
+                        }
+
+                        function openLoginModal() {
+                            // Tambahkan logika atau panggilan fungsi untuk menampilkan modal login di sini
+                            var isLoggedIn = checkLoginStatus();
+
+                            if (!isLoggedIn) {
+                                $("#loginModal").show();
+                            }
+                        }
+
+                        function submitLogout() {
+                            $.ajax({
+                                type: "POST",
+                                url: "logoutUser.php",
+                                success: function(response) {
+                                    alert(response);
+                                    updateLoginStatus(false);
+
+                                    // Redirect ke halaman login atau halaman lain yang sesuai
+                                    window.location.href =
+                                        "index.php"; // Gantilah "login.php" dengan halaman yang sesuai
+                                },
+                                error: function(xhr, status, error) {
+                                    alert("Terjadi kesalahan saat melakukan logout. Silakan coba lagi.");
+                                }
+                            });
+                        }
+
+
+                        function checkLoginStatus() {
+                            var isLoggedIn = <?php echo isset($_SESSION['user_email']) ? 'true' : 'false'; ?>;
+                            return isLoggedIn;
+                        }
+
+                        function updateLoginStatus(isLoggedIn) {
+                            var loginLogoutLink = $("#login-logout-link");
+
+                            if (isLoggedIn) {
+                                loginLogoutLink.text("LOGOUT");
+                            } else {
+                                loginLogoutLink.text("LOGIN");
+                            }
+                        }
+                        </script>
+
+                        <!-- The sign-up modal -->
+                        <div id="signupModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <h2>Sign Up</h2>
+                                <form id="signupForm">
+                                    <div class="form-group">
+                                        <input type="text" id="firstName" name="firstName" placeholder="First Name"
+                                            required />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" id="lastName" name="lastName" placeholder="Last Name"
+                                            required />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" id="signupEmail" name="signupEmail" placeholder="Email"
+                                            required />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" id="signupPassword" name="signupPassword"
+                                            placeholder="Password" required />
+                                    </div>
+                                    <button type="submit" class="signup-btn">Sign Up</button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                </ul>
-        </nav>
+                    </ul>
+                </nav>
                 </nav>
                 <!-- end navbar -->
             </div>
@@ -214,16 +306,11 @@ include "koneksi.php"
             <div class="container">
                 <div class="row">
                     <?php
-// Ambil parameter kategori dari URL jika tersedia
-$kategoriFilter = isset($_GET['kategori']) ? $_GET['kategori'] : '';
+// Ambil parameter ID dari URL jika tersedia
+$idDetailtour = isset($_GET['id']) ? $_GET['id'] : '';
 
-// Buat query SQL dengan filter kategori dan batasan 1 hasil
-$sql = "SELECT * FROM detailtour";
-if (!empty($kategoriFilter)) {
-    $sql .= " WHERE kategoriTour = '$kategoriFilter'";
-}
-
-$sql .= " LIMIT 1"; // Tambahkan LIMIT 1 pada akhir query
+// Buat query SQL dengan filter ID
+$sql = "SELECT * FROM detailtour WHERE id_detailtour = '$idDetailtour'";
 
 $result = $conn->query($sql);
 
@@ -233,7 +320,6 @@ if ($result->num_rows > 0) {
         ?>
                     <div class="col-12">
                         <h2><?php echo $row['namaTour']; ?></h2>
-                        <!-- <img src="images/<?php echo $row['gambarTour']; ?>" alt="Image" /> -->
                         <img src="images/title-seperator.png" alt="Image" />
                         <p>
                             <?php echo $row['deskripsiTour']; ?>
@@ -247,6 +333,7 @@ if ($result->num_rows > 0) {
 ?>
 
 
+
                     <!-- end col-12 -->
                 </div>
                 <!-- end row -->
@@ -255,73 +342,97 @@ if ($result->num_rows > 0) {
         </section>
         <!-- end attractions-header -->
         <?php
-// Ambil parameter kategori dari URL jika tersedia
-$kategoriFilter = isset($_GET['kategori']) ? $_GET['kategori'] : '';
+// Ambil parameter ID dari URL jika tersedia
+$idDetailtour = isset($_GET['id']) ? $_GET['id'] : '';
 
-// Buat query SQL dengan filter kategori dan batasan 1 hasil
-$sql = "SELECT * FROM detailtour";
-if (!empty($kategoriFilter)) {
-    $sql .= " WHERE kategoriTour = '$kategoriFilter'";
-}
-
-$sql .= " LIMIT 1"; // Tambahkan LIMIT 1 pada akhir query
+// Buat query SQL dengan filter ID
+$sql = "SELECT * FROM detailtour WHERE id_detailtour = '$idDetailtour'";
 
 $result = $conn->query($sql);
 
 // Periksa apakah query berhasil dieksekusi
 if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        ?>
+    $row = $result->fetch_assoc(); // Ambil data langsung karena kita hanya mengharapkan satu hasil
+
+    // Tampilkan data sesuai kebutuhan
+    ?>
         <div class="attractions-hero-image bg-image" data-background="images/<?php echo $row['gambarTour']; ?>"></div>
+        <!-- Tambahkan bagian lain sesuai kebutuhan -->
+
         <?php
-    }
 } else {
     echo "0 results";
 }
 ?>
 
         <!-- end attractions-hero-image -->
-        <section class="attractions-desc">
+        <?php
+// Periksa apakah parameter id ada pada URL
+if (isset($_GET['id'])) {
+    // Ambil nilai id dari URL
+    $id_detailtour = $_GET['id'];
+
+    // Query untuk mengambil funFact dari tabel detailtour sesuai dengan id_detailtour
+    $sql = "SELECT funFact FROM detailtour WHERE id_detailtour = $id_detailtour";
+
+    $result = $conn->query($sql);
+
+    // Periksa apakah query berhasil dijalankan
+    if ($result->num_rows > 0) {
+        // Output data dari setiap baris
+        while($row = $result->fetch_assoc()) {
+            $funFact = $row["funFact"];
+        }
+    } else {
+        $funFact = "Data funfact tidak ditemukan";
+    }
+} else {
+    // Jika parameter id tidak ada, berikan nilai default atau tindakan lain sesuai kebutuhan
+    $funFact = "ID tidak valid";
+}
+?>
+        <section class="tour-desc">
             <div class="container">
                 <div class="row">
                     <div class="col-12 text-center">
                         <div class="section-title">
-                            <h2>Our Most Popular Trekking Trail<br />Ending With Camps At Night</h2>
+                            <h2>Pengetahuan</h2>
                             <img src="images/title-seperator.png" alt="Image" />
                         </div>
                         <!-- end section-title -->
                     </div>
                     <!-- end col-12 -->
                     <div class="col-lg-6">
-                        <p>Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus mus. Cras
-                            eleifend tellus sed congue ectetur velit turpis faucibus odio eget volutpat odio erat.</p>
                         <p>
-                            Pellentesque vestibulum fermentum velit non placerat aecenas in hendrerit justo quisque quis
-                            rhoncus exeget semper semlam at lobortis velit. Vestibulum ante ipsum primis in faucibus
-                            orcie luctus et
-                            <a href="#">Cubilia Curae</a> ultrices posuere ed dignissim leo lorema condimentum mauris
-                            vestibulum et maecenas vitae urna aced magna facilisis porttitor.
+                            Seni pertunjukkan bermula dari zaman prasejarah, di mana manusia pertama kali
+                            mengekspresikan diri
+                            melalui gerakan tubuh, musik, dan ritual. Pertunjukan prasejarah ini, yang melibatkan
+                            tarian dan
+                            ritual keagamaan, menjadi bentuk awal ekspresi budaya dan spiritual. Di Yunani Kuno,
+                            seni teater
+                            muncul sebagai bentuk formal pertunjukkan yang menggabungkan naskah drama, aktor
+                            profesional, dan
+                            penonton dalam sebuah pengalaman kolektif. Seiring waktu, munculnya seni wayang kulit
+                            di Asia,
+                            pertunjukan sirkus Romawi, opera Italia, dan teater kabuki Jepang, semuanya
+                            menciptakan keragaman
+                            dalam seni pertunjukkan. Evolusi ini berlanjut ke era modern, di mana seni
+                            pertunjukkan menjadi
+                            wadah inovasi, menggabungkan berbagai gaya dan medium, membangun warisan budaya yang
+                            kaya dan terus
+                            berkembang hingga hari ini.
                         </p>
-                        <p>Fusce in eros at lectus mollis pulvinar. Nullam in auctor mimus consectetur ullamcorper
-                            facilisis vivamus luctus.</p>
+                        <p>
+
+                        </p>
+
                     </div>
                     <!-- end col-6 -->
                     <div class="col-lg-6">
                         <p>
-                            Varius natoque penatibus et magnis dis turient montes scetur ridiculus mus. Cras eleifend
-                            tellus sed congue ectetur velit urpis faucibus odio eget volutpat odio lectus eu erat esque
-                            estibulum fermentum velit non placerat
-                            justo.
+                            <?php echo $funFact; ?>
                         </p>
-                        <p>
-                            Quisque quis rhoncus exeget semper semlam at lobortis velit estibulum ante ipsum primis in
-                            <a href="#">Faucibus Orcie</a> luctus et ultrices posuere cubilia curae ed dignissim leo
-                            lorema condimentum mauris vestibulum et
-                            maecenas vitae urna aced magna cilisis cubilia curae ed <a href="#">Dignissim Porttitor</a>
-                            fusce in eros at lectus mollis pulvinar. Nullam in auctor mimus consectetur ullamcorper
-                            facilisis vivamus luctusodio lectus eu erat
-                            esque estibulum fermentum velit non placerat aecenas.
-                        </p>
+
                     </div>
                     <!-- end col-6 -->
                 </div>
@@ -405,7 +516,7 @@ if ($result->num_rows > 0) {
                 <div class="row">
                     <div class="col-12">
                         <div class="section-title">
-                            <h2>Available Tours </h2>
+                            <h2>Pertunjukkan Terpopuler </h2>
                             <img src="images/title-seperator.png" alt="Image" />
                         </div>
                         <!-- end section-title -->

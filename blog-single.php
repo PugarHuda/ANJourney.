@@ -47,22 +47,7 @@ include "koneksi.php"
                 <div class="col-12">
                     <span class="search-close-btn"><i class="fa fa-times"></i></span>
                     <h3>Profile</h3>
-                    <!-- <form>
-              <div class="form-group">
-                <i class="fa fa-search"></i>
-                <input type="text" placeholder="Search Activities, Themes or Tours" />
-              </div>
-              --end form-group
-              <button type="submit">SEARCH</button>
-            </form>
-            <dl>
-              <dt>Suggestions <i class="fa fa-long-arrow-right"></i></dt>
-              <dd><a href="#">Adventure</a></dd>
-              <dd><a href="#">Nothern Lights</a></dd>
-              <dd><a href="#">Waterfalls</a></dd>
-              <dd><a href="#">Winter Tours</a></dd>
-              <dd><a href="#">Glaciar Walk</a></dd>
-            </dl> -->
+
                 </div>
                 <div class="container mt-5">
                     <div class="row">
@@ -135,9 +120,11 @@ include "koneksi.php"
                 </div>
                 <!-- end menu-btn -->
                 <span class="search-btn"><i class="bi bi-person-circle"></i>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                        <path fill-rule="evenodd"
+                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
                     </svg>
                 </span>
                 <ul class="navbar-nav">
@@ -155,14 +142,15 @@ include "koneksi.php"
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="about-us.php">ABOUT US</a></li>
-                    <li class="nav-item"><a id="login-link" class="nav-link" href="#">LOGIN</a></li>
-
+                    <li class="nav-item">
+                        <a id="login-logout-link" class="nav-link" href="#" onclick="toggleLoginStatus()">LOGIN</a>
+                    </li>
                     <!-- The login modal -->
                     <div id="loginModal" class="modal">
                         <div class="modal-content">
-                            <span class="close">&times;</span>
+                            <span class="close" onclick="closeLoginModal()">&times;</span>
                             <h2>Welcome Back</h2>
-                            <form id="loginForm">
+                            <form id="loginForm" method="POST" action="loginUser.php" onsubmit="submitLoginForm(event)">
                                 <div class="form-group">
                                     <input type="email" id="loginEmail" name="loginEmail" placeholder="Email"
                                         required />
@@ -177,6 +165,91 @@ include "koneksi.php"
                         </div>
                     </div>
 
+                    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                    <script>
+                    function submitLoginForm(event) {
+                        event.preventDefault();
+
+                        var email = $("#loginEmail").val();
+                        var password = $("#loginPassword").val();
+
+                        $.ajax({
+                            type: "POST",
+                            url: "loginUser.php",
+                            data: {
+                                loginEmail: email,
+                                loginPassword: password
+                            },
+                            success: function(response) {
+                                alert(response);
+                                if (response.includes("Login berhasil")) {
+                                    closeLoginModal();
+                                    updateLoginStatus(true);
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                alert("Terjadi kesalahan saat melakukan login. Silakan coba lagi.");
+                            }
+                        });
+                    }
+
+                    function closeLoginModal() {
+                        $("#loginModal").hide();
+                    }
+
+                    function toggleLoginStatus() {
+                        var isLoggedIn = checkLoginStatus();
+
+                        if (isLoggedIn) {
+                            submitLogout();
+                        } else {
+                            openLoginModal();
+                        }
+                    }
+
+                    function openLoginModal() {
+                        // Tambahkan logika atau panggilan fungsi untuk menampilkan modal login di sini
+                        var isLoggedIn = checkLoginStatus();
+
+                        if (!isLoggedIn) {
+                            $("#loginModal").show();
+                        }
+                    }
+
+                    function submitLogout() {
+                        $.ajax({
+                            type: "POST",
+                            url: "logoutUser.php",
+                            success: function(response) {
+                                alert(response);
+                                updateLoginStatus(false);
+
+                                // Redirect ke halaman login atau halaman lain yang sesuai
+                                window.location.href =
+                                    "index.php"; // Gantilah "login.php" dengan halaman yang sesuai
+                            },
+                            error: function(xhr, status, error) {
+                                alert("Terjadi kesalahan saat melakukan logout. Silakan coba lagi.");
+                            }
+                        });
+                    }
+
+
+                    function checkLoginStatus() {
+                        var isLoggedIn = <?php echo isset($_SESSION['user_email']) ? 'true' : 'false'; ?>;
+                        return isLoggedIn;
+                    }
+
+                    function updateLoginStatus(isLoggedIn) {
+                        var loginLogoutLink = $("#login-logout-link");
+
+                        if (isLoggedIn) {
+                            loginLogoutLink.text("LOGOUT");
+                        } else {
+                            loginLogoutLink.text("LOGIN");
+                        }
+                    }
+                    </script>
                     <!-- The sign-up modal -->
                     <div id="signupModal" class="modal">
                         <div class="modal-content">
@@ -203,7 +276,7 @@ include "koneksi.php"
                         </div>
                     </div>
                 </ul>
-        </nav>
+            </nav>
             </nav>
             <!-- end navbar -->
         </div>
@@ -214,31 +287,39 @@ include "koneksi.php"
         <div class="container">
             <div class="row">
                 <?php
-// Ambil data dari tabel berita (gantilah sesuai dengan koneksi dan query Anda)
-$sql = "SELECT * FROM berita";
+// Ambil parameter ID_berita dari URL jika tersedia
+$idBerita = isset($_GET['id']) ? $_GET['id'] : '';
+
+// Buat query SQL dengan filter ID_berita
+$sql = "SELECT * FROM berita WHERE id_berita = '$idBerita'";
 $result = $conn->query($sql);
 
 if ($result) {
-    // Ambil data pertama dari hasil query
-    $row = $result->fetch_assoc();
+    // Periksa apakah query berhasil dieksekusi dan apakah ada data
+    if ($result->num_rows > 0) {
+        // Ambil data pertama dari hasil query
+        $row = $result->fetch_assoc();
 
-    // Tampilkan informasi berita dalam markup HTML
-    echo '<div class="col-12">
-            <small><span>' . $row['tanggalBerita'] . '</span> <span>|</span> BY ' . $row['penguploadBerita'] . '</small>
-            <h2>' . $row['judulBerita'] . '</h2>
+        // Tampilkan informasi berita dalam markup HTML
+        echo '<div class="col-12">
+                <small><span>' . $row['tanggalBerita'] . '</span> <span>|</span> BY ' . $row['penguploadBerita'] . '</small>
+                <h2>' . $row['judulBerita'] . '</h2>
+              </div>
+              <!-- end col-12 -->
+            </div>
+            <!-- end row -->
           </div>
-          <!-- end col-12 -->
-        </div>
-        <!-- end row -->
-      </div>
-      <!-- end container -->
-    </section>
-    <!-- end blog-header -->
-    <div class="blog-hero-image bg-image" data-background="images/' . $row['gambarBerita'] . '"></div>
-    <!-- end blog-hero-image -->';
+          <!-- end container -->
+        </section>
+        <!-- end blog-header -->
+        <div class="blog-hero-image bg-image" data-background="images/' . $row['gambarBerita'] . '"></div>
+        <!-- end blog-hero-image -->';
 
-    // Bebaskan hasil query
-    $result->free();
+        // Bebaskan hasil query
+        $result->free();
+    } else {
+        echo "Data tidak ditemukan";
+    }
 } else {
     echo "Error: " . $conn->error;
 }
@@ -265,18 +346,36 @@ if ($result) {
                                             <a href="#" class="googleplus-ico"><i class="fa fa-google-plus"></i></a>
                                         </li>
                                     </ul>
-                                    <h3>Getting Started</h3>
+                                    <?php
+// Ambil parameter ID_berita dari URL jika tersedia
+$idBerita = isset($_GET['id']) ? $_GET['id'] : '';
+
+// Buat query SQL dengan filter ID_berita
+$sql = "SELECT * FROM berita WHERE id_berita = '$idBerita'";
+
+$result = $conn->query($sql);
+
+// Periksa apakah query berhasil dieksekusi
+if ($result) {
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            ?>
+                                    <h3><?php echo $row['judulBerita']; ?></h3>
                                     <p>
-                                        Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus
-                                        mus. Cras eleifend tellus sed congue ectetur velit turpis faucibus odio eget
-                                        volutpat odio lectus eu erat. Fusce in eros at lectus mollis
-                                        pulvinar. Nullam in auctor mimus desed consectetur ullamcorper facilisis vivamus
-                                        luctus. Varius natoque penatibus et magns dis turient montes scetur ridiculus
-                                        mus. Cras eleifend tellus sed congue ectetur velit urpis faucibus
-                                        odio eget volutpat odio lectus eu erat esque estibulum fermentum leg non
-                                        placerat aecenas in hendrerit justo.
+                                        <?php echo $row['deskripsiBerita']; ?>
                                     </p>
-                                    <p>
+                                    <?php
+        }
+    } else {
+        echo "Data tidak ditemukan";
+    }
+} else {
+    echo "Error: " . $conn->error;
+}
+?>
+
+
+                                    <!-- <p>
                                         Pellentesque vestibulum fermentum velit non placerat aecenas in hendrerit justo
                                         quisque quis rhoncus exeget semper semlam at lobortis velit. Vestibulum ante
                                         ipsum primis in faucibus orcie luctus et ultrices posuere
@@ -287,9 +386,9 @@ if ($result) {
                                         turient montes scetur ridiculus mus. Cras eleifend tellus sed congue ectetur
                                         velit urpis faucibus odio eget volutpat odio lectus eu erat esque
                                         estibulum fermentum velit non placerat aecenas in hendrerit justo.
-                                    </p>
+                                    </p> -->
                                     <br />
-                                    <h3>The Journey</h3>
+                                    <!-- <h3>The Journey</h3>
                                     <p>
                                         Fusce in eros at lectus mollis pulvinar. Nullam in auctor mimus consectetur
                                         ullamcorper facilisis vivamus luctus. Varius natoque penatibus et magnis dis
@@ -314,7 +413,7 @@ if ($result) {
                                         estibulum fermentum velit non placerat aecenas in hendrerit justo. Fusce in eros
                                         at lectus mollis pulvinar. Nullam in auctor mimus ectetur
                                         ullamcorper facilisis vivamus luctus. Varius natoque penatibus.
-                                    </p>
+                                    </p> -->
                                 </div>
                                 <!-- end inner -->
                             </div>
@@ -326,11 +425,11 @@ if ($result) {
                 </section>
                 <!-- end blog-content -->
                 <div class="swiper-blog-carousel">
-                    <div class="swiper-wrapper">
+                    <!-- <div class="swiper-wrapper">
                         <div class="swiper-slide"><img src="images/blog-carousel01.jpg" alt="Image" /></div>
                         <div class="swiper-slide"><img src="images/blog-carousel02.jpg" alt="Image" /></div>
                         <div class="swiper-slide"><img src="images/blog-carousel03.jpg" alt="Image" /></div>
-                    </div>
+                    </div> -->
                     <!-- end swiper-wrapper -->
                     <!-- Add Pagination -->
                     <div class="swiper-button-prev">
@@ -346,7 +445,7 @@ if ($result) {
                         <div class="row">
                             <div class="col-12">
                                 <div class="inner">
-                                    <h3>Night Stay and Camping</h3>
+                                    <!-- <h3>Night Stay and Camping</h3>
                                     <p>
                                         Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus
                                         mus. Cras eleifend tellus sed congue ectetur velit turpis faucibus odio eget
@@ -355,35 +454,32 @@ if ($result) {
                                         luctus. <a href="#">Varius natoque</a> penatibus et magns dis turient montes
                                         scetur ridiculus mus. Cras eleifend tellus sed congue ectetur
                                         velit urpis faucibus odio eget volutpat odio lectus eu erat esque estibulum
-                                        fermentum leg non placerat aecenas in hendrerit justo.
+                                        fermentum leg non placerat aecenas in hendrerit justo. -->
                                     </p>
-                                    <h3>The Verdict</h3>
+                                    <!-- <h3>The Verdict</h3>
                                     <p>
                                         Fusce in eros at lectus mollis pulvinar. Nullam in auctor mimus consectetur
                                         ullamcorper facilisis vivamus luctus. Varius natoque penatibus et magnis dis
                                         turient montes scetur ridiculus mus. Cras eleifend tellus sed congue
                                         ectetur velit urpis faucibus odio eget volutpat odio lectus eu erat esque
-                                        estibulum fermentum velit non placerat aecenas in hendrerit justo.
+                                        estibulum fermentum velit non placerat aecenas in hendrerit justo. -->
                                     </p>
                                     <p>
-                                        Quisque quis rhoncus exeget semper semlam at lobortis velit estibulum ante ipsum
+                                        <!-- Quisque quis rhoncus exeget semper semlam at lobortis velit estibulum ante ipsum
                                         primis in <a href="#">Faucibus Orcie</a> luctus et ultrices posuere cubilia
                                         curae ed dignissim leo lorema condimentum mauris vestibulum et
                                         maecenas vitae urna aced magna cilisis cubilia curae ed <a href="#">Dignissim
                                             Porttitor</a> fusce in eros at lectus mollis pulvinar. Nullam in auctor
                                         mimus consectetur ullamcorper facilisis vivamus luctusodio lectus eu erat
-                                        esque estibulum fermentum velit non placerat aecenas.
+                                        esque estibulum fermentum velit non placerat aecenas. -->
                                     </p>
                                     <div class="about-author">
-                                        <figure><img src="images/guide01.png" alt="Image" /></figure>
-                                        <small>GFXPARTNER</small>
+                                        <figure><img src="images/profile.jpg" alt="Image" /></figure>
+                                        <small>ADMIN ANJOURNEY</small>
                                         <h5>About the Author</h5>
                                         <img src="images/title-seperator.png" alt="Image" class="title-seperator" />
                                         <p>
-                                            Lorem ipsum dolor sit amet consectetur adipiscing elit. In erat est viverra
-                                            fringilla euismod in fermentum sed augue. Nullam consectetur ligula id
-                                            elementum hendrerit suspendisse potenti. Nulla facilisi sed sque lectus
-                                            venenatis quam.
+                                            SIAPA YAHHHH YANG JADI ADMIN ANJOURNEY
                                         </p>
                                     </div>
                                     <!-- end about-author -->
@@ -397,86 +493,51 @@ if ($result) {
                     <!-- end container -->
                 </section>
                 <!-- end blog-content -->
-                <section class="related-blog">
+                <section class="recent-blog">
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
                                 <div class="section-title">
-                                    <h2>Related Blog Posts</h2>
+                                    <h2>Berita Terbaru</h2>
                                     <img src="images/title-seperator.png" alt="Image" />
                                 </div>
                                 <!-- end section-title -->
                             </div>
                             <!-- end col-12 -->
-                            <div class="col-lg-6">
-                                <div class="blog-post">
-                                    <figure class="post-image"><img src="images/relatedblog_thumb01.jpg" alt="Image" />
-                                    </figure>
-                                    <div class="post-content">
-                                        <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-                                        <a href="blog-single.php">
-                                            <h3>An Enchanted Ice Cave in Midst of Denmark</h3>
-                                        </a>
-                                        <a href="blog-single.php" class="read-more">READ MORE</a>
-                                    </div>
-                                    <!-- end post-content -->
-                                </div>
-                                <!-- end blog-post -->
+                            <?php
+// Query untuk mengambil data dari tabel berita
+$sql = "SELECT * FROM berita ORDER BY RAND() LIMIT 3";
+
+$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo '<div class="col-lg-4">
+                <div class="blog-post">
+                  <figure class="post-image"><img src="images/' . $row['gambarBerita'] . '" alt="Image" /></figure>
+                  <div class="post-content">
+                    <small>' . $row['tanggalBerita'] . ' <span>|</span>' . $row['penguploadBerita'] . '</small>
+                    <a href="blog-single.php"><h3>' . $row['judulBerita'] . '</h3></a>
+                    <p> </p>
+                    <a href="blog-single.php" class="read-more">READ MORE</a>
+                  </div>
+                </div>
+              </div>';
+    }
+} else {
+    echo "0 results";
+}
+?>
+                            <!-- end col-4  -->
+                            <div class="col-12 text-center"><a href="blog-list.php" class="site-btn">KUNJUNGI BLOG
+                                    KAMI</a>
                             </div>
-                            <!-- end col-6 -->
-                            <div class="col-lg-6">
-                                <div class="blog-post">
-                                    <figure class="post-image"><img src="images/relatedblog_thumb02.jpg" alt="Image" />
-                                    </figure>
-                                    <div class="post-content">
-                                        <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-                                        <a href="blog-single.php">
-                                            <h3>An Enchanted Ice Cave in Midst of Denmark</h3>
-                                        </a>
-                                        <a href="blog-single.php" class="read-more">READ MORE</a>
-                                    </div>
-                                    <!-- end post-content -->
-                                </div>
-                                <!-- end blog-post -->
-                            </div>
-                            <!-- end col-6 -->
-                            <div class="col-lg-6">
-                                <div class="blog-post">
-                                    <figure class="post-image"><img src="images/relatedblog_thumb03.jpg" alt="Image" />
-                                    </figure>
-                                    <div class="post-content">
-                                        <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-                                        <a href="blog-single.php">
-                                            <h3>An Enchanted Ice Cave in Midst of Denmark</h3>
-                                        </a>
-                                        <a href="blog-single.php" class="read-more">READ MORE</a>
-                                    </div>
-                                    <!-- end post-content -->
-                                </div>
-                                <!-- end blog-post -->
-                            </div>
-                            <!-- end col-6 -->
-                            <div class="col-lg-6">
-                                <div class="blog-post">
-                                    <figure class="post-image"><img src="images/relatedblog_thumb04.jpg" alt="Image" />
-                                    </figure>
-                                    <div class="post-content">
-                                        <small>2018-03-02 <span>|</span>BY GFXPARTNER</small>
-                                        <a href="blog-single.php">
-                                            <h3>An Enchanted Ice Cave in Midst of Denmark</h3>
-                                        </a>
-                                        <a href="blog-single.php" class="read-more">READ MORE</a>
-                                    </div>
-                                    <!-- end post-content -->
-                                </div>
-                                <!-- end blog-post -->
-                            </div>
-                            <!-- end col-6 -->
+                            <!-- end col-12 -->
                         </div>
                         <!-- end row -->
                     </div>
                     <!-- end container -->
                 </section>
+                <!-- end recent-blog -->
                 <!-- end related-blog -->
                 <section class="blog-comments">
                     <div class="container">
@@ -486,37 +547,34 @@ if ($result) {
                                 <img src="images/title-seperator.png" alt="Image" class="title-seperator" />
                                 <div class="comments">
                                     <div class="comment">
-                                        <figure><img src="images/guide03.png" alt="Image" /></figure>
+                                        <figure><img src="images/profile.jpg" alt="Image" /></figure>
                                         <div class="info">
                                             <a href="#">REPLY</a>
-                                            <h6>Michael Robbin</h6>
+                                            <h6>Pendekar</h6>
                                             <small>2018-03-02</small>
-                                            <p>Nunc rhoncus felis eget nulla aliquet id fermentum ested ucibus estibulum
-                                                ullamcorper hendrerit sapien.</p>
+                                            <p>WAHHHH</p>
                                         </div>
                                         <!-- end info -->
                                     </div>
                                     <!-- end comment -->
                                     <div class="comment related">
-                                        <figure><img src="images/guide02.png" alt="Image" /></figure>
+                                        <figure><img src="images/profile.jpg" alt="Image" /></figure>
                                         <div class="info">
                                             <a href="#">REPLY</a>
-                                            <h6>Michael Robbin</h6>
+                                            <h6>SIAPA YA</h6>
                                             <small>2018-03-02</small>
-                                            <p>Nunc rhoncus felis eget nulla aliquet id fermentum ested ucibus estibulum
-                                                ullamcorper hendrerit sapien.</p>
+                                            <p>GOKILLL</p>
                                         </div>
                                         <!-- end info -->
                                     </div>
                                     <!-- end comment -->
                                     <div class="comment">
-                                        <figure><img src="images/guide03.png" alt="Image" /></figure>
+                                        <figure><img src="images/profile.jpg" alt="Image" /></figure>
                                         <div class="info">
                                             <a href="#">REPLY</a>
-                                            <h6>Michael Robbin</h6>
+                                            <h6>Penakluk Land Of Dawn</h6>
                                             <small>2018-03-02</small>
-                                            <p>Nunc rhoncus felis eget nulla aliquet id fermentum ested ucibus estibulum
-                                                ullamcorper hendrerit sapien.</p>
+                                            <p>HAAAAAA</p>
                                         </div>
                                         <!-- end info -->
                                     </div>
@@ -557,95 +615,7 @@ if ($result) {
                     <!-- end container -->
                 </section>
                 <!-- end blog-comments -->
-                <section class="related-tours">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="section-title">
-                                    <h2>Related Tours That You Might Like</h2>
-                                    <img src="images/title-seperator.png" alt="Image" />
-                                </div>
-                                <!-- end section-title -->
-                            </div>
-                            <!-- end col-12 -->
-                            <div class="col-lg-4">
-                                <div class="tour-box">
-                                    <figure><img src="images/tour-thumb01.jpg" alt="Image" /></figure>
-                                    <div class="tour-content">
-                                        <small>FROM SKAFTAFELL</small>
-                                        <h3>Blue Ice Experience</h3>
-                                        <ul>
-                                            <li><img src="images/icon-date.png" alt="Image" /> <small>Available</small>
-                                                <span>ALL YEAR</span>
-                                            </li>
-                                            <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small>
-                                                <span>3-10 DAYS</span>
-                                            </li>
-                                            <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small>
-                                                <span>$166.750</span>
-                                            </li>
-                                        </ul>
-                                        <a href="#">SELECT DATES</a>
-                                    </div>
-                                    <!-- end tour-content -->
-                                </div>
-                                <!-- end tour-box -->
-                            </div>
-                            <!-- end col-4 -->
-                            <div class="col-lg-4">
-                                <div class="tour-box">
-                                    <figure><img src="images/tour-thumb02.jpg" alt="Image" /> <span class="tag">MOST
-                                            POPULAR</span></figure>
-                                    <div class="tour-content">
-                                        <small>FROM SKAFTAFELL</small>
-                                        <h3>Blue Ice Experience</h3>
-                                        <ul>
-                                            <li><img src="images/icon-date.png" alt="Image" /> <small>Available</small>
-                                                <span>ALL YEAR</span>
-                                            </li>
-                                            <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small>
-                                                <span>3-10 DAYS</span>
-                                            </li>
-                                            <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small>
-                                                <span>$166.750</span>
-                                            </li>
-                                        </ul>
-                                        <a href="#">SELECT DATES</a>
-                                    </div>
-                                    <!-- end tour-content -->
-                                </div>
-                                <!-- end tour-box -->
-                            </div>
-                            <!-- end col-4 -->
-                            <div class="col-lg-4">
-                                <div class="tour-box">
-                                    <figure><img src="images/tour-thumb03.jpg" alt="Image" /></figure>
-                                    <div class="tour-content">
-                                        <small>FROM SKAFTAFELL</small>
-                                        <h3>Blue Ice Experience</h3>
-                                        <ul>
-                                            <li><img src="images/icon-date.png" alt="Image" /> <small>Available</small>
-                                                <span>ALL YEAR</span>
-                                            </li>
-                                            <li><img src="images/icon-time.png" alt="Image" /> <small>Duration</small>
-                                                <span>3-10 DAYS</span>
-                                            </li>
-                                            <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small>
-                                                <span>$166.750</span>
-                                            </li>
-                                        </ul>
-                                        <a href="#">SELECT DATES</a>
-                                    </div>
-                                    <!-- end tour-content -->
-                                </div>
-                                <!-- end tour-box -->
-                            </div>
-                            <!-- end col-4 -->
-                        </div>
-                        <!-- end row -->
-                    </div>
-                    <!-- end container -->
-                </section>
+
                 <!-- end related-tours -->
                 <footer class="footer">
                     <div class="container">

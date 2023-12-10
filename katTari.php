@@ -48,22 +48,7 @@ include "koneksi.php"
                     <div class="col-12">
                         <span class="search-close-btn"><i class="fa fa-times"></i></span>
                         <h3>Profile</h3>
-                        <!-- <form>
-              <div class="form-group">
-                <i class="fa fa-search"></i>
-                <input type="text" placeholder="Search Activities, Themes or Tours" />
-              </div>
-              --end form-group
-              <button type="submit">SEARCH</button>
-            </form>
-            <dl>
-              <dt>Suggestions <i class="fa fa-long-arrow-right"></i></dt>
-              <dd><a href="#">Adventure</a></dd>
-              <dd><a href="#">Nothern Lights</a></dd>
-              <dd><a href="#">Waterfalls</a></dd>
-              <dd><a href="#">Winter Tours</a></dd>
-              <dd><a href="#">Glaciar Walk</a></dd>
-            </dl> -->
+
                     </div>
                     <div class="container mt-5">
                         <div class="row">
@@ -136,75 +121,79 @@ include "koneksi.php"
                     </div>
                     <!-- end menu-btn -->
                     <span class="search-btn"><i class="bi bi-person-circle"></i>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                    </svg>
-                </span>
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="index.php">HOME</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="tours-list.php">TOURS</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link">CATEGORY</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="katTari.php">TARI</a></li>
-                            <li><a href="katTea.php">TEATER</a></li>
-                            <li><a href="katMus.php">MUSIK</a></li>
-                            <li><a href="katPam.php">PAMERAN VISUAL</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="about-us.php">ABOUT US</a></li>
-                    <li class="nav-item"><a id="login-link" class="nav-link" href="#">LOGIN</a></li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                            <path fill-rule="evenodd"
+                                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                        </svg>
+                    </span>
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="index.php">HOME</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="tours-list.php">TOURS</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link">CATEGORY</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="katTari.php">TARI</a></li>
+                                <li><a href="katTea.php">TEATER</a></li>
+                                <li><a href="katMus.php">MUSIK</a></li>
+                                <li><a href="katPam.php">PAMERAN VISUAL</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="about-us.php">ABOUT US</a></li>
+                        <li class="nav-item"><a id="login-link" class="nav-link" href="#">LOGIN</a></li>
 
-                    <!-- The login modal -->
-                    <div id="loginModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close">&times;</span>
-                            <h2>Welcome Back</h2>
-                            <form id="loginForm">
-                                <div class="form-group">
-                                    <input type="email" id="loginEmail" name="loginEmail" placeholder="Email"
-                                        required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" id="loginPassword" name="loginPassword"
-                                        placeholder="Password" required />
-                                </div>
-                                <button type="submit" class="login-btn">Login</button>
-                            </form>
-                            <p class="signup-link">Don't have an account? <a href="#" id="signup-link">Sign Up</a></p>
+                        <!-- The login modal -->
+                        <div id="loginModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <h2>Welcome Back</h2>
+                                <form id="loginForm">
+                                    <div class="form-group">
+                                        <input type="email" id="loginEmail" name="loginEmail" placeholder="Email"
+                                            required />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" id="loginPassword" name="loginPassword"
+                                            placeholder="Password" required />
+                                    </div>
+                                    <button type="submit" class="login-btn">Login</button>
+                                </form>
+                                <p class="signup-link">Don't have an account? <a href="#" id="signup-link">Sign Up</a>
+                                </p>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- The sign-up modal -->
-                    <div id="signupModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close">&times;</span>
-                            <h2>Sign Up</h2>
-                            <form id="signupForm">
-                                <div class="form-group">
-                                    <input type="text" id="firstName" name="firstName" placeholder="First Name"
-                                        required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" id="signupEmail" name="signupEmail" placeholder="Email"
-                                        required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" id="signupPassword" name="signupPassword"
-                                        placeholder="Password" required />
-                                </div>
-                                <button type="submit" class="signup-btn">Sign Up</button>
-                            </form>
+                        <!-- The sign-up modal -->
+                        <div id="signupModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <h2>Sign Up</h2>
+                                <form id="signupForm">
+                                    <div class="form-group">
+                                        <input type="text" id="firstName" name="firstName" placeholder="First Name"
+                                            required />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" id="lastName" name="lastName" placeholder="Last Name"
+                                            required />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" id="signupEmail" name="signupEmail" placeholder="Email"
+                                            required />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" id="signupPassword" name="signupPassword"
+                                            placeholder="Password" required />
+                                    </div>
+                                    <button type="submit" class="signup-btn">Sign Up</button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                </ul>
-        </nav>
+                    </ul>
+                </nav>
                 </nav>
                 <!-- end navbar -->
             </div>
@@ -218,7 +207,11 @@ include "koneksi.php"
                         <h2>Pertunjukan Tari</h2>
                         <img src="images/title-seperator.png" alt="Image" />
                         <p>
-                        Indonesia memiliki lebih dari 300 suku dan banyak pulau dengan budaya yang berbeda. Setiap suku atau daerah memiliki tarian tradisionalnya sendiri yang memperkaya keanekaragaman seni tari di Indonesia. Tarian-tarian tradisional di Indonesia tidak hanya sekadar gerakan-gerakan indah, tetapi juga merupakan ekspresi dari nilai-nilai budaya, sejarah, agama, dan kehidupan sehari-hari masyarakat setempat
+                            Indonesia memiliki lebih dari 300 suku dan banyak pulau dengan budaya yang berbeda. Setiap
+                            suku atau daerah memiliki tarian tradisionalnya sendiri yang memperkaya keanekaragaman seni
+                            tari di Indonesia. Tarian-tarian tradisional di Indonesia tidak hanya sekadar
+                            gerakan-gerakan indah, tetapi juga merupakan ekspresi dari nilai-nilai budaya, sejarah,
+                            agama, dan kehidupan sehari-hari masyarakat setempat
                         </p>
                     </div>
                     <!-- end col-12 -->
@@ -243,11 +236,8 @@ include "koneksi.php"
                     <!-- end col-12 -->
                     <?php
 // Query untuk mengambil data dari tabel detailwisata dan detailtour dengan JOIN
-$sql = "SELECT detailwisata.*, detailtour.* 
-        FROM detailwisata 
-        JOIN detailtour ON detailwisata.id_detailtour = detailtour.id_detailtour
-        WHERE detailtour.namaKota = 'Jakarta'
-        ORDER BY detailtour.id_detailtour";
+$sql = "SELECT * FROM detailtour WHERE kategoriTour = 'Tari' ORDER BY RAND() LIMIT 4";
+
 
 $result = $conn->query($sql);
 
@@ -267,8 +257,9 @@ if ($result->num_rows > 0) {
 }
 ?>
 
+
                     <!-- end col-6 -->
-                    
+
                     <!-- end col-12 -->
                 </div>
                 <!-- end row -->
@@ -282,7 +273,7 @@ if ($result->num_rows > 0) {
                 <div class="row">
                     <div class="col-12">
                         <div class="section-title">
-                            <h2>Related Adventure Tours</h2>
+                            <h2>Pertunjukkan Tari yang akan Datang</h2>
                             <img src="images/title-seperator.png" alt="Image" />
                         </div>
                         <!-- end section-title -->
@@ -290,7 +281,7 @@ if ($result->num_rows > 0) {
                     <!-- end col-12 -->
                     <?php
 // Query untuk mengambil data dari tabel detailtour dengan urutan acak
-$sql = "SELECT * FROM detailtour ORDER BY RAND() LIMIT 3";
+$sql = "SELECT * FROM detailtour WHERE kategoriTour = 'Tari' ORDER BY RAND() LIMIT 3";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

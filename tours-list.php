@@ -47,22 +47,7 @@ include "koneksi.php";
                     <div class="col-12">
                         <span class="search-close-btn"><i class="fa fa-times"></i></span>
                         <h3>Profile</h3>
-                        <!-- <form>
-              <div class="form-group">
-                <i class="fa fa-search"></i>
-                <input type="text" placeholder="Search Activities, Themes or Tours" />
-              </div>
-              --end form-group
-              <button type="submit">SEARCH</button>
-            </form>
-            <dl>
-              <dt>Suggestions <i class="fa fa-long-arrow-right"></i></dt>
-              <dd><a href="#">Adventure</a></dd>
-              <dd><a href="#">Nothern Lights</a></dd>
-              <dd><a href="#">Waterfalls</a></dd>
-              <dd><a href="#">Winter Tours</a></dd>
-              <dd><a href="#">Glaciar Walk</a></dd>
-            </dl> -->
+
                     </div>
                     <div class="container mt-5">
                         <div class="row">
@@ -135,75 +120,167 @@ include "koneksi.php";
                     </div>
                     <!-- end menu-btn -->
                     <span class="search-btn"><i class="bi bi-person-circle"></i>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                    </svg>
-                </span>
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="index.php">HOME</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="tours-list.php">TOURS</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link">CATEGORY</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="katTari.php">TARI</a></li>
-                            <li><a href="katTea.php">TEATER</a></li>
-                            <li><a href="katMus.php">MUSIK</a></li>
-                            <li><a href="katPam.php">PAMERAN VISUAL</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="about-us.php">ABOUT US</a></li>
-                    <li class="nav-item"><a id="login-link" class="nav-link" href="#">LOGIN</a></li>
-
-                    <!-- The login modal -->
-                    <div id="loginModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close">&times;</span>
-                            <h2>Welcome Back</h2>
-                            <form id="loginForm">
-                                <div class="form-group">
-                                    <input type="email" id="loginEmail" name="loginEmail" placeholder="Email"
-                                        required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" id="loginPassword" name="loginPassword"
-                                        placeholder="Password" required />
-                                </div>
-                                <button type="submit" class="login-btn">Login</button>
-                            </form>
-                            <p class="signup-link">Don't have an account? <a href="#" id="signup-link">Sign Up</a></p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                            <path fill-rule="evenodd"
+                                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                        </svg>
+                    </span>
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="index.php">HOME</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="tours-list.php">TOURS</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link">CATEGORY</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="katTari.php">TARI</a></li>
+                                <li><a href="katTea.php">TEATER</a></li>
+                                <li><a href="katMus.php">MUSIK</a></li>
+                                <li><a href="katPam.php">PAMERAN VISUAL</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="about-us.php">ABOUT US</a></li>
+                        <li class="nav-item">
+                            <a id="login-logout-link" class="nav-link" href="#" onclick="toggleLoginStatus()">LOGIN</a>
+                        </li>
+                        <!-- The login modal -->
+                        <div id="loginModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close" onclick="closeLoginModal()">&times;</span>
+                                <h2>Welcome Back</h2>
+                                <form id="loginForm" method="POST" action="loginUser.php"
+                                    onsubmit="submitLoginForm(event)">
+                                    <div class="form-group">
+                                        <input type="email" id="loginEmail" name="loginEmail" placeholder="Email"
+                                            required />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" id="loginPassword" name="loginPassword"
+                                            placeholder="Password" required />
+                                    </div>
+                                    <button type="submit" class="login-btn">Login</button>
+                                </form>
+                                <p class="signup-link">Don't have an account? <a href="#" id="signup-link">Sign Up</a>
+                                </p>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- The sign-up modal -->
-                    <div id="signupModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close">&times;</span>
-                            <h2>Sign Up</h2>
-                            <form id="signupForm">
-                                <div class="form-group">
-                                    <input type="text" id="firstName" name="firstName" placeholder="First Name"
-                                        required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" id="signupEmail" name="signupEmail" placeholder="Email"
-                                        required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" id="signupPassword" name="signupPassword"
-                                        placeholder="Password" required />
-                                </div>
-                                <button type="submit" class="signup-btn">Sign Up</button>
-                            </form>
+                        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                        <script>
+                        function submitLoginForm(event) {
+                            event.preventDefault();
+
+                            var email = $("#loginEmail").val();
+                            var password = $("#loginPassword").val();
+
+                            $.ajax({
+                                type: "POST",
+                                url: "loginUser.php",
+                                data: {
+                                    loginEmail: email,
+                                    loginPassword: password
+                                },
+                                success: function(response) {
+                                    alert(response);
+                                    if (response.includes("Login berhasil")) {
+                                        closeLoginModal();
+                                        updateLoginStatus(true);
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    alert("Terjadi kesalahan saat melakukan login. Silakan coba lagi.");
+                                }
+                            });
+                        }
+
+                        function closeLoginModal() {
+                            $("#loginModal").hide();
+                        }
+
+                        function toggleLoginStatus() {
+                            var isLoggedIn = checkLoginStatus();
+
+                            if (isLoggedIn) {
+                                submitLogout();
+                            } else {
+                                openLoginModal();
+                            }
+                        }
+
+                        function openLoginModal() {
+                            // Tambahkan logika atau panggilan fungsi untuk menampilkan modal login di sini
+                            var isLoggedIn = checkLoginStatus();
+
+                            if (!isLoggedIn) {
+                                $("#loginModal").show();
+                            }
+                        }
+
+                        function submitLogout() {
+                            $.ajax({
+                                type: "POST",
+                                url: "logoutUser.php",
+                                success: function(response) {
+                                    alert(response);
+                                    updateLoginStatus(false);
+
+                                    // Redirect ke halaman login atau halaman lain yang sesuai
+                                    window.location.href =
+                                        "index.php"; // Gantilah "login.php" dengan halaman yang sesuai
+                                },
+                                error: function(xhr, status, error) {
+                                    alert("Terjadi kesalahan saat melakukan logout. Silakan coba lagi.");
+                                }
+                            });
+                        }
+
+
+                        function checkLoginStatus() {
+                            var isLoggedIn = <?php echo isset($_SESSION['user_email']) ? 'true' : 'false'; ?>;
+                            return isLoggedIn;
+                        }
+
+                        function updateLoginStatus(isLoggedIn) {
+                            var loginLogoutLink = $("#login-logout-link");
+
+                            if (isLoggedIn) {
+                                loginLogoutLink.text("LOGOUT");
+                            } else {
+                                loginLogoutLink.text("LOGIN");
+                            }
+                        }
+                        </script>
+
+                        <!-- The sign-up modal -->
+                        <div id="signupModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <h2>Sign Up</h2>
+                                <form id="signupForm">
+                                    <div class="form-group">
+                                        <input type="text" id="firstName" name="firstName" placeholder="First Name"
+                                            required />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" id="lastName" name="lastName" placeholder="Last Name"
+                                            required />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" id="signupEmail" name="signupEmail" placeholder="Email"
+                                            required />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" id="signupPassword" name="signupPassword"
+                                            placeholder="Password" required />
+                                    </div>
+                                    <button type="submit" class="signup-btn">Sign Up</button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                </ul>
-        </nav>
+                    </ul>
+                </nav>
                 </nav>
                 <!-- end navbar -->
             </div>
@@ -214,50 +291,20 @@ include "koneksi.php";
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-            
+
                         <h2>Tur Paling Populer</h2>
                         <?php
                 $query = mysqli_query($conn, "SELECT COUNT(id_detailtour) as jumlah FROM detailtour");
                 $dataDetailWisata = mysqli_fetch_array($query, MYSQLI_ASSOC);
                 ?>
-                        <p>Berikut daftar <strong><?php echo $dataDetailWisata['jumlah'];?> Tour</strong>, silahkan cari yang
+                        <p>Berikut daftar <strong><?php echo $dataDetailWisata['jumlah'];?> Tour</strong>, silahkan cari
+                            yang
                             paling menarik untuk anda.</p>
                     </div>
                     <!-- end col-12 -->
                     <div class="col-12">
-                        <!-- end filter -->
-                        <div class="filter dropdown">
-                            <a href="#" data-toggle="dropdown">Duration <i class="fa fa-angle-down"></i></a>
-                            <ul class="dropdown-menu dropdown-check">
-                                <li><input type="checkbox" /><span>3-5 Days</span></li>
-                                <li><input type="checkbox" /><span>5-7 Days</span></li>
-                                <li><input type="checkbox" /><span>7-9 Days</span></li>
-                                <li><input type="checkbox" /><span>10-15 Days</span></li>
-                                <li>
-                                    <div>
-                                        <span><i class="fa fa-times"></i>CLEAR</span>
-                                        <span><i class="fa fa-check"></i>APPLY</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- end filter -->
-                        <div class="filter dropdown">
-                            <a href="#" data-toggle="dropdown">Category <i class="fa fa-angle-down"></i></a>
-                            <ul id="categoryFilter" class="dropdown-menu dropdown-check">
-                                <li><input type="checkbox" value="kesenian" /><span>Kesenian</span></li>
-                                <li><input type="checkbox" value="hiburan" /><span>Hiburan</span></li>
-                                <li><input type="checkbox" value="alam" /><span>Alam</span></li>
-                                <li><input type="checkbox" value="sejarah" /><span>Sejarah</span></li>
-                                <li>
-                                    <div>
-                                        <span id="clearFilter"><i class="fa fa-times"></i>CLEAR</span>
-                                        <span id="applyFilter"><i class="fa fa-check"></i>APPLY</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- end filter -->
+
+
 
                         <ul class="view-type tour-view-type">
                             <li>
