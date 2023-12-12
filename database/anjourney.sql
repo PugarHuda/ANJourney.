@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Des 2023 pada 08.31
+-- Waktu pembuatan: 12 Des 2023 pada 03.21
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -159,7 +159,7 @@ INSERT INTO `detailtour` (`id_detailtour`, `gambarTour`, `namaKota`, `namaTour`,
 (12, '1702185221.jpg', 'BALI', 'Eksplorasi Karya Seni Lokal Bali', 'Available', '2-3 JAM', 'Rp200.000', 'Pameran Visual', 'Tur Eksplorasi Karya Seni Lokal Bali melalui Ubud Diary adalah pengalaman yang memukau yang mengajak peserta untuk mendalami kekayaan seni dan budaya di Bali, terutama di daerah Ubud yang terkenal dengan seni tradisionalnya. Mengikuti Ubud Diary akan memberikan kesempatan bagi peserta untuk melihat langsung proses pembuatan karya seni, berinteraksi dengan seniman lokal, dan belajar tentang teknik, inspirasi, serta filosofi di balik setiap karya seni yang diproduksi. Tur ini juga akan mengajak peserta untuk menyelami kebudayaan Bali melalui pertunjukan tari, musik, dan ritual budaya yang bisa menjadi inspirasi dalam karya seni mereka sendiri.', 'Menampilkan koleksi lukisan, barang antik dan artefak kayu, Ubud Diary mengadakan pameran reguler dengan lebih dari 20 seniman Bali menampilkan dan mengkhususkan diri dalam gaya Ubud dengan bentuk interpretasi seni mereka sendiri. Di art gallery ini, Anda akan menemukan harmoni seni dan teknologi dimana setiap karya seni memiliki kode QR yang memberikan informasi dan detailnya.', '2023-05-15'),
 (13, '1702185198.jpg', 'JAKARTA', 'Jelajahi Seni Rupa Nusantara di Jakarta', 'Available', '2-3 JAM', 'Rp150.000', 'Pameran Visual', 'Tur ini menawarkan pengalaman yang memikat bagi para pengunjung yang ingin memahami kekayaan seni rupa Indonesia. Art1:Museum, salah satu museum seni yang terletak di Jakarta, menjadi tujuan utama dalam tur ini. Peserta tur akan diajak untuk menjelajahi koleksi seni rupa Nusantara yang luar biasa yang dipamerkan di Art1:Museum. Koleksi ini mencakup berbagai karya seni rupa tradisional dan kontemporer dari berbagai daerah di Indonesia, seperti lukisan, patung, karya seni instalasi, dan seni rupa lainnya. Tur ini memungkinkan pengunjung untuk meresapi keindahan, keunikan, dan keragaman seni rupa Nusantara.', 'Art:1 Museum dulu dinamakan Mon Decor yang telah berdiri sejak tahun 1983 sebagai sebuah art gallery Jakarta yang ternama. Lokasinya yang berada di Jalan Rajawali Jakarta Pusat memanggil-manggil pengunjung untuk menikmati karya seni kontemporer. Awalnya Mon Decor hanya menampung kebutuhan pencari karya seni visual untuk dekorasi interior. Pada tahun 2011, Mon Decor memutuskan membuka museum ruang seni dan institut seni serta memamerkan berbagai karya seni yang telah dikumpulkan sejak tahun 1983 untuk mendukung kemajuan seni Indonesia.', '2023-06-10'),
 (14, '1702185159.jpg', 'YOGYAKARTA', 'Magical Arts Expedition', 'Available', '5 Hari/4 Malam', 'Rp700.000', 'Pameran Visual', 'Jika Anda seorang pencinta seni pertunjukan pameran visual dan ingin menggabungkan liburan dengan pengalaman seni yang luar biasa, paket tour \"Magical Arts Expedition\" ini adalah pilihan tepat untuk Anda. Dengan destinasi penuh daya tarik seni, setiap langkah perjalanan ini akan memanjakan indra Anda dan memperdalam pemahaman Anda tentang seni pertunjukan.', 'Seni pertunjukan pameran visual menciptakan panggung yang memaparkan keindahan dan keanekaragaman karya seni secara langsung, memperlihatkan keterampilan seniman dan merangsang refleksi estetika penonton. Seni pertunjukan pameran visual tidak hanya menjadi tempat untuk mengeksplorasi keindahan, tetapi juga menjadi sarana untuk menyuarakan pandangan sosial, politik, dan ekologis. Melalui sejarahnya yang panjang, seni pertunjukan pameran visual terus berkembang, mencerminkan evolusi seni dan refleksi dinamika masyarakat.', '2024-01-10'),
-(15, '1702185110.jpg', 'BALI', 'Rhythmical Elegance Escape', 'Available', '3 Hari/2 Malam', 'Rp650.000', 'Tari', 'Jika Anda mengidamkan pengalaman tak terlupakan dengan menyelami keindahan dan keberagaman seni pertunjukan tari, ', 'Seni pertunjukan tari memiliki akar yang melintasi waktu dan budaya, menjadi ungkapan unik dari kreativitas dan identitas manusia sepanjang sejarah. Dari zaman prasejarah hingga era modern, tari telah menjadi bahasa universal yang menyampaikan emosi, cerita, dan kebudayaan. Dalam era globalisasi ini, seni pertunjukan tari terus berkembang, menggabungkan unsur-unsur budaya yang beragam. Festival-festival tari internasional dan perkembangan teknologi membuka pintu bagi penonton di seluruh dunia untuk menyaksikan dan menghargai keindahan serta kompleksitas seni pertunjukan tari.', '2023-12-24'),
+(15, '1702185110.jpg', 'BALI', 'Rhythmical Elegance Escape', 'Available', '3 Hari/2 Malam', 'Rp650.000', 'Tari', 'Jika Anda mengidamkan pengalaman tak terlupakan dengan menyelami keindahan dan keberagaman seni pertunjukan tari, \"Rhythmical Elegance Escape\" adalah paket tour yang sempurna. Dengan mengunjungi destinasi-dedikasi seni tari, tour ini akan membawa Anda dalam perjalanan melalui gerak, ritme, dan keindahan seni tari yang menakjubkan.', 'Seni pertunjukan tari memiliki akar yang melintasi waktu dan budaya, menjadi ungkapan unik dari kreativitas dan identitas manusia sepanjang sejarah. Dari zaman prasejarah hingga era modern, tari telah menjadi bahasa universal yang menyampaikan emosi, cerita, dan kebudayaan. Dalam era globalisasi ini, seni pertunjukan tari terus berkembang, menggabungkan unsur-unsur budaya yang beragam. Festival-festival tari internasional dan perkembangan teknologi membuka pintu bagi penonton di seluruh dunia untuk menyaksikan dan menghargai keindahan serta kompleksitas seni pertunjukan tari.', '2023-12-24'),
 (16, '1702185065.jpg', 'JAWA BARAT', 'Drama & Eksplorasi Budaya', 'Available', '6 Hari/5 Malam', 'Rp850.000', 'Teater', 'Jika Anda adalah pencinta teater yang haus akan pengalaman seni panggung yang mendalam, \"Drama & Eksplorasi Budaya\" adalah paket tour yang dirancang khusus untuk Anda. Berkeliling dari kota ke kota, tour ini akan membawa Anda dalam perjalanan melalui panggung-panggung teater terkemuka di Indonesia.', 'Seni pertunjukan teater adalah jejak panjang dan kaya dari peradaban manusia yang mencerminkan kreativitas, ekspresi, dan refleksi kehidupan. Dari panggung-panggung kuno hingga teater modern yang inovatif, seni pertunjukan teater terus melangkah maju sebagai sarana yang kuat untuk menyampaikan cerita, memprovokasi pemikiran, dan merayakan keberagaman manusia. Sejarah teater membingkai kisah-kisah manusia dan terus menginspirasi penonton di seluruh dunia.', '2024-01-01'),
 (17, '1702185667.jpg', 'SURABAYA', 'Harmony Expedition', 'Available', '5 Hari/4 Malam', 'Rp550.000', 'Teater', 'Jika Anda adalah pencinta teater yang haus akan pengalaman seni panggung yang mendalam, \"Drama & Eksplorasi Budaya\" adalah paket tour yang dirancang khusus untuk Anda. Berkeliling dari kota ke kota, tour ini akan membawa Anda dalam perjalanan melalui panggung-panggung teater terkemuka di Indonesia.', 'Seni pertunjukan musik memiliki warisan panjang yang memperkaya budaya manusia sepanjang peradaban. Zaman kontemporer menandai inklusi genre musik yang semakin beragam dan terhubung secara global. Festival musik internasional, konser, dan platform daring telah menjadi bagian penting dalam mempromosikan dan merayakan keberagaman seni pertunjukan musik di seluruh dunia. Dengan melihat sejarahnya, seni pertunjukan musik terus menghadirkan inspirasi, hiburan, dan merangkul ragam kreativitas manusia.', '2024-01-21');
 
@@ -252,7 +252,11 @@ CREATE TABLE `payment` (
   `id_payment` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `hargaTour` varchar(255) NOT NULL,
-  `id_passenger` int(11) NOT NULL
+  `id_passenger` int(11) NOT NULL,
+  `nomorKartu` varchar(255) NOT NULL,
+  `tanggalKadaluarsa` varchar(255) NOT NULL,
+  `cvc_cvv` varchar(255) NOT NULL,
+  `kodePromosi` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -289,7 +293,12 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id_user`, `namaDepan`, `namaBelakang`, `email`, `password`, `NIK`, `noTelepon`) VALUES
 (1, 'musang', 'pandan', 'musangpandan@gmail.com', 'musangpandan', 33039483, 94738384),
 (2, 'raisha', 'riash', 'raisah@gmail.com', '1234', 24353534, 2324234),
-(3, 'halo', 'halo', 'halo@gmail.com', 'halo', 330394832, 11231232);
+(3, 'halo', 'halo', 'halo@gmail.com', 'halo', 330394832, 11231232),
+(4, 'hayo', 'HAYO', 'hayoHAYO@gmail.com', 'hayo', 0, 0),
+(5, 'hayo', 'HAYO', 'hayoHAYO@gmail.com', 'hayo', 0, 0),
+(6, 'Pugar', 'Huda Mantoro', 'dfgdf@asdas.com', 'sdfsdf', 0, 0),
+(7, 'fsf', 'sfsdfsd', 'fsdfsd@gmail.com', 'fsfsd', 0, 0),
+(8, 'sdfsdf', 'sdfsdf', 'hayoHAYO@gmail.com', 'sdfsd', 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -464,7 +473,7 @@ ALTER TABLE `populartour`
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
