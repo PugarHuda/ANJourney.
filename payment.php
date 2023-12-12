@@ -42,6 +42,20 @@ include "koneksi.php"
             </svg>
         </div>
         <!-- end preloader -->
+        <?php
+// ID user yang ingin ditampilkan (sesuaikan dengan kebutuhan Anda)
+$userId = 1;
+
+// Query untuk mendapatkan data dari tabel "user" berdasarkan ID
+$sql = "SELECT * FROM user WHERE id_user = $userId";
+$result = $conn->query($sql);
+
+// Periksa apakah data ditemukan
+if ($result->num_rows > 0) {
+    // Ambil data dan isi formulir
+    $userRow = $result->fetch_assoc();
+?>
+
         <div class="search-box">
             <div class="container">
                 <div class="row">
@@ -56,36 +70,36 @@ include "koneksi.php"
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="account-fn">NAMA DEPAN</label>
-                                            <input class="form-control" type="text" id="account-fn" value="Daniel"
-                                                disabled="" />
+                                            <input class="form-control" type="text" id="account-fn"
+                                                value="<?php echo $userRow['namaDepan']; ?>" disabled="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="account-ln">NAMA BELAKANG</label>
-                                            <input class="form-control" type="text" id="account-ln" value="Adams"
-                                                disabled="" />
+                                            <input class="form-control" type="text" id="account-ln"
+                                                value="<?php echo $userRow['namaBelakang']; ?>" disabled="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="account-email">E-MAIL</label>
                                             <input class="form-control" type="email" id="account-email"
-                                                value="daniel.adams@example.com" disabled="" />
+                                                value="<?php echo $userRow['email']; ?>" disabled="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="account-phone">No.HP</label>
                                             <input class="form-control" type="text" id="account-phone"
-                                                value="+7 (805) 348 95 72" disabled="" />
+                                                value="<?php echo $userRow['noTelepon']; ?>" disabled="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="account-pass">PASSWORD</label>
-                                            <input class="form-control" type="password" id="account-pass" value="da"
-                                                disabled="" />
+                                            <input class="form-control" type="password" id="account-pass"
+                                                value="<?php echo $userRow['password']; ?>" disabled="" />
                                         </div>
                                     </div>
                                 </form>
@@ -98,6 +112,14 @@ include "koneksi.php"
             </div>
             <!-- end container -->
         </div>
+
+        <?php
+} else {
+    echo "Data user tidak ditemukan.";
+}
+
+?>
+
         <!-- end search-box -->
         <header class="header-int">
             <div class="container">
@@ -119,14 +141,7 @@ include "koneksi.php"
                         </div>
                     </div>
                     <!-- end menu-btn -->
-                    <span class="search-btn"><i class="bi bi-person-circle"></i>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                            class="bi bi-person-circle" viewBox="0 0 16 16">
-                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
-                            <path fill-rule="evenodd"
-                                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
-                        </svg>
-                    </span>
+
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="index.php">HOME</a>
@@ -143,13 +158,20 @@ include "koneksi.php"
                         </li>
                         <li class="nav-item"><a class="nav-link" href="about-us.php">ABOUT US</a></li>
                         <li class="nav-item"><a id="login-link" class="nav-link" href="#">LOGIN</a></li>
-
-                        <!-- The login modal -->
+                        <span class="search-btn"><i class="bi bi-person-circle"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                                <path fill-rule="evenodd"
+                                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                            </svg>
+                        </span>
                         <div id="loginModal" class="modal">
                             <div class="modal-content">
-                                <span class="close">&times;</span>
+                                <span class="close" onclick="closeLoginModal()">&times;</span>
                                 <h2>Welcome Back</h2>
-                                <form id="loginForm">
+                                <form id="loginForm" method="POST" action="loginUser.php"
+                                    onsubmit="submitLoginForm(event)">
                                     <div class="form-group">
                                         <input type="email" id="loginEmail" name="loginEmail" placeholder="Email"
                                             required />
@@ -165,41 +187,210 @@ include "koneksi.php"
                             </div>
                         </div>
 
-                        <!-- The sign-up modal -->
-                        <div id="signupModal" class="modal">
-                            <div class="modal-content">
-                                <span class="close">&times;</span>
-                                <h2>Sign Up</h2>
-                                <form id="signupForm">
-                                    <div class="form-group">
-                                        <input type="text" id="firstName" name="firstName" placeholder="First Name"
-                                            required />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" id="lastName" name="lastName" placeholder="Last Name"
-                                            required />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="email" id="signupEmail" name="signupEmail" placeholder="Email"
-                                            required />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" id="signupPassword" name="signupPassword"
-                                            placeholder="Password" required />
-                                    </div>
-                                    <button type="submit" class="signup-btn">Sign Up</button>
-                                </form>
-                            </div>
-                        </div>
-                    </ul>
-                </nav>
-                </nav>
-                <!-- end navbar -->
-            </div>
-            <!-- end container -->
-        </header>
-        <!-- end header-int -->
-        <?php
+                        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                        <script>
+                        function submitLoginForm(event) {
+                            event.preventDefault();
+
+                            var email = $("#loginEmail").val();
+                            var password = $("#loginPassword").val();
+
+                            $.ajax({
+                                type: "POST",
+                                url: "loginUser.php",
+                                data: {
+                                    loginEmail: email,
+                                    loginPassword: password
+                                },
+                                success: function(response) {
+                                    alert(response);
+                                    if (response.includes("Login berhasil")) {
+                                        closeLoginModal();
+                                        updateLoginStatus(true);
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    alert("Terjadi kesalahan saat melakukan login. Silakan coba lagi.");
+                                }
+                            });
+                        }
+
+                        function openSignUpModal() {
+                            // Tambahkan logika untuk membuka modal pendaftaran
+                            // Misalnya, dengan menampilkan modal signup atau menavigasi ke halaman pendaftaran
+                            $("#signupModal").show();
+                        }
+
+                        function closeLoginModal() {
+                            $("#loginModal").hide();
+                        }
+
+                        // ... Fungsi-fungsi lainnya ...
+
+                        $(document).ready(function() {
+                            // Menangani klik pada tautan "Sign Up"
+                            $("#signup-link").click(function() {
+                                openSignUpModal();
+                            });
+                        });
+
+                        function closeLoginModal() {
+                            $("#loginModal").hide();
+                        }
+
+                        function toggleLoginStatus() {
+                            var isLoggedIn = checkLoginStatus();
+
+                            if (isLoggedIn) {
+                                submitLogout();
+                            } else {
+                                openLoginModal();
+                            }
+                        }
+                        $(document).ready(function() {
+                            // Sembunyikan modals saat halaman dimuat
+                            $(".modal").hide();
+                        });
+
+                        function submitLoginForm(event) {
+                            event.preventDefault();
+                            // Logika login Anda di sini
+                        }
+
+                        function openModal(modalId) {
+                            // Tampilkan modal dengan ID tertentu
+                            $("#" + modalId).show();
+                        }
+
+                        function closeModal(modalId) {
+                            // Sembunyikan modal dengan ID tertentu
+                            $("#" + modalId).hide();
+                        }
+
+                        function openLoginModal() {
+                            // Tambahkan logika atau panggilan fungsi untuk menampilkan modal login di sini
+                            var isLoggedIn = checkLoginStatus();
+
+                            if (!isLoggedIn) {
+                                $("#loginModal").show();
+                            }
+                        }
+
+                        function submitLogout() {
+                            $.ajax({
+                                type: "POST",
+                                url: "logoutUser.php",
+                                success: function(response) {
+                                    alert(response);
+                                    updateLoginStatus(false);
+
+                                    // Redirect ke halaman login atau halaman lain yang sesuai
+                                    window.location.href =
+                                        "index.php"; // Gantilah "login.php" dengan halaman yang sesuai
+                                },
+                                error: function(xhr, status, error) {
+                                    alert("Terjadi kesalahan saat melakukan logout. Silakan coba lagi.");
+                                }
+                            });
+                        }
+
+
+                        function checkLoginStatus() {
+                            var isLoggedIn = <?php echo isset($_SESSION['user_email']) ? 'true' : 'false'; ?>;
+                            return isLoggedIn;
+                        }
+
+                        function updateLoginStatus(isLoggedIn) {
+                            var loginLogoutLink = $("#login-logout-link");
+
+                            if (isLoggedIn) {
+                                loginLogoutLink.text("LOGOUT");
+                            } else {
+                                loginLogoutLink.text("LOGIN");
+                            }
+                        }
+                        </script>
+
+                        <!-- Tambahkan elemen HTML lainnya atau skrip JavaScript di sini -->
+    </body>
+
+
+    <!-- The sign-up modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('signupModal')">&times;</span>
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <input type="text" id="firstName" name="firstName" placeholder="First Name" required />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required />
+                </div>
+                <div class="form-group">
+                    <input type="email" id="signupEmail" name="signupEmail" placeholder="Email" required />
+                </div>
+                <div class="form-group">
+                    <input type="password" id="signupPassword" name="signupPassword" placeholder="Password" required />
+                </div>
+                <button type="submit" class="signup-btn">Sign Up</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $("#signupForm").submit(function(event) {
+            event.preventDefault();
+
+            // Ambil nilai dari formulir pendaftaran
+            var firstName = $("#firstName").val();
+            var lastName = $("#lastName").val();
+            var signupEmail = $("#signupEmail").val();
+            var signupPassword = $("#signupPassword").val();
+
+            // Kirim data pendaftaran ke server melalui AJAX
+            $.ajax({
+                type: "POST",
+                url: "signupUser.php",
+                data: {
+                    firstName: firstName,
+                    lastName: lastName,
+                    signupEmail: signupEmail,
+                    signupPassword: signupPassword
+                },
+                success: function(response) {
+                    // Tampilkan respons dari server (misalnya, pesan sukses atau kesalahan)
+                    alert(response);
+
+                    // Jika pendaftaran berhasil, tutup popup signup
+                    if (response.includes("Pendaftaran berhasil")) {
+                        closeModal('signupModal');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Tampilkan pesan kesalahan jika terjadi kesalahan saat mengirimkan data
+                    alert("Terjadi kesalahan saat mendaftar. Silakan coba lagi.");
+                }
+            });
+        });
+    });
+
+    function closeModal(modalId) {
+        $("#" + modalId).hide();
+    }
+    </script>
+
+
+    </ul>
+    </nav>
+    </nav>
+    <!-- end navbar -->
+    </div>
+    <!-- end container -->
+    </header>
+    <!-- end header-int -->
+    <?php
         // Periksa apakah parameter 'id' telah diterima dan merupakan angka
         if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $tourId = $_GET['id'];
@@ -213,34 +404,34 @@ include "koneksi.php"
         // Ambil data tur
         $detailRow = $result->fetch_assoc();
         ?>
-        <section class="checkout-header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <!-- <small><?php echo $detailRow['namaKota']; ?></small> -->
-                        <h2><?php echo $detailRow['namaTour']; ?></h2>
-                    </div>
-                    <!-- end col-8 -->
-                    <div class="col-lg-4">
-                        <p><?php echo $detailRow['deskripsiTour']; ?></p>
-                    </div>
-                    <!-- end col-4 -->
-                    <div class="col-12">
-                        <div class="info-box"><?php echo $detailRow['durasiTour']; ?><i class="fa fa-angle-down"
-                                data-toggle="tooltip" data-placement="bottom" title="Durasi Tour"></i></div>
-                        <!-- end info-box -->
-                        <div class="info-box">Price: <strong><?php echo $detailRow['hargaTour']; ?></strong><i
-                                class="fa fa-angle-down" data-toggle="tooltip" data-placement="bottom"
-                                title="Confirmed Price"></i></div>
-                        <!-- end info-box -->
-                    </div>
-                    <!-- end col-12 -->
+    <section class="checkout-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- <small><?php echo $detailRow['namaKota']; ?></small> -->
+                    <h2><?php echo $detailRow['namaTour']; ?></h2>
                 </div>
-                <!-- end row -->
+                <!-- end col-8 -->
+                <div class="col-lg-4">
+                    <p><?php echo $detailRow['deskripsiTour']; ?></p>
+                </div>
+                <!-- end col-4 -->
+                <div class="col-12">
+                    <div class="info-box"><?php echo $detailRow['durasiTour']; ?><i class="fa fa-angle-down"
+                            data-toggle="tooltip" data-placement="bottom" title="Durasi Tour"></i></div>
+                    <!-- end info-box -->
+                    <div class="info-box">Price: <strong><?php echo $detailRow['hargaTour']; ?></strong><i
+                            class="fa fa-angle-down" data-toggle="tooltip" data-placement="bottom"
+                            title="Confirmed Price"></i></div>
+                    <!-- end info-box -->
+                </div>
+                <!-- end col-12 -->
             </div>
-            <!-- end container -->
-        </section>
-        <?php
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </section>
+    <?php
     } else {
         echo "Tur tidak ditemukan.";
     }
@@ -249,68 +440,59 @@ include "koneksi.php"
 }
 
 ?>
-        <!-- end checkout-header -->
-        <section class="checkout">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="steps">
-                            <!-- <small>STEP 4</small> -->
-                            <h5>Informasi Pembayaran</h5>
-                            <p>Mohon untuk mengisi informasi pembayaran di bawah ini...</p>
-                            <span>MEMBAYAR SEBAGAI</span>
+    <!-- end checkout-header -->
+    <section class="checkout">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="steps">
+                        <!-- <small>STEP 4</small> -->
+                        <h5>Informasi Pembayaran</h5>
+                        <p>Mohon untuk mengisi informasi pembayaran di bawah ini...</p>
+                        <span>MEMBAYAR SEBAGAI</span>
 
-                            <?php
-            // ID user yang ingin ditampilkan (sesuaikan dengan kebutuhan Anda)
-            $userId = 1;
+                        <?php
+                    // ID user yang ingin ditampilkan (sesuaikan dengan kebutuhan Anda)
+                    $userId = 1;
 
-            // Query untuk mendapatkan data namaDepan dan namaBelakang dari tabel "user" berdasarkan ID
-            $sql = "SELECT namaDepan, namaBelakang FROM user WHERE id_user = $userId";
-            $result = $conn->query($sql);
+                    // Query untuk mendapatkan data namaDepan dan namaBelakang dari tabel "user" berdasarkan ID
+                    $sql = "SELECT namaDepan, namaBelakang FROM user WHERE id_user = $userId";
+                    $result = $conn->query($sql);
 
-            // Periksa apakah data ditemukan
-            if ($result->num_rows > 0) {
-                // Ambil data namaDepan dan namaBelakang
-                $userRow = $result->fetch_assoc();
+                    // Periksa apakah data ditemukan
+                    if ($result->num_rows > 0) {
+                        // Ambil data namaDepan dan namaBelakang
+                        $userRow = $result->fetch_assoc();
 
-                // Tampilkan teks "PAYING AS A" diikuti dengan nama depan dan belakang dari pengguna
-                echo '' . $userRow['namaDepan'] . ' ' . $userRow['namaBelakang'] . '</b>';
-            } else {
-                echo "Data user tidak ditemukan.";
-            }
-
-            
-            ?>
-                        </div>
-                        <!-- end steps -->
+                        // Tampilkan teks "MEMBAYAR SEBAGAI" diikuti dengan nama depan dan belakang dari pengguna
+                        echo $userRow['namaDepan'] . ' ' . $userRow['namaBelakang'] . '</b>';
+                    } else {
+                        echo "Data user tidak ditemukan.";
+                    }
+                    ?>
                     </div>
+                    <!-- end steps -->
                 </div>
-
                 <!-- end col-4 -->
                 <div class="col-lg-8">
                     <div class="payment">
                         <form>
                             <div class="inner">
                                 <h6>INFORMASI PEMBAYARAN</h6>
-                                <!-- end form-group -->
                                 <div class="form-group big">
-                                    <input type="text" placeholder="Nomor Kartu" required />
+                                    <input type="text" id="nomorKartu" placeholder="Nomor Kartu" required />
                                 </div>
-                                <!-- end form-group -->
                                 <div class="form-group big">
-                                    <input type="text" placeholder="Tanggal Kadaluarsa" required />
+                                    <input type="text" id="tanggalKadaluarsa" placeholder="Tanggal Kadaluarsa"
+                                        required />
                                 </div>
-                                <!-- end form-group -->
                                 <div class="form-group big">
-                                    <input type="text" placeholder="CVC/CVV" required />
+                                    <input type="text" id="cvcCvv" placeholder="CVC/CVV" required />
                                 </div>
-                                <!-- end form-group -->
                                 <div class="form-group big coupon-field">
                                     <input type="text" placeholder="Kode Promosi" />
                                 </div>
-                                <!-- end form-group -->
                             </div>
-                            <!-- end inner -->
                         </form>
                     </div>
                     <!-- end payment -->
@@ -322,12 +504,7 @@ include "koneksi.php"
                 <!-- Tautan SweetAlert CSS -->
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
 
-
-
                 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
-                <button type="button" class="site-btn pull-right" onclick="lakukanPembayaran()">LAKUKAN
-                    PEMBAYARAN</button>
 
                 <!-- Skrip JavaScript kustom -->
                 <script>
@@ -359,95 +536,98 @@ include "koneksi.php"
                 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+                <button type="button" class="site-btn pull-right" onclick="lakukanPembayaran()">LAKUKAN
+                    PEMBAYARAN</button>
 
             </div>
             <!-- end row -->
-            </div>
-            <!-- end container -->
-        </section>
-        <!-- end checkout -->
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-4">
-                        <h5>TENTANG KAMI</h5>
-                        <ul class="footer-menu">
-                            <li><a href="about-us.php">Tentang Kami</a></li>
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- end checkout -->
 
-                            <li><a href="#">Tim Kami</a></li>
-                            <li><a href="blog-list.php">Berita</a></li>
-                        </ul>
-                    </div>
-                    <!-- end col-3 -->
-                    <div class="col-lg-3 col-md-4">
-                        <h5>Layanan</h5>
-                        <ul class="footer-menu">
-                            <li><a href="#">Terms of Payment</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Difficulty Levels</a></li>
-                        </ul>
-                    </div>
-                    <!-- end col-3 -->
-                    <div class="col-lg-3 col-md-4">
-                        <h5>Hubungi Kami</h5>
-                        <address>
-                            ATHENA INC.<br />
-                            Jakal km 14.5, Yogyakarta<br />
-                            Telp: 123 456 7890<br />
-                            <a href="#">info@athenacomp.com</a>
-                        </address>
-                    </div>
-                    <!-- end col-3 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-4">
+                    <h5>TENTANG KAMI</h5>
+                    <ul class="footer-menu">
+                        <li><a href="about-us.php">Tentang Kami</a></li>
 
-                    <!-- end col-3 -->
-                    <div class="col-12">
-                        <ul class="social-media">
-                            <li>
-                                <a href="#"><i class="fa fa-tripadvisor"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- end col-12 -->
-                    <div class="col-12"><span class="copyright">&copy; ATHENA</span></div>
-                    <!-- end col-12 -->
+                        <li><a href="#">Tim Kami</a></li>
+                        <li><a href="blog-list.php">Berita</a></li>
+                    </ul>
                 </div>
-                <!-- end row -->
+                <!-- end col-3 -->
+                <div class="col-lg-3 col-md-4">
+                    <h5>Layanan</h5>
+                    <ul class="footer-menu">
+                        <li><a href="#">Terms of Payment</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Difficulty Levels</a></li>
+                    </ul>
+                </div>
+                <!-- end col-3 -->
+                <div class="col-lg-3 col-md-4">
+                    <h5>Hubungi Kami</h5>
+                    <address>
+                        ATHENA INC.<br />
+                        Jakal km 14.5, Yogyakarta<br />
+                        Telp: 123 456 7890<br />
+                        <a href="#">info@athenacomp.com</a>
+                    </address>
+                </div>
+                <!-- end col-3 -->
+
+                <!-- end col-3 -->
+                <div class="col-12">
+                    <ul class="social-media">
+                        <li>
+                            <a href="#"><i class="fa fa-tripadvisor"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- end col-12 -->
+                <div class="col-12"><span class="copyright">&copy; ATHENA</span></div>
+                <!-- end col-12 -->
             </div>
-            <!-- end container -->
-        </footer>
-        <!-- JS FILES -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-        <script>
-        // PRELOADER
-        (function($) {
-            $(window).on("load", function() {
-                $("body").addClass("page-loaded");
-            });
-        })(jQuery);
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-        </script>
-        <script src="js/swiper.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-        <script src="js/scripts.js"></script>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </footer>
+    <!-- JS FILES -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script>
+    // PRELOADER
+    (function($) {
+        $(window).on("load", function() {
+            $("body").addClass("page-loaded");
+        });
+    })(jQuery);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <script src="js/swiper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script src="js/scripts.js"></script>
     </body>
 
     </html>

@@ -41,28 +41,26 @@ include "koneksi.php"
             </svg>
         </div>
         <!-- end preloader -->
+        <?php
+// ID user yang ingin ditampilkan (sesuaikan dengan kebutuhan Anda)
+$userId = 1;
+
+// Query untuk mendapatkan data dari tabel "user" berdasarkan ID
+$sql = "SELECT * FROM user WHERE id_user = $userId";
+$result = $conn->query($sql);
+
+// Periksa apakah data ditemukan
+if ($result->num_rows > 0) {
+    // Ambil data dan isi formulir
+    $userRow = $result->fetch_assoc();
+?>
+
         <div class="search-box">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <span class="search-close-btn"><i class="fa fa-times"></i></span>
                         <h3>Profile</h3>
-                        <!-- <form>
-              <div class="form-group">
-                <i class="fa fa-search"></i>
-                <input type="text" placeholder="Search Activities, Themes or Tours" />
-              </div>
-              --end form-group
-              <button type="submit">SEARCH</button>
-            </form>
-            <dl>
-              <dt>Suggestions <i class="fa fa-long-arrow-right"></i></dt>
-              <dd><a href="#">Adventure</a></dd>
-              <dd><a href="#">Nothern Lights</a></dd>
-              <dd><a href="#">Waterfalls</a></dd>
-              <dd><a href="#">Winter Tours</a></dd>
-              <dd><a href="#">Glaciar Walk</a></dd>
-            </dl> -->
                     </div>
                     <div class="container mt-5">
                         <div class="row">
@@ -71,36 +69,36 @@ include "koneksi.php"
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="account-fn">NAMA DEPAN</label>
-                                            <input class="form-control" type="text" id="account-fn" value="Daniel"
-                                                disabled="" />
+                                            <input class="form-control" type="text" id="account-fn"
+                                                value="<?php echo $userRow['namaDepan']; ?>" disabled="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="account-ln">NAMA BELAKANG</label>
-                                            <input class="form-control" type="text" id="account-ln" value="Adams"
-                                                disabled="" />
+                                            <input class="form-control" type="text" id="account-ln"
+                                                value="<?php echo $userRow['namaBelakang']; ?>" disabled="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="account-email">E-MAIL</label>
                                             <input class="form-control" type="email" id="account-email"
-                                                value="daniel.adams@example.com" disabled="" />
+                                                value="<?php echo $userRow['email']; ?>" disabled="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="account-phone">No.HP</label>
                                             <input class="form-control" type="text" id="account-phone"
-                                                value="+7 (805) 348 95 72" disabled="" />
+                                                value="<?php echo $userRow['noTelepon']; ?>" disabled="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="account-pass">PASSWORD</label>
-                                            <input class="form-control" type="password" id="account-pass" value="da"
-                                                disabled="" />
+                                            <input class="form-control" type="password" id="account-pass"
+                                                value="<?php echo $userRow['password']; ?>" disabled="" />
                                         </div>
                                     </div>
                                 </form>
@@ -113,6 +111,14 @@ include "koneksi.php"
             </div>
             <!-- end container -->
         </div>
+
+        <?php
+} else {
+    echo "Data user tidak ditemukan.";
+}
+
+?>
+
         <!-- end search-box -->
         <header class="header-int">
             <div class="container">
@@ -160,7 +166,6 @@ include "koneksi.php"
                         <li class="nav-item">
                             <a id="login-logout-link" class="nav-link" href="#" onclick="toggleLoginStatus()">LOGIN</a>
                         </li>
-                        <!-- The login modal -->
                         <div id="loginModal" class="modal">
                             <div class="modal-content">
                                 <span class="close" onclick="closeLoginModal()">&times;</span>
@@ -210,6 +215,25 @@ include "koneksi.php"
                             });
                         }
 
+                        function openSignUpModal() {
+                            // Tambahkan logika untuk membuka modal pendaftaran
+                            // Misalnya, dengan menampilkan modal signup atau menavigasi ke halaman pendaftaran
+                            $("#signupModal").show();
+                        }
+
+                        function closeLoginModal() {
+                            $("#loginModal").hide();
+                        }
+
+                        // ... Fungsi-fungsi lainnya ...
+
+                        $(document).ready(function() {
+                            // Menangani klik pada tautan "Sign Up"
+                            $("#signup-link").click(function() {
+                                openSignUpModal();
+                            });
+                        });
+
                         function closeLoginModal() {
                             $("#loginModal").hide();
                         }
@@ -222,6 +246,25 @@ include "koneksi.php"
                             } else {
                                 openLoginModal();
                             }
+                        }
+                        $(document).ready(function() {
+                            // Sembunyikan modals saat halaman dimuat
+                            $(".modal").hide();
+                        });
+
+                        function submitLoginForm(event) {
+                            event.preventDefault();
+                            // Logika login Anda di sini
+                        }
+
+                        function openModal(modalId) {
+                            // Tampilkan modal dengan ID tertentu
+                            $("#" + modalId).show();
+                        }
+
+                        function closeModal(modalId) {
+                            // Sembunyikan modal dengan ID tertentu
+                            $("#" + modalId).hide();
                         }
 
                         function openLoginModal() {
@@ -268,44 +311,89 @@ include "koneksi.php"
                         }
                         </script>
 
-                        <!-- The sign-up modal -->
-                        <div id="signupModal" class="modal">
-                            <div class="modal-content">
-                                <span class="close">&times;</span>
-                                <h2>Sign Up</h2>
-                                <form id="signupForm">
-                                    <div class="form-group">
-                                        <input type="text" id="firstName" name="firstName" placeholder="First Name"
-                                            required />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" id="lastName" name="lastName" placeholder="Last Name"
-                                            required />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="email" id="signupEmail" name="signupEmail" placeholder="Email"
-                                            required />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" id="signupPassword" name="signupPassword"
-                                            placeholder="Password" required />
-                                    </div>
-                                    <button type="submit" class="signup-btn">Sign Up</button>
-                                </form>
-                            </div>
-                        </div>
-                    </ul>
-                </nav>
-                </nav>
-                <!-- end navbar -->
-            </div>
-            <!-- end container -->
-        </header>
-        <!-- end header-int -->
-        <section class="attractions-header">
-            <div class="container">
-                <div class="row">
-                    <?php
+                        <!-- Tambahkan elemen HTML lainnya atau skrip JavaScript di sini -->
+    </body>
+
+
+    <!-- The sign-up modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('signupModal')">&times;</span>
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <input type="text" id="firstName" name="firstName" placeholder="First Name" required />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required />
+                </div>
+                <div class="form-group">
+                    <input type="email" id="signupEmail" name="signupEmail" placeholder="Email" required />
+                </div>
+                <div class="form-group">
+                    <input type="password" id="signupPassword" name="signupPassword" placeholder="Password" required />
+                </div>
+                <button type="submit" class="signup-btn">Sign Up</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $("#signupForm").submit(function(event) {
+            event.preventDefault();
+
+            // Ambil nilai dari formulir pendaftaran
+            var firstName = $("#firstName").val();
+            var lastName = $("#lastName").val();
+            var signupEmail = $("#signupEmail").val();
+            var signupPassword = $("#signupPassword").val();
+
+            // Kirim data pendaftaran ke server melalui AJAX
+            $.ajax({
+                type: "POST",
+                url: "signupUser.php",
+                data: {
+                    firstName: firstName,
+                    lastName: lastName,
+                    signupEmail: signupEmail,
+                    signupPassword: signupPassword
+                },
+                success: function(response) {
+                    // Tampilkan respons dari server (misalnya, pesan sukses atau kesalahan)
+                    alert(response);
+
+                    // Jika pendaftaran berhasil, tutup popup signup
+                    if (response.includes("Pendaftaran berhasil")) {
+                        closeModal('signupModal');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Tampilkan pesan kesalahan jika terjadi kesalahan saat mengirimkan data
+                    alert("Terjadi kesalahan saat mendaftar. Silakan coba lagi.");
+                }
+            });
+        });
+    });
+
+    function closeModal(modalId) {
+        $("#" + modalId).hide();
+    }
+    </script>
+
+
+    </ul>
+    </nav>
+    </nav>
+    <!-- end navbar -->
+    </div>
+    <!-- end container -->
+    </header>
+    <!-- end header-int -->
+    <section class="attractions-header">
+        <div class="container">
+            <div class="row">
+                <?php
 // Ambil parameter ID dari URL jika tersedia
 $idDetailtour = isset($_GET['id']) ? $_GET['id'] : '';
 
@@ -318,14 +406,14 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         ?>
-                    <div class="col-12">
-                        <h2><?php echo $row['namaTour']; ?></h2>
-                        <img src="images/title-seperator.png" alt="Image" />
-                        <p>
-                            <?php echo $row['deskripsiTour']; ?>
-                        </p>
-                    </div>
-                    <?php
+                <div class="col-12">
+                    <h2><?php echo $row['namaTour']; ?></h2>
+                    <img src="images/title-seperator.png" alt="Image" />
+                    <p>
+                        <?php echo $row['deskripsiTour']; ?>
+                    </p>
+                </div>
+                <?php
     }
 } else {
     echo "0 results";
@@ -334,14 +422,14 @@ if ($result->num_rows > 0) {
 
 
 
-                    <!-- end col-12 -->
-                </div>
-                <!-- end row -->
+                <!-- end col-12 -->
             </div>
-            <!-- end container -->
-        </section>
-        <!-- end attractions-header -->
-        <?php
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- end attractions-header -->
+    <?php
 // Ambil parameter ID dari URL jika tersedia
 $idDetailtour = isset($_GET['id']) ? $_GET['id'] : '';
 
@@ -356,17 +444,17 @@ if ($result->num_rows > 0) {
 
     // Tampilkan data sesuai kebutuhan
     ?>
-        <div class="attractions-hero-image bg-image" data-background="images/<?php echo $row['gambarTour']; ?>"></div>
-        <!-- Tambahkan bagian lain sesuai kebutuhan -->
+    <div class="attractions-hero-image bg-image" data-background="images/<?php echo $row['gambarTour']; ?>"></div>
+    <!-- Tambahkan bagian lain sesuai kebutuhan -->
 
-        <?php
+    <?php
 } else {
     echo "0 results";
 }
 ?>
 
-        <!-- end attractions-hero-image -->
-        <?php
+    <!-- end attractions-hero-image -->
+    <?php
 // Periksa apakah parameter id ada pada URL
 if (isset($_GET['id'])) {
     // Ambil nilai id dari URL
@@ -391,69 +479,69 @@ if (isset($_GET['id'])) {
     $funFact = "ID tidak valid";
 }
 ?>
-        <section class="tour-desc">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <div class="section-title">
-                            <h2>Pengetahuan</h2>
-                            <img src="images/title-seperator.png" alt="Image" />
-                        </div>
-                        <!-- end section-title -->
+    <section class="tour-desc">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="section-title">
+                        <h2>Pengetahuan</h2>
+                        <img src="images/title-seperator.png" alt="Image" />
                     </div>
-                    <!-- end col-12 -->
-                    <div class="col-lg-6">
-                        <p>
-                            Seni pertunjukkan bermula dari zaman prasejarah, di mana manusia pertama kali
-                            mengekspresikan diri
-                            melalui gerakan tubuh, musik, dan ritual. Pertunjukan prasejarah ini, yang melibatkan
-                            tarian dan
-                            ritual keagamaan, menjadi bentuk awal ekspresi budaya dan spiritual. Di Yunani Kuno,
-                            seni teater
-                            muncul sebagai bentuk formal pertunjukkan yang menggabungkan naskah drama, aktor
-                            profesional, dan
-                            penonton dalam sebuah pengalaman kolektif. Seiring waktu, munculnya seni wayang kulit
-                            di Asia, pertunjukan sirkus Romawi, opera Italia, dan teater kabuki Jepang, semuanya
-                            menciptakan keragaman
-                            dalam seni pertunjukkan. Evolusi ini berlanjut ke era modern, di mana seni
-                            pertunjukkan menjadi
-                            wadah inovasi, menggabungkan berbagai gaya dan medium, membangun warisan budaya yang
-                            kaya dan terus
-                            berkembang hingga hari ini.
-                        </p>
-                        <p>
-
-                        </p>
-
-                    </div>
-                    <!-- end col-6 -->
-                    <div class="col-lg-6">
-                        <p>
-                            <?php echo $funFact; ?>
-                        </p>
-
-                    </div>
-                    <!-- end col-6 -->
+                    <!-- end section-title -->
                 </div>
-                <!-- end row -->
+                <!-- end col-12 -->
+                <div class="col-lg-6">
+                    <p>
+                        Seni pertunjukkan bermula dari zaman prasejarah, di mana manusia pertama kali
+                        mengekspresikan diri
+                        melalui gerakan tubuh, musik, dan ritual. Pertunjukan prasejarah ini, yang melibatkan
+                        tarian dan
+                        ritual keagamaan, menjadi bentuk awal ekspresi budaya dan spiritual. Di Yunani Kuno,
+                        seni teater
+                        muncul sebagai bentuk formal pertunjukkan yang menggabungkan naskah drama, aktor
+                        profesional, dan
+                        penonton dalam sebuah pengalaman kolektif. Seiring waktu, munculnya seni wayang kulit
+                        di Asia, pertunjukan sirkus Romawi, opera Italia, dan teater kabuki Jepang, semuanya
+                        menciptakan keragaman
+                        dalam seni pertunjukkan. Evolusi ini berlanjut ke era modern, di mana seni
+                        pertunjukkan menjadi
+                        wadah inovasi, menggabungkan berbagai gaya dan medium, membangun warisan budaya yang
+                        kaya dan terus
+                        berkembang hingga hari ini.
+                    </p>
+                    <p>
+
+                    </p>
+
+                </div>
+                <!-- end col-6 -->
+                <div class="col-lg-6">
+                    <p>
+                        <?php echo $funFact; ?>
+                    </p>
+
+                </div>
+                <!-- end col-6 -->
             </div>
-            <!-- end container -->
+            <!-- end row -->
+        </div>
+        <!-- end container -->
 
-        </section>
+    </section>
 
-        <section class="tour-desc">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <div class="section-title">
-                            <h2>Berbagai Kesenian di Indonesia</h2>
-                            <img src="images/title-seperator.png" alt="Image" />
-                        </div>
-        </section>
-        <!-- end attraction-desc -->
-        <div class="swiper-blog-carousel">
-            <div class="swiper-wrapper">
-                <?php
+    <section class="tour-desc">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="section-title">
+                        <h2>Berbagai Kesenian di Indonesia</h2>
+                        <img src="images/title-seperator.png" alt="Image" />
+                    </div>
+    </section>
+    <!-- end attraction-desc -->
+    <div class="swiper-blog-carousel">
+        <div class="swiper-wrapper">
+            <?php
         // Ambil data gambarWisata dari tabel detailwisata
         $sql = "SELECT gambarWisata FROM detailwisata";
         $result = $conn->query($sql);
@@ -462,40 +550,40 @@ if (isset($_GET['id'])) {
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
         ?>
-                <div class="swiper-slide">
-                    <img src="images/<?php echo $row['gambarWisata']; ?>" alt="Image" />
-                </div>
-                <?php
+            <div class="swiper-slide">
+                <img src="images/<?php echo $row['gambarWisata']; ?>" alt="Image" />
+            </div>
+            <?php
             }
         } else {
             echo "0 results";
         }
         ?>
-            </div>
         </div>
+    </div>
 
-        <!-- end swiper-wrapper -->
-        <!-- Add Pagination -->
-        <div class="swiper-button-prev">
-            <div class="arrow-left"></div>
-        </div>
-        <div class="swiper-button-next">
-            <div class="arrow-right"></div>
-        </div>
-        </div>
-        <!-- end swiper-blog-carousel -->
-        <section class="things-todo">
-            <div class="container">
-                <div class="row no-gutters">
-                    <div class="col-12">
-                        <div class="section-title">
-                            <!-- <h2>Things To Do</h2> -->
-                            <!-- <img src="images/title-seperator.png" alt="Image" /> -->
-                        </div>
-                        <!-- end section-title -->
+    <!-- end swiper-wrapper -->
+    <!-- Add Pagination -->
+    <div class="swiper-button-prev">
+        <div class="arrow-left"></div>
+    </div>
+    <div class="swiper-button-next">
+        <div class="arrow-right"></div>
+    </div>
+    </div>
+    <!-- end swiper-blog-carousel -->
+    <section class="things-todo">
+        <div class="container">
+            <div class="row no-gutters">
+                <div class="col-12">
+                    <div class="section-title">
+                        <!-- <h2>Things To Do</h2> -->
+                        <!-- <img src="images/title-seperator.png" alt="Image" /> -->
                     </div>
-                    <!-- end col-12 -->
-                    <!-- <div class="col-md-6 border-right">
+                    <!-- end section-title -->
+                </div>
+                <!-- end col-12 -->
+                <!-- <div class="col-md-6 border-right">
                         <ul class="pull-left">
                             <li><img src="images/attractions-icon01.jpg" alt="Image" /> Climbing Glaciers</li>
                             <li><img src="images/attractions-icon02.jpg" alt="Image" /> Setting up Camps at Night</li>
@@ -504,8 +592,8 @@ if (isset($_GET['id'])) {
                             <li><img src="images/attractions-icon05.jpg" alt="Image" /> Kayaking in Ocean</li>
                         </ul>
                     </div> -->
-                    <!--end col-6 -->
-                    <!-- <div class="col-md-6">
+                <!--end col-6 -->
+                <!-- <div class="col-md-6">
                         <ul class="pull-right">
                             <li><img src="images/attractions-icon06.jpg" alt="Image" /> Skiing on the Ice</li>
                             <li><img src="images/attractions-icon07.jpg" alt="Image" /> Take Photos</li>
@@ -514,25 +602,25 @@ if (isset($_GET['id'])) {
                             <li><img src="images/attractions-icon10.jpg" alt="Image" /> Surfing in the Ocean</li>
                         </ul>
                     </div> -->
-                    <!--end col-6 -->
-                </div>
-                <!-- end row -->
+                <!--end col-6 -->
             </div>
-            <!-- end container -->
-        </section>
-        <!-- end things-todo -->
-        <section class="related-tours">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="section-title">
-                            <h2>Pertunjukkan Terpopuler </h2>
-                            <img src="images/title-seperator.png" alt="Image" />
-                        </div>
-                        <!-- end section-title -->
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- end things-todo -->
+    <section class="related-tours">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <h2>Pertunjukkan Terpopuler </h2>
+                        <img src="images/title-seperator.png" alt="Image" />
                     </div>
-                    <!-- end col-12 -->
-                    <?php
+                    <!-- end section-title -->
+                </div>
+                <!-- end col-12 -->
+                <?php
 // Query untuk mendapatkan data dari tabel detailtour dengan kategori Kesenian
 $sql = "SELECT * FROM detailtour ORDER BY RAND() LIMIT 6 ";
 $result = $conn->query($sql);
@@ -541,36 +629,36 @@ if ($result) {
     // Loop untuk menampilkan data tour
     while ($row = $result->fetch_assoc()) {
 ?>
-                    <!-- Mulai col-lg-4 -->
-                    <div class="col-lg-4">
-                        <div class="tour-box">
-                            <figure><img src="images/<?php echo $row['gambarTour']; ?>" alt="Image" /> <span
-                                    class="tag">MOST POPULAR</span>
-                            </figure>
-                            <div class="tour-content">
-                                <small>FROM <?php echo $row['namaKota']; ?></small>
-                                <h3><?php echo $row['namaTour']; ?></h3>
-                                <ul>
-                                    <li><img src="images/icon-date.png" alt="Image" />
-                                        <small>Available</small>
-                                        <span><?php echo $row['ketersediaanTour']; ?></span>
-                                    </li>
-                                    <li><img src="images/icon-time.png" alt="Image" />
-                                        <small>Duration</small>
-                                        <span><?php echo $row['durasiTour']; ?></span>
-                                    </li>
-                                    <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small>
-                                        <span><?php echo $row['hargaTour']; ?></span>
-                                    </li>
-                                </ul>
-                                <a href="#">SELECT DATES</a>
-                            </div>
-                            <!-- end tour-content -->
+                <!-- Mulai col-lg-4 -->
+                <div class="col-lg-4">
+                    <div class="tour-box">
+                        <figure><img src="images/<?php echo $row['gambarTour']; ?>" alt="Image" /> <span
+                                class="tag">MOST POPULAR</span>
+                        </figure>
+                        <div class="tour-content">
+                            <small>FROM <?php echo $row['namaKota']; ?></small>
+                            <h3><?php echo $row['namaTour']; ?></h3>
+                            <ul>
+                                <li><img src="images/icon-date.png" alt="Image" />
+                                    <small>Available</small>
+                                    <span><?php echo $row['ketersediaanTour']; ?></span>
+                                </li>
+                                <li><img src="images/icon-time.png" alt="Image" />
+                                    <small>Duration</small>
+                                    <span><?php echo $row['durasiTour']; ?></span>
+                                </li>
+                                <li><img src="images/icon-tag.png" alt="Image" /> <small>From</small>
+                                    <span><?php echo $row['hargaTour']; ?></span>
+                                </li>
+                            </ul>
+                            <a href="#">SELECT DATES</a>
                         </div>
-                        <!-- end tour-box -->
+                        <!-- end tour-content -->
                     </div>
-                    <!-- end col-lg-4 -->
-                    <?php
+                    <!-- end tour-box -->
+                </div>
+                <!-- end col-lg-4 -->
+                <?php
     }
 
     // Bebaskan hasil query
@@ -579,21 +667,21 @@ if ($result) {
     echo "Error: " . $conn->error;
 }
 ?>
-                    <!-- end col-4 -->
+                <!-- end col-4 -->
 
-        </section>
-        <!-- end related-tours -->
-        <section class="related-blog">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="section-title">
-                            <h2>Related Blog Posts</h2>
-                            <img src="images/title-seperator.png" alt="Image" />
-                        </div>
-                        <!-- end section-title -->
+    </section>
+    <!-- end related-tours -->
+    <section class="related-blog">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <h2>Related Blog Posts</h2>
+                        <img src="images/title-seperator.png" alt="Image" />
                     </div>
-                    <?php
+                    <!-- end section-title -->
+                </div>
+                <?php
                    
                     $sqlBerita = "SELECT * FROM berita";
                     $resultBerita = $conn->query($sqlBerita);
@@ -601,113 +689,113 @@ if ($result) {
                     if ($resultBerita->num_rows > 0) {
                     $rowBerita = $resultBerita->fetch_assoc();
                     ?>
-                    <div class="blog-post">
-                        <figure class="post-image"><img src="images/<?php echo $rowBerita['gambarBerita']; ?>"
-                                alt="Image" />
-                        </figure>
-                        <div class="post-content">
-                            <small><?php echo $rowBerita['tanggalBerita']; ?> <span>|</span>BY
-                                <?php echo $rowBerita['penguploadBerita']; ?></small>
-                            <a href="blog-single.php?id=<?php echo $rowBerita['id_berita']; ?>">
-                                <h3><?php echo $rowBerita['judulBerita']; ?></h3>
-                            </a>
-                            <a href="blog-single.php?id=<?php echo $rowBerita['id_berita']; ?>" class="read-more">READ
-                                MORE</a>
-                        </div>
-                        <!-- end post-content -->
+                <div class="blog-post">
+                    <figure class="post-image"><img src="images/<?php echo $rowBerita['gambarBerita']; ?>"
+                            alt="Image" />
+                    </figure>
+                    <div class="post-content">
+                        <small><?php echo $rowBerita['tanggalBerita']; ?> <span>|</span>BY
+                            <?php echo $rowBerita['penguploadBerita']; ?></small>
+                        <a href="blog-single.php?id=<?php echo $rowBerita['id_berita']; ?>">
+                            <h3><?php echo $rowBerita['judulBerita']; ?></h3>
+                        </a>
+                        <a href="blog-single.php?id=<?php echo $rowBerita['id_berita']; ?>" class="read-more">READ
+                            MORE</a>
                     </div>
-                    <!-- end blog-post -->
-                    <?php
+                    <!-- end post-content -->
+                </div>
+                <!-- end blog-post -->
+                <?php
     } else {
         echo "Tidak ada berita yang tersedia.";
     }
     ?>
 
-        </section>
-        <!-- end related-blog -->
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-4">
-                        <h5>TENTANG KAMI</h5>
-                        <ul class="footer-menu">
-                            <li><a href="about-us.php">Tentang Kami</a></li>
+    </section>
+    <!-- end related-blog -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-4">
+                    <h5>TENTANG KAMI</h5>
+                    <ul class="footer-menu">
+                        <li><a href="about-us.php">Tentang Kami</a></li>
 
-                            <li><a href="#">Tim Kami</a></li>
-                            <li><a href="blog-list.php">Berita</a></li>
-                        </ul>
-                    </div>
-                    <!-- end col-3 -->
-                    <div class="col-lg-3 col-md-4">
-                        <h5>Layanan</h5>
-                        <ul class="footer-menu">
-                            <li><a href="#">Terms of Payment</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Difficulty Levels</a></li>
-                        </ul>
-                    </div>
-                    <!-- end col-3 -->
-                    <div class="col-lg-3 col-md-4">
-                        <h5>Hubungi Kami</h5>
-                        <address>
-                            ATHENA INC.<br />
-                            Jakal km 14.5, Yogyakarta<br />
-                            Telp: 123 456 7890<br />
-                            <a href="#">info@athenacomp.com</a>
-                        </address>
-                    </div>
-                    <!-- end col-3 -->
-
-                    <!-- end col-3 -->
-                    <div class="col-12">
-                        <ul class="social-media">
-                            <li>
-                                <a href="#"><i class="fa fa-tripadvisor"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- end col-12 -->
-                    <div class="col-12"><span class="copyright">&copy; ATHENA</span></div>
-                    <!-- end col-12 -->
+                        <li><a href="#">Tim Kami</a></li>
+                        <li><a href="blog-list.php">Berita</a></li>
+                    </ul>
                 </div>
-                <!-- end row -->
-            </div>
-            <!-- end container -->
-        </footer>
+                <!-- end col-3 -->
+                <div class="col-lg-3 col-md-4">
+                    <h5>Layanan</h5>
+                    <ul class="footer-menu">
+                        <li><a href="#">Terms of Payment</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Difficulty Levels</a></li>
+                    </ul>
+                </div>
+                <!-- end col-3 -->
+                <div class="col-lg-3 col-md-4">
+                    <h5>Hubungi Kami</h5>
+                    <address>
+                        ATHENA INC.<br />
+                        Jakal km 14.5, Yogyakarta<br />
+                        Telp: 123 456 7890<br />
+                        <a href="#">info@athenacomp.com</a>
+                    </address>
+                </div>
+                <!-- end col-3 -->
 
-        <!-- JS FILES -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
-        </script>
-        <script>
-        // PRELOADER
-        (function($) {
-            $(window).on("load", function() {
-                $("body").addClass("page-loaded");
-            });
-        })(jQuery);
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-        </script>
-        <script src="js/swiper.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-        <script src="js/scripts.js"></script>
+                <!-- end col-3 -->
+                <div class="col-12">
+                    <ul class="social-media">
+                        <li>
+                            <a href="#"><i class="fa fa-tripadvisor"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- end col-12 -->
+                <div class="col-12"><span class="copyright">&copy; ATHENA</span></div>
+                <!-- end col-12 -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </footer>
+
+    <!-- JS FILES -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
+    </script>
+    <script>
+    // PRELOADER
+    (function($) {
+        $(window).on("load", function() {
+            $("body").addClass("page-loaded");
+        });
+    })(jQuery);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <script src="js/swiper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script src="js/scripts.js"></script>
     </body>
 
     </html>

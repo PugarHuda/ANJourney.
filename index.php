@@ -45,6 +45,20 @@ include "koneksi.php";
         </svg>
     </div>
     <!-- end preloader -->
+    <?php
+// ID user yang ingin ditampilkan (sesuaikan dengan kebutuhan Anda)
+$userId = 1;
+
+// Query untuk mendapatkan data dari tabel "user" berdasarkan ID
+$sql = "SELECT * FROM user WHERE id_user = $userId";
+$result = $conn->query($sql);
+
+// Periksa apakah data ditemukan
+if ($result->num_rows > 0) {
+    // Ambil data dan isi formulir
+    $userRow = $result->fetch_assoc();
+?>
+
     <div class="search-box">
         <div class="container">
             <div class="row">
@@ -59,36 +73,36 @@ include "koneksi.php";
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="account-fn">NAMA DEPAN</label>
-                                        <input class="form-control" type="text" id="account-fn" value="Daniel"
-                                            disabled="" />
+                                        <input class="form-control" type="text" id="account-fn"
+                                            value="<?php echo $userRow['namaDepan']; ?>" disabled="" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="account-ln">NAMA BELAKANG</label>
-                                        <input class="form-control" type="text" id="account-ln" value="Adams"
-                                            disabled="" />
+                                        <input class="form-control" type="text" id="account-ln"
+                                            value="<?php echo $userRow['namaBelakang']; ?>" disabled="" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="account-email">E-MAIL</label>
                                         <input class="form-control" type="email" id="account-email"
-                                            value="daniel.adams@example.com" disabled="" />
+                                            value="<?php echo $userRow['email']; ?>" disabled="" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="account-phone">No. HP</label>
+                                        <label for="account-phone">No.HP</label>
                                         <input class="form-control" type="text" id="account-phone"
-                                            value="+7 (805) 348 95 72" disabled="" />
+                                            value="<?php echo $userRow['noTelepon']; ?>" disabled="" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="account-pass">PASSWORD</label>
-                                        <input class="form-control" type="password" id="account-pass" value="da"
-                                            disabled="" />
+                                        <input class="form-control" type="password" id="account-pass"
+                                            value="<?php echo $userRow['password']; ?>" disabled="" />
                                     </div>
                                 </div>
                             </form>
@@ -101,6 +115,14 @@ include "koneksi.php";
         </div>
         <!-- end container -->
     </div>
+
+    <?php
+} else {
+    echo "Data user tidak ditemukan.";
+}
+
+?>
+
     <!-- end search-box -->
     <header class="header-denmark">
         <div class="container">
@@ -165,8 +187,7 @@ include "koneksi.php";
                                 </div>
                                 <button type="submit" class="login-btn">Login</button>
                             </form>
-                            <p class="signup-link">Don't have an account? <a href="#" id="signup-link"
-                                    onclick="openSignUpModal()">Sign Up</a></p>
+                            <p class="signup-link">Don't have an account? <a href="#" id="signup-link">Sign Up</a></p>
                         </div>
                     </div>
 
@@ -198,14 +219,27 @@ include "koneksi.php";
                         });
                     }
 
+                    function openSignUpModal() {
+                        // Tambahkan logika untuk membuka modal pendaftaran
+                        // Misalnya, dengan menampilkan modal signup atau menavigasi ke halaman pendaftaran
+                        $("#signupModal").show();
+                    }
+
                     function closeLoginModal() {
                         $("#loginModal").hide();
                     }
 
+                    // ... Fungsi-fungsi lainnya ...
 
+                    $(document).ready(function() {
+                        // Menangani klik pada tautan "Sign Up"
+                        $("#signup-link").click(function() {
+                            openSignUpModal();
+                        });
+                    });
 
-                    function closeSignUpModal() {
-                        $("#signUpModal").hide();
+                    function closeLoginModal() {
+                        $("#loginModal").hide();
                     }
 
                     function toggleLoginStatus() {
@@ -216,6 +250,25 @@ include "koneksi.php";
                         } else {
                             openLoginModal();
                         }
+                    }
+                    $(document).ready(function() {
+                        // Sembunyikan modals saat halaman dimuat
+                        $(".modal").hide();
+                    });
+
+                    function submitLoginForm(event) {
+                        event.preventDefault();
+                        // Logika login Anda di sini
+                    }
+
+                    function openModal(modalId) {
+                        // Tampilkan modal dengan ID tertentu
+                        $("#" + modalId).show();
+                    }
+
+                    function closeModal(modalId) {
+                        // Sembunyikan modal dengan ID tertentu
+                        $("#" + modalId).hide();
                     }
 
                     function openLoginModal() {
@@ -265,12 +318,11 @@ include "koneksi.php";
                     <!-- Tambahkan elemen HTML lainnya atau skrip JavaScript di sini -->
 </body>
 
-</html>
 
 <!-- The sign-up modal -->
 <div id="signupModal" class="modal">
     <div class="modal-content">
-        <span class="close">&times;</span>
+        <span class="close" onclick="closeModal('signupModal')">&times;</span>
         <h2>Sign Up</h2>
         <form id="signupForm">
             <div class="form-group">
@@ -289,6 +341,51 @@ include "koneksi.php";
         </form>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+$(document).ready(function() {
+    $("#signupForm").submit(function(event) {
+        event.preventDefault();
+
+        // Ambil nilai dari formulir pendaftaran
+        var firstName = $("#firstName").val();
+        var lastName = $("#lastName").val();
+        var signupEmail = $("#signupEmail").val();
+        var signupPassword = $("#signupPassword").val();
+
+        // Kirim data pendaftaran ke server melalui AJAX
+        $.ajax({
+            type: "POST",
+            url: "signupUser.php",
+            data: {
+                firstName: firstName,
+                lastName: lastName,
+                signupEmail: signupEmail,
+                signupPassword: signupPassword
+            },
+            success: function(response) {
+                // Tampilkan respons dari server (misalnya, pesan sukses atau kesalahan)
+                alert(response);
+
+                // Jika pendaftaran berhasil, tutup popup signup
+                if (response.includes("Pendaftaran berhasil")) {
+                    closeModal('signupModal');
+                }
+            },
+            error: function(xhr, status, error) {
+                // Tampilkan pesan kesalahan jika terjadi kesalahan saat mengirimkan data
+                alert("Terjadi kesalahan saat mendaftar. Silakan coba lagi.");
+            }
+        });
+    });
+});
+
+function closeModal(modalId) {
+    $("#" + modalId).hide();
+}
+</script>
+
+
 </ul>
 </nav>
 <!-- end navbar -->
@@ -634,5 +731,5 @@ if ($result->num_rows > 0) {
         <script src="js/scripts.js"></script>
         </body>
 
-        </html>
-        <?php mysqli_close($conn); ?>
+</html>
+<?php mysqli_close($conn); ?>

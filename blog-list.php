@@ -40,6 +40,20 @@ include "koneksi.php"
         </svg>
     </div>
     <!-- end preloader -->
+    <?php
+// ID user yang ingin ditampilkan (sesuaikan dengan kebutuhan Anda)
+$userId = 1;
+
+// Query untuk mendapatkan data dari tabel "user" berdasarkan ID
+$sql = "SELECT * FROM user WHERE id_user = $userId";
+$result = $conn->query($sql);
+
+// Periksa apakah data ditemukan
+if ($result->num_rows > 0) {
+    // Ambil data dan isi formulir
+    $userRow = $result->fetch_assoc();
+?>
+
     <div class="search-box">
         <div class="container">
             <div class="row">
@@ -54,36 +68,36 @@ include "koneksi.php"
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="account-fn">NAMA DEPAN</label>
-                                        <input class="form-control" type="text" id="account-fn" value="Daniel"
-                                            disabled="" />
+                                        <input class="form-control" type="text" id="account-fn"
+                                            value="<?php echo $userRow['namaDepan']; ?>" disabled="" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="account-ln">NAMA BELAKANG</label>
-                                        <input class="form-control" type="text" id="account-ln" value="Adams"
-                                            disabled="" />
+                                        <input class="form-control" type="text" id="account-ln"
+                                            value="<?php echo $userRow['namaBelakang']; ?>" disabled="" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="account-email">E-MAIL</label>
                                         <input class="form-control" type="email" id="account-email"
-                                            value="daniel.adams@example.com" disabled="" />
+                                            value="<?php echo $userRow['email']; ?>" disabled="" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="account-phone">No.HP</label>
                                         <input class="form-control" type="text" id="account-phone"
-                                            value="+7 (805) 348 95 72" disabled="" />
+                                            value="<?php echo $userRow['noTelepon']; ?>" disabled="" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="account-pass">PASSWORD</label>
-                                        <input class="form-control" type="password" id="account-pass" value="da"
-                                            disabled="" />
+                                        <input class="form-control" type="password" id="account-pass"
+                                            value="<?php echo $userRow['password']; ?>" disabled="" />
                                     </div>
                                 </div>
                             </form>
@@ -96,6 +110,14 @@ include "koneksi.php"
         </div>
         <!-- end container -->
     </div>
+
+    <?php
+} else {
+    echo "Data user tidak ditemukan.";
+}
+
+?>
+
     <!-- end search-box -->
     <header class="header-int">
         <div class="container">
@@ -143,7 +165,6 @@ include "koneksi.php"
                     <li class="nav-item">
                         <a id="login-logout-link" class="nav-link" href="#" onclick="toggleLoginStatus()">LOGIN</a>
                     </li>
-                    <!-- The login modal -->
                     <div id="loginModal" class="modal">
                         <div class="modal-content">
                             <span class="close" onclick="closeLoginModal()">&times;</span>
@@ -191,6 +212,25 @@ include "koneksi.php"
                         });
                     }
 
+                    function openSignUpModal() {
+                        // Tambahkan logika untuk membuka modal pendaftaran
+                        // Misalnya, dengan menampilkan modal signup atau menavigasi ke halaman pendaftaran
+                        $("#signupModal").show();
+                    }
+
+                    function closeLoginModal() {
+                        $("#loginModal").hide();
+                    }
+
+                    // ... Fungsi-fungsi lainnya ...
+
+                    $(document).ready(function() {
+                        // Menangani klik pada tautan "Sign Up"
+                        $("#signup-link").click(function() {
+                            openSignUpModal();
+                        });
+                    });
+
                     function closeLoginModal() {
                         $("#loginModal").hide();
                     }
@@ -203,6 +243,25 @@ include "koneksi.php"
                         } else {
                             openLoginModal();
                         }
+                    }
+                    $(document).ready(function() {
+                        // Sembunyikan modals saat halaman dimuat
+                        $(".modal").hide();
+                    });
+
+                    function submitLoginForm(event) {
+                        event.preventDefault();
+                        // Logika login Anda di sini
+                    }
+
+                    function openModal(modalId) {
+                        // Tampilkan modal dengan ID tertentu
+                        $("#" + modalId).show();
+                    }
+
+                    function closeModal(modalId) {
+                        // Sembunyikan modal dengan ID tertentu
+                        $("#" + modalId).hide();
                     }
 
                     function openLoginModal() {
@@ -249,65 +308,111 @@ include "koneksi.php"
                     }
                     </script>
 
-                    <!-- The sign-up modal -->
-                    <div id="signupModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close">&times;</span>
-                            <h2>Sign Up</h2>
-                            <form id="signupForm">
-                                <div class="form-group">
-                                    <input type="text" id="firstName" name="firstName" placeholder="First Name"
-                                        required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" id="signupEmail" name="signupEmail" placeholder="Email"
-                                        required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" id="signupPassword" name="signupPassword"
-                                        placeholder="Password" required />
-                                </div>
-                                <button type="submit" class="signup-btn">Sign Up</button>
-                            </form>
-                        </div>
-                    </div>
-                </ul>
-            </nav>
-            </nav>
-            <!-- end navbar -->
-        </div>
-        <!-- end container -->
-    </header>
-    <!-- end header-int -->
-    <section class="blog-header">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-title page-title">
-                        <h2>Berita Terbaru</h2>
-                        <img src="images/title-seperator.png" alt="Image" />
-                    </div>
-                    <!-- end section-title -->
+                    <!-- Tambahkan elemen HTML lainnya atau skrip JavaScript di sini -->
+</body>
+
+
+<!-- The sign-up modal -->
+<div id="signupModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('signupModal')">&times;</span>
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+            <div class="form-group">
+                <input type="text" id="firstName" name="firstName" placeholder="First Name" required />
+            </div>
+            <div class="form-group">
+                <input type="text" id="lastName" name="lastName" placeholder="Last Name" required />
+            </div>
+            <div class="form-group">
+                <input type="email" id="signupEmail" name="signupEmail" placeholder="Email" required />
+            </div>
+            <div class="form-group">
+                <input type="password" id="signupPassword" name="signupPassword" placeholder="Password" required />
+            </div>
+            <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+$(document).ready(function() {
+    $("#signupForm").submit(function(event) {
+        event.preventDefault();
+
+        // Ambil nilai dari formulir pendaftaran
+        var firstName = $("#firstName").val();
+        var lastName = $("#lastName").val();
+        var signupEmail = $("#signupEmail").val();
+        var signupPassword = $("#signupPassword").val();
+
+        // Kirim data pendaftaran ke server melalui AJAX
+        $.ajax({
+            type: "POST",
+            url: "signupUser.php",
+            data: {
+                firstName: firstName,
+                lastName: lastName,
+                signupEmail: signupEmail,
+                signupPassword: signupPassword
+            },
+            success: function(response) {
+                // Tampilkan respons dari server (misalnya, pesan sukses atau kesalahan)
+                alert(response);
+
+                // Jika pendaftaran berhasil, tutup popup signup
+                if (response.includes("Pendaftaran berhasil")) {
+                    closeModal('signupModal');
+                }
+            },
+            error: function(xhr, status, error) {
+                // Tampilkan pesan kesalahan jika terjadi kesalahan saat mengirimkan data
+                alert("Terjadi kesalahan saat mendaftar. Silakan coba lagi.");
+            }
+        });
+    });
+});
+
+function closeModal(modalId) {
+    $("#" + modalId).hide();
+}
+</script>
+
+
+</ul>
+</nav>
+</nav>
+<!-- end navbar -->
+</div>
+<!-- end container -->
+</header>
+<!-- end header-int -->
+<section class="blog-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title page-title">
+                    <h2>Berita Terbaru</h2>
+                    <img src="images/title-seperator.png" alt="Image" />
                 </div>
-                <!-- end col-12 -->
-
-
-                <!-- end view-type -->
+                <!-- end section-title -->
             </div>
             <!-- end col-12 -->
+
+
+            <!-- end view-type -->
         </div>
-        <!-- end row -->
-        </div>
-        <!-- end container -->
-    </section>
-    <!-- end blog-header -->
-    <section class="blog-posts posts blog-posts-list">
-        <div class="container">
-            <div class="row">
-                <?php
+        <!-- end col-12 -->
+    </div>
+    <!-- end row -->
+    </div>
+    <!-- end container -->
+</section>
+<!-- end blog-header -->
+<section class="blog-posts posts blog-posts-list">
+    <div class="container">
+        <div class="row">
+            <?php
 // Ambil data dari tabel berita
 $sql = "SELECT * FROM berita";
 $result = $conn->query($sql);
@@ -316,29 +421,29 @@ if ($result) {
     // Loop untuk menampilkan data berita
     while ($row = $result->fetch_assoc()) {
         ?>
-                <!-- Mulai col-12 -->
-                <div class="col-12 column">
-                    <div class="blog-post-list post">
-                        <figure class="post-image"><img src="images/<?php echo $row['gambarBerita']; ?>" alt="Image" />
-                        </figure>
-                        <div class="post-content">
-                            <small><?php echo $row['tanggalBerita']; ?> <span>|</span> BY
-                                <?php echo $row['penguploadBerita']; ?></small>
-                            <a href="blog-single.php?id=<?php echo $row['id_berita']; ?>">
-                                <h3><?php echo $row['judulBerita']; ?></h3>
-                            </a>
-                            <p>
-                                <?php echo $row['deskripsiBerita']; ?>
-                            </p>
-                            <a href="blog-single.php?id=<?php echo $row['id_berita']; ?>" class="read-more">READ
-                                MORE</a>
-                        </div>
-                        <!-- end post-content -->
+            <!-- Mulai col-12 -->
+            <div class="col-12 column">
+                <div class="blog-post-list post">
+                    <figure class="post-image"><img src="images/<?php echo $row['gambarBerita']; ?>" alt="Image" />
+                    </figure>
+                    <div class="post-content">
+                        <small><?php echo $row['tanggalBerita']; ?> <span>|</span> BY
+                            <?php echo $row['penguploadBerita']; ?></small>
+                        <a href="blog-single.php?id=<?php echo $row['id_berita']; ?>">
+                            <h3><?php echo $row['judulBerita']; ?></h3>
+                        </a>
+                        <p>
+                            <?php echo $row['deskripsiBerita']; ?>
+                        </p>
+                        <a href="blog-single.php?id=<?php echo $row['id_berita']; ?>" class="read-more">READ
+                            MORE</a>
                     </div>
-                    <!-- end blog-post -->
+                    <!-- end post-content -->
                 </div>
-                <!-- end col-12  -->
-                <?php
+                <!-- end blog-post -->
+            </div>
+            <!-- end col-12  -->
+            <?php
     }
 
     // Bebaskan hasil query
@@ -349,103 +454,103 @@ if ($result) {
 ?>
 
 
-            </div>
-            <!-- end row -->
         </div>
-        <!-- end container -->
-    </section>
-    <!-- end blog-posts -->
-    <!-- end subscribe -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-4">
-                    <h5>TENTANG KAMI</h5>
-                    <ul class="footer-menu">
-                        <li><a href="about-us.php">Tentang Kami</a></li>
+        <!-- end row -->
+    </div>
+    <!-- end container -->
+</section>
+<!-- end blog-posts -->
+<!-- end subscribe -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-4">
+                <h5>TENTANG KAMI</h5>
+                <ul class="footer-menu">
+                    <li><a href="about-us.php">Tentang Kami</a></li>
 
-                        <li><a href="#">Tim Kami</a></li>
-                        <li><a href="blog-list.php">Berita</a></li>
-                    </ul>
-                </div>
-                <!-- end col-3 -->
-                <div class="col-lg-3 col-md-4">
-                    <h5>Layanan</h5>
-                    <ul class="footer-menu">
-                        <li><a href="#">Terms of Payment</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Difficulty Levels</a></li>
-                    </ul>
-                </div>
-                <!-- end col-3 -->
-                <div class="col-lg-3 col-md-4">
-                    <h5>Hubungi Kami</h5>
-                    <address>
-                        ATHENA INC.<br />
-                        Jakal km 14.5, Yogyakarta<br />
-                        Telp: 123 456 7890<br />
-                        <a href="#">info@athenacomp.com</a>
-                    </address>
-                </div>
-                <!-- end col-3 -->
-
-                <!-- end col-3 -->
-                <div class="col-12">
-                    <ul class="social-media">
-                        <li>
-                            <a href="#"><i class="fa fa-tripadvisor"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- end col-12 -->
-                <div class="col-12"><span class="copyright">&copy; ATHENA</span></div>
-                <!-- end col-12 -->
+                    <li><a href="#">Tim Kami</a></li>
+                    <li><a href="blog-list.php">Berita</a></li>
+                </ul>
             </div>
-            <!-- end row -->
+            <!-- end col-3 -->
+            <div class="col-lg-3 col-md-4">
+                <h5>Layanan</h5>
+                <ul class="footer-menu">
+                    <li><a href="#">Terms of Payment</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Difficulty Levels</a></li>
+                </ul>
+            </div>
+            <!-- end col-3 -->
+            <div class="col-lg-3 col-md-4">
+                <h5>Hubungi Kami</h5>
+                <address>
+                    ATHENA INC.<br />
+                    Jakal km 14.5, Yogyakarta<br />
+                    Telp: 123 456 7890<br />
+                    <a href="#">info@athenacomp.com</a>
+                </address>
+            </div>
+            <!-- end col-3 -->
+
+            <!-- end col-3 -->
+            <div class="col-12">
+                <ul class="social-media">
+                    <li>
+                        <a href="#"><i class="fa fa-tripadvisor"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-youtube-play"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <!-- end col-12 -->
+            <div class="col-12"><span class="copyright">&copy; ATHENA</span></div>
+            <!-- end col-12 -->
         </div>
-        <!-- end container -->
-    </footer>
+        <!-- end row -->
+    </div>
+    <!-- end container -->
+</footer>
 
-    <!-- JS FILES -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <script>
-    // PRELOADER
-    (function($) {
-        $(window).on("load", function() {
-            $("body").addClass("page-loaded");
-        });
+<!-- JS FILES -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script>
+// PRELOADER
+(function($) {
+    $(window).on("load", function() {
+        $("body").addClass("page-loaded");
+    });
 
-        $(".data-range-picker a").daterangepicker({
-            linkedCalendars: false,
-        });
+    $(".data-range-picker a").daterangepicker({
+        linkedCalendars: false,
+    });
 
-        $(".daterangepicker").addClass("blog-picker");
-    })(jQuery);
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
-    <script src="js/swiper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-    <script src="js/scripts.js"></script>
+    $(".daterangepicker").addClass("blog-picker");
+})(jQuery);
+</script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+</script>
+<script src="js/swiper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+<script src="js/scripts.js"></script>
 </body>
 
 </html>

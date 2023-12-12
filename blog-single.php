@@ -41,13 +41,26 @@ include "koneksi.php"
         </svg>
     </div>
     <!-- end preloader -->
+    <?php
+// ID user yang ingin ditampilkan (sesuaikan dengan kebutuhan Anda)
+$userId = 1;
+
+// Query untuk mendapatkan data dari tabel "user" berdasarkan ID
+$sql = "SELECT * FROM user WHERE id_user = $userId";
+$result = $conn->query($sql);
+
+// Periksa apakah data ditemukan
+if ($result->num_rows > 0) {
+    // Ambil data dan isi formulir
+    $userRow = $result->fetch_assoc();
+?>
+
     <div class="search-box">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <span class="search-close-btn"><i class="fa fa-times"></i></span>
                     <h3>Profile</h3>
-
                 </div>
                 <div class="container mt-5">
                     <div class="row">
@@ -56,36 +69,36 @@ include "koneksi.php"
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="account-fn">NAMA DEPAN</label>
-                                        <input class="form-control" type="text" id="account-fn" value="Daniel"
-                                            disabled="" />
+                                        <input class="form-control" type="text" id="account-fn"
+                                            value="<?php echo $userRow['namaDepan']; ?>" disabled="" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="account-ln">NAMA BELAKANG</label>
-                                        <input class="form-control" type="text" id="account-ln" value="Adams"
-                                            disabled="" />
+                                        <input class="form-control" type="text" id="account-ln"
+                                            value="<?php echo $userRow['namaBelakang']; ?>" disabled="" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="account-email">E-MAIL</label>
                                         <input class="form-control" type="email" id="account-email"
-                                            value="daniel.adams@example.com" disabled="" />
+                                            value="<?php echo $userRow['email']; ?>" disabled="" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="account-phone">No.HP</label>
                                         <input class="form-control" type="text" id="account-phone"
-                                            value="+7 (805) 348 95 72" disabled="" />
+                                            value="<?php echo $userRow['noTelepon']; ?>" disabled="" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="account-pass">PASSWORD</label>
-                                        <input class="form-control" type="password" id="account-pass" value="da"
-                                            disabled="" />
+                                        <input class="form-control" type="password" id="account-pass"
+                                            value="<?php echo $userRow['password']; ?>" disabled="" />
                                     </div>
                                 </div>
                             </form>
@@ -98,6 +111,14 @@ include "koneksi.php"
         </div>
         <!-- end container -->
     </div>
+
+    <?php
+} else {
+    echo "Data user tidak ditemukan.";
+}
+
+?>
+
     <!-- end search-box -->
     <header class="header-int">
         <div class="container">
@@ -145,7 +166,6 @@ include "koneksi.php"
                     <li class="nav-item">
                         <a id="login-logout-link" class="nav-link" href="#" onclick="toggleLoginStatus()">LOGIN</a>
                     </li>
-                    <!-- The login modal -->
                     <div id="loginModal" class="modal">
                         <div class="modal-content">
                             <span class="close" onclick="closeLoginModal()">&times;</span>
@@ -193,6 +213,25 @@ include "koneksi.php"
                         });
                     }
 
+                    function openSignUpModal() {
+                        // Tambahkan logika untuk membuka modal pendaftaran
+                        // Misalnya, dengan menampilkan modal signup atau menavigasi ke halaman pendaftaran
+                        $("#signupModal").show();
+                    }
+
+                    function closeLoginModal() {
+                        $("#loginModal").hide();
+                    }
+
+                    // ... Fungsi-fungsi lainnya ...
+
+                    $(document).ready(function() {
+                        // Menangani klik pada tautan "Sign Up"
+                        $("#signup-link").click(function() {
+                            openSignUpModal();
+                        });
+                    });
+
                     function closeLoginModal() {
                         $("#loginModal").hide();
                     }
@@ -205,6 +244,25 @@ include "koneksi.php"
                         } else {
                             openLoginModal();
                         }
+                    }
+                    $(document).ready(function() {
+                        // Sembunyikan modals saat halaman dimuat
+                        $(".modal").hide();
+                    });
+
+                    function submitLoginForm(event) {
+                        event.preventDefault();
+                        // Logika login Anda di sini
+                    }
+
+                    function openModal(modalId) {
+                        // Tampilkan modal dengan ID tertentu
+                        $("#" + modalId).show();
+                    }
+
+                    function closeModal(modalId) {
+                        // Sembunyikan modal dengan ID tertentu
+                        $("#" + modalId).hide();
                     }
 
                     function openLoginModal() {
@@ -250,43 +308,90 @@ include "koneksi.php"
                         }
                     }
                     </script>
-                    <!-- The sign-up modal -->
-                    <div id="signupModal" class="modal">
-                        <div class="modal-content">
-                            <span class="close">&times;</span>
-                            <h2>Sign Up</h2>
-                            <form id="signupForm">
-                                <div class="form-group">
-                                    <input type="text" id="firstName" name="firstName" placeholder="First Name"
-                                        required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" id="signupEmail" name="signupEmail" placeholder="Email"
-                                        required />
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" id="signupPassword" name="signupPassword"
-                                        placeholder="Password" required />
-                                </div>
-                                <button type="submit" class="signup-btn">Sign Up</button>
-                            </form>
-                        </div>
-                    </div>
-                </ul>
-            </nav>
-            </nav>
-            <!-- end navbar -->
-        </div>
-        <!-- end container -->
-    </header>
-    <!-- end header-int -->
-    <section class="blog-header">
-        <div class="container">
-            <div class="row">
-                <?php
+
+                    <!-- Tambahkan elemen HTML lainnya atau skrip JavaScript di sini -->
+</body>
+
+
+<!-- The sign-up modal -->
+<div id="signupModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('signupModal')">&times;</span>
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+            <div class="form-group">
+                <input type="text" id="firstName" name="firstName" placeholder="First Name" required />
+            </div>
+            <div class="form-group">
+                <input type="text" id="lastName" name="lastName" placeholder="Last Name" required />
+            </div>
+            <div class="form-group">
+                <input type="email" id="signupEmail" name="signupEmail" placeholder="Email" required />
+            </div>
+            <div class="form-group">
+                <input type="password" id="signupPassword" name="signupPassword" placeholder="Password" required />
+            </div>
+            <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+$(document).ready(function() {
+    $("#signupForm").submit(function(event) {
+        event.preventDefault();
+
+        // Ambil nilai dari formulir pendaftaran
+        var firstName = $("#firstName").val();
+        var lastName = $("#lastName").val();
+        var signupEmail = $("#signupEmail").val();
+        var signupPassword = $("#signupPassword").val();
+
+        // Kirim data pendaftaran ke server melalui AJAX
+        $.ajax({
+            type: "POST",
+            url: "signupUser.php",
+            data: {
+                firstName: firstName,
+                lastName: lastName,
+                signupEmail: signupEmail,
+                signupPassword: signupPassword
+            },
+            success: function(response) {
+                // Tampilkan respons dari server (misalnya, pesan sukses atau kesalahan)
+                alert(response);
+
+                // Jika pendaftaran berhasil, tutup popup signup
+                if (response.includes("Pendaftaran berhasil")) {
+                    closeModal('signupModal');
+                }
+            },
+            error: function(xhr, status, error) {
+                // Tampilkan pesan kesalahan jika terjadi kesalahan saat mengirimkan data
+                alert("Terjadi kesalahan saat mendaftar. Silakan coba lagi.");
+            }
+        });
+    });
+});
+
+function closeModal(modalId) {
+    $("#" + modalId).hide();
+}
+</script>
+
+
+</ul>
+</nav>
+</nav>
+<!-- end navbar -->
+</div>
+<!-- end container -->
+</header>
+<!-- end header-int -->
+<section class="blog-header">
+    <div class="container">
+        <div class="row">
+            <?php
 // Ambil parameter ID_berita dari URL jika tersedia
 $idBerita = isset($_GET['id']) ? $_GET['id'] : '';
 
@@ -325,28 +430,28 @@ if ($result) {
 }
 ?>
 
-                <!-- end col-12 -->
+            <!-- end col-12 -->
 
-                <section class="blog-content">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="inner">
-                                    <ul class="social-share">
-                                        <li>
-                                            <a href="#" class="facebook-ico"><i class="fa fa-facebook"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="twitter-ico"><i class="fa fa-twitter"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="instagram-ico"><i class="fa fa-instagram"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="googleplus-ico"><i class="fa fa-google-plus"></i></a>
-                                        </li>
-                                    </ul>
-                                    <?php
+            <section class="blog-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="inner">
+                                <ul class="social-share">
+                                    <li>
+                                        <a href="#" class="facebook-ico"><i class="fa fa-facebook"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="twitter-ico"><i class="fa fa-twitter"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="instagram-ico"><i class="fa fa-instagram"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="googleplus-ico"><i class="fa fa-google-plus"></i></a>
+                                    </li>
+                                </ul>
+                                <?php
 // Ambil parameter ID_berita dari URL jika tersedia
 $idBerita = isset($_GET['id']) ? $_GET['id'] : '';
 
@@ -360,11 +465,11 @@ if ($result) {
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             ?>
-                                    <h3><?php echo $row['judulBerita']; ?></h3>
-                                    <p>
-                                        <?php echo $row['deskripsiBerita']; ?>
-                                    </p>
-                                    <?php
+                                <h3><?php echo $row['judulBerita']; ?></h3>
+                                <p>
+                                    <?php echo $row['deskripsiBerita']; ?>
+                                </p>
+                                <?php
         }
     } else {
         echo "Data tidak ditemukan";
@@ -375,7 +480,7 @@ if ($result) {
 ?>
 
 
-                                    <!-- <p>
+                                <!-- <p>
                                         Pellentesque vestibulum fermentum velit non placerat aecenas in hendrerit justo
                                         quisque quis rhoncus exeget semper semlam at lobortis velit. Vestibulum ante
                                         ipsum primis in faucibus orcie luctus et ultrices posuere
@@ -387,8 +492,8 @@ if ($result) {
                                         velit urpis faucibus odio eget volutpat odio lectus eu erat esque
                                         estibulum fermentum velit non placerat aecenas in hendrerit justo.
                                     </p> -->
-                                    <br />
-                                    <!-- <h3>The Journey</h3>
+                                <br />
+                                <!-- <h3>The Journey</h3>
                                     <p>
                                         Fusce in eros at lectus mollis pulvinar. Nullam in auctor mimus consectetur
                                         ullamcorper facilisis vivamus luctus. Varius natoque penatibus et magnis dis
@@ -414,38 +519,38 @@ if ($result) {
                                         at lectus mollis pulvinar. Nullam in auctor mimus ectetur
                                         ullamcorper facilisis vivamus luctus. Varius natoque penatibus.
                                     </p> -->
-                                </div>
-                                <!-- end inner -->
                             </div>
-                            <!-- end col-12 -->
+                            <!-- end inner -->
                         </div>
-                        <!-- end row -->
+                        <!-- end col-12 -->
                     </div>
-                    <!-- end container -->
-                </section>
-                <!-- end blog-content -->
-                <div class="swiper-blog-carousel">
-                    <!-- <div class="swiper-wrapper">
+                    <!-- end row -->
+                </div>
+                <!-- end container -->
+            </section>
+            <!-- end blog-content -->
+            <div class="swiper-blog-carousel">
+                <!-- <div class="swiper-wrapper">
                         <div class="swiper-slide"><img src="images/blog-carousel01.jpg" alt="Image" /></div>
                         <div class="swiper-slide"><img src="images/blog-carousel02.jpg" alt="Image" /></div>
                         <div class="swiper-slide"><img src="images/blog-carousel03.jpg" alt="Image" /></div>
                     </div> -->
-                    <!-- end swiper-wrapper -->
-                    <!-- Add Pagination -->
-                    <div class="swiper-button-prev">
-                        <div class="arrow-left"></div>
-                    </div>
-                    <div class="swiper-button-next">
-                        <div class="arrow-right"></div>
-                    </div>
+                <!-- end swiper-wrapper -->
+                <!-- Add Pagination -->
+                <div class="swiper-button-prev">
+                    <div class="arrow-left"></div>
                 </div>
-                <!-- end swiper-blog-carousel -->
-                <section class="blog-content">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="inner">
-                                    <!-- <h3>Night Stay and Camping</h3>
+                <div class="swiper-button-next">
+                    <div class="arrow-right"></div>
+                </div>
+            </div>
+            <!-- end swiper-blog-carousel -->
+            <section class="blog-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="inner">
+                                <!-- <h3>Night Stay and Camping</h3>
                                     <p>
                                         Orci varius natoque penatibus et magnis dis turient montes nascetur ridiculus
                                         mus. Cras eleifend tellus sed congue ectetur velit turpis faucibus odio eget
@@ -455,57 +560,57 @@ if ($result) {
                                         scetur ridiculus mus. Cras eleifend tellus sed congue ectetur
                                         velit urpis faucibus odio eget volutpat odio lectus eu erat esque estibulum
                                         fermentum leg non placerat aecenas in hendrerit justo. -->
-                                    </p>
-                                    <!-- <h3>The Verdict</h3>
+                                </p>
+                                <!-- <h3>The Verdict</h3>
                                     <p>
                                         Fusce in eros at lectus mollis pulvinar. Nullam in auctor mimus consectetur
                                         ullamcorper facilisis vivamus luctus. Varius natoque penatibus et magnis dis
                                         turient montes scetur ridiculus mus. Cras eleifend tellus sed congue
                                         ectetur velit urpis faucibus odio eget volutpat odio lectus eu erat esque
                                         estibulum fermentum velit non placerat aecenas in hendrerit justo. -->
-                                    </p>
-                                    <p>
-                                        <!-- Quisque quis rhoncus exeget semper semlam at lobortis velit estibulum ante ipsum
+                                </p>
+                                <p>
+                                    <!-- Quisque quis rhoncus exeget semper semlam at lobortis velit estibulum ante ipsum
                                         primis in <a href="#">Faucibus Orcie</a> luctus et ultrices posuere cubilia
                                         curae ed dignissim leo lorema condimentum mauris vestibulum et
                                         maecenas vitae urna aced magna cilisis cubilia curae ed <a href="#">Dignissim
                                             Porttitor</a> fusce in eros at lectus mollis pulvinar. Nullam in auctor
                                         mimus consectetur ullamcorper facilisis vivamus luctusodio lectus eu erat
                                         esque estibulum fermentum velit non placerat aecenas. -->
+                                </p>
+                                <div class="about-author">
+                                    <figure><img src="images/profile.jpg" alt="Image" /></figure>
+                                    <small>ADMIN ANJOURNEY</small>
+                                    <h5>About the Author</h5>
+                                    <img src="images/title-seperator.png" alt="Image" class="title-seperator" />
+                                    <p>
+                                        SIAPA YAHHHH YANG JADI ADMIN ANJOURNEY
                                     </p>
-                                    <div class="about-author">
-                                        <figure><img src="images/profile.jpg" alt="Image" /></figure>
-                                        <small>ADMIN ANJOURNEY</small>
-                                        <h5>About the Author</h5>
-                                        <img src="images/title-seperator.png" alt="Image" class="title-seperator" />
-                                        <p>
-                                            SIAPA YAHHHH YANG JADI ADMIN ANJOURNEY
-                                        </p>
-                                    </div>
-                                    <!-- end about-author -->
                                 </div>
-                                <!-- end inner -->
+                                <!-- end about-author -->
                             </div>
-                            <!-- end col-12 -->
+                            <!-- end inner -->
                         </div>
-                        <!-- end row -->
+                        <!-- end col-12 -->
                     </div>
-                    <!-- end container -->
-                </section>
-                <!-- end blog-content -->
-                <section class="recent-blog">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="section-title">
-                                    <h2>Berita Terbaru</h2>
-                                    <img src="images/title-seperator.png" alt="Image" />
-                                </div>
-                                <!-- end section-title -->
+                    <!-- end row -->
+                </div>
+                <!-- end container -->
+            </section>
+            <!-- end blog-content -->
+            <section class="recent-blog">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="section-title">
+                                <h2>Berita Terbaru</h2>
+                                <img src="images/title-seperator.png" alt="Image" />
                             </div>
-                            <!-- end col-12 -->
-                            <!-- end col-12 -->
-                            <?php
+                            <!-- end section-title -->
+                        </div>
+                        <!-- end col-12 -->
+                        <!-- end col-12 -->
+                        <?php
 // Query untuk mengambil data dari tabel berita
 $sql = "SELECT * FROM berita ORDER BY RAND() LIMIT 3";
 
@@ -529,177 +634,177 @@ if ($result->num_rows > 0) {
 }
 ?>
 
-                            <!-- end col-4  -->
-                            <div class="col-12 text-center"><a href="blog-list.php" class="site-btn">KUNJUNGI BLOG
-                                    KAMI</a>
-                            </div>
-                            <!-- end col-12 -->
+                        <!-- end col-4  -->
+                        <div class="col-12 text-center"><a href="blog-list.php" class="site-btn">KUNJUNGI BLOG
+                                KAMI</a>
                         </div>
-                        <!-- end row -->
+                        <!-- end col-12 -->
                     </div>
-                    <!-- end container -->
-                </section>
-                <!-- end recent-blog -->
-                <!-- end related-blog -->
-                <section class="blog-comments">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <h5>Discussion</h5>
-                                <img src="images/title-seperator.png" alt="Image" class="title-seperator" />
-                                <div class="comments">
-                                    <div class="comment">
-                                        <figure><img src="images/profile.jpg" alt="Image" /></figure>
-                                        <div class="info">
-                                            <a href="#">REPLY</a>
-                                            <h6>Pendekar</h6>
-                                            <small>2018-03-02</small>
-                                            <p>WAHHHH</p>
-                                        </div>
-                                        <!-- end info -->
+                    <!-- end row -->
+                </div>
+                <!-- end container -->
+            </section>
+            <!-- end recent-blog -->
+            <!-- end related-blog -->
+            <section class="blog-comments">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h5>Discussion</h5>
+                            <img src="images/title-seperator.png" alt="Image" class="title-seperator" />
+                            <div class="comments">
+                                <div class="comment">
+                                    <figure><img src="images/profile.jpg" alt="Image" /></figure>
+                                    <div class="info">
+                                        <a href="#">REPLY</a>
+                                        <h6>Pendekar</h6>
+                                        <small>2018-03-02</small>
+                                        <p>WAHHHH</p>
                                     </div>
-                                    <!-- end comment -->
-                                    <div class="comment related">
-                                        <figure><img src="images/profile.jpg" alt="Image" /></figure>
-                                        <div class="info">
-                                            <a href="#">REPLY</a>
-                                            <h6>SIAPA YA</h6>
-                                            <small>2018-03-02</small>
-                                            <p>GOKILLL</p>
-                                        </div>
-                                        <!-- end info -->
-                                    </div>
-                                    <!-- end comment -->
-                                    <div class="comment">
-                                        <figure><img src="images/profile.jpg" alt="Image" /></figure>
-                                        <div class="info">
-                                            <a href="#">REPLY</a>
-                                            <h6>Penakluk Land Of Dawn</h6>
-                                            <small>2018-03-02</small>
-                                            <p>HAAAAAA</p>
-                                        </div>
-                                        <!-- end info -->
-                                    </div>
-                                    <!-- end comment -->
+                                    <!-- end info -->
                                 </div>
-                                <!-- end comments -->
+                                <!-- end comment -->
+                                <div class="comment related">
+                                    <figure><img src="images/profile.jpg" alt="Image" /></figure>
+                                    <div class="info">
+                                        <a href="#">REPLY</a>
+                                        <h6>SIAPA YA</h6>
+                                        <small>2018-03-02</small>
+                                        <p>GOKILLL</p>
+                                    </div>
+                                    <!-- end info -->
+                                </div>
+                                <!-- end comment -->
+                                <div class="comment">
+                                    <figure><img src="images/profile.jpg" alt="Image" /></figure>
+                                    <div class="info">
+                                        <a href="#">REPLY</a>
+                                        <h6>Penakluk Land Of Dawn</h6>
+                                        <small>2018-03-02</small>
+                                        <p>HAAAAAA</p>
+                                    </div>
+                                    <!-- end info -->
+                                </div>
+                                <!-- end comment -->
                             </div>
-                            <!-- end col-6 -->
-                            <div class="col-lg-6">
-                                <form class="row">
-                                    <div class="col-12">
-                                        <h5>Comment</h5>
-                                        <img src="images/title-seperator.png" alt="Image" class="title-seperator" />
-                                    </div>
-                                    <!-- end col-12 -->
-                                    <div class="form-group col-md-6">
-                                        <input type="text" placeholder="Full Name" />
-                                    </div>
-                                    <!-- end form-group -->
-                                    <div class="form-group col-md-6">
-                                        <input type="text" placeholder="E-mail Address" />
-                                    </div>
-                                    <!-- end form-group -->
-                                    <div class="form-group col-12">
-                                        <textarea placeholder="Your Message"></textarea>
-                                    </div>
-                                    <!-- end form-group -->
-                                    <div class="form-group col-12">
-                                        <button type="submit">SEND COMMENT</button>
-                                    </div>
-                                    <!-- end form-group -->
-                                </form>
-                            </div>
-                            <!-- end col-6 -->
+                            <!-- end comments -->
                         </div>
-                        <!-- end row -->
-                    </div>
-                    <!-- end container -->
-                </section>
-                <!-- end blog-comments -->
-
-                <!-- end related-tours -->
-                <footer class="footer">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-4">
-                                <h5>TENTANG KAMI</h5>
-                                <ul class="footer-menu">
-                                    <li><a href="about-us.php">Tentang Kami</a></li>
-
-                                    <li><a href="#">Tim Kami</a></li>
-                                    <li><a href="blog-list.php">Berita</a></li>
-                                </ul>
-                            </div>
-                            <!-- end col-3 -->
-                            <div class="col-lg-3 col-md-4">
-                                <h5>Layanan</h5>
-                                <ul class="footer-menu">
-                                    <li><a href="#">Terms of Payment</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Difficulty Levels</a></li>
-                                </ul>
-                            </div>
-                            <!-- end col-3 -->
-                            <div class="col-lg-3 col-md-4">
-                                <h5>Hubungi Kami</h5>
-                                <address>
-                                    ATHENA INC.<br />
-                                    Jakal km 14.5, Yogyakarta<br />
-                                    Telp: 123 456 7890<br />
-                                    <a href="#">info@athenacomp.com</a>
-                                </address>
-                            </div>
-                            <!-- end col-3 -->
-
-                            <!-- end col-3 -->
-                            <div class="col-12">
-                                <ul class="social-media">
-                                    <li>
-                                        <a href="#"><i class="fa fa-tripadvisor"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-youtube-play"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-instagram"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- end col-12 -->
-                            <div class="col-12"><span class="copyright">&copy; ATHENA</span></div>
-                            <!-- end col-12 -->
+                        <!-- end col-6 -->
+                        <div class="col-lg-6">
+                            <form class="row">
+                                <div class="col-12">
+                                    <h5>Comment</h5>
+                                    <img src="images/title-seperator.png" alt="Image" class="title-seperator" />
+                                </div>
+                                <!-- end col-12 -->
+                                <div class="form-group col-md-6">
+                                    <input type="text" placeholder="Full Name" />
+                                </div>
+                                <!-- end form-group -->
+                                <div class="form-group col-md-6">
+                                    <input type="text" placeholder="E-mail Address" />
+                                </div>
+                                <!-- end form-group -->
+                                <div class="form-group col-12">
+                                    <textarea placeholder="Your Message"></textarea>
+                                </div>
+                                <!-- end form-group -->
+                                <div class="form-group col-12">
+                                    <button type="submit">SEND COMMENT</button>
+                                </div>
+                                <!-- end form-group -->
+                            </form>
                         </div>
-                        <!-- end row -->
+                        <!-- end col-6 -->
                     </div>
-                    <!-- end container -->
-                </footer>
-                <!-- JS FILES -->
-                <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-                    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-                <script>
-                // PRELOADER
-                (function($) {
-                    $(window).on("load", function() {
-                        $("body").addClass("page-loaded");
-                    });
-                })(jQuery);
-                </script>
-                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-                    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-                    crossorigin="anonymous"></script>
-                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-                    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-                    crossorigin="anonymous"></script>
-                <script src="js/swiper.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-                <script src="js/scripts.js"></script>
-</body>
+                    <!-- end row -->
+                </div>
+                <!-- end container -->
+            </section>
+            <!-- end blog-comments -->
+
+            <!-- end related-tours -->
+            <footer class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4">
+                            <h5>TENTANG KAMI</h5>
+                            <ul class="footer-menu">
+                                <li><a href="about-us.php">Tentang Kami</a></li>
+
+                                <li><a href="#">Tim Kami</a></li>
+                                <li><a href="blog-list.php">Berita</a></li>
+                            </ul>
+                        </div>
+                        <!-- end col-3 -->
+                        <div class="col-lg-3 col-md-4">
+                            <h5>Layanan</h5>
+                            <ul class="footer-menu">
+                                <li><a href="#">Terms of Payment</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Difficulty Levels</a></li>
+                            </ul>
+                        </div>
+                        <!-- end col-3 -->
+                        <div class="col-lg-3 col-md-4">
+                            <h5>Hubungi Kami</h5>
+                            <address>
+                                ATHENA INC.<br />
+                                Jakal km 14.5, Yogyakarta<br />
+                                Telp: 123 456 7890<br />
+                                <a href="#">info@athenacomp.com</a>
+                            </address>
+                        </div>
+                        <!-- end col-3 -->
+
+                        <!-- end col-3 -->
+                        <div class="col-12">
+                            <ul class="social-media">
+                                <li>
+                                    <a href="#"><i class="fa fa-tripadvisor"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-youtube-play"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- end col-12 -->
+                        <div class="col-12"><span class="copyright">&copy; ATHENA</span></div>
+                        <!-- end col-12 -->
+                    </div>
+                    <!-- end row -->
+                </div>
+                <!-- end container -->
+            </footer>
+            <!-- JS FILES -->
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+                integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+            <script>
+            // PRELOADER
+            (function($) {
+                $(window).on("load", function() {
+                    $("body").addClass("page-loaded");
+                });
+            })(jQuery);
+            </script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+                integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+                crossorigin="anonymous"></script>
+            <script src="js/swiper.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+            <script src="js/scripts.js"></script>
+            </body>
 
 </html>

@@ -42,28 +42,26 @@ include "koneksi.php"
             </svg>
         </div>
         <!-- end preloader -->
+        <?php
+// ID user yang ingin ditampilkan (sesuaikan dengan kebutuhan Anda)
+$userId = 1;
+
+// Query untuk mendapatkan data dari tabel "user" berdasarkan ID
+$sql = "SELECT * FROM user WHERE id_user = $userId";
+$result = $conn->query($sql);
+
+// Periksa apakah data ditemukan
+if ($result->num_rows > 0) {
+    // Ambil data dan isi formulir
+    $userRow = $result->fetch_assoc();
+?>
+
         <div class="search-box">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <span class="search-close-btn"><i class="fa fa-times"></i></span>
                         <h3>Profile</h3>
-                        <!-- <form>
-              <div class="form-group">
-                <i class="fa fa-search"></i>
-                <input type="text" placeholder="Search Activities, Themes or Tours" />
-              </div>
-              --end form-group
-              <button type="submit">SEARCH</button>
-            </form>
-            <dl>
-              <dt>Suggestions <i class="fa fa-long-arrow-right"></i></dt>
-              <dd><a href="#">Adventure</a></dd>
-              <dd><a href="#">Nothern Lights</a></dd>
-              <dd><a href="#">Waterfalls</a></dd>
-              <dd><a href="#">Winter Tours</a></dd>
-              <dd><a href="#">Glaciar Walk</a></dd>
-            </dl> -->
                     </div>
                     <div class="container mt-5">
                         <div class="row">
@@ -72,36 +70,36 @@ include "koneksi.php"
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="account-fn">NAMA DEPAN</label>
-                                            <input class="form-control" type="text" id="account-fn" value="Daniel"
-                                                disabled="" />
+                                            <input class="form-control" type="text" id="account-fn"
+                                                value="<?php echo $userRow['namaDepan']; ?>" disabled="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="account-ln">NAMA BELAKANG</label>
-                                            <input class="form-control" type="text" id="account-ln" value="Adams"
-                                                disabled="" />
+                                            <input class="form-control" type="text" id="account-ln"
+                                                value="<?php echo $userRow['namaBelakang']; ?>" disabled="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="account-email">E-MAIL</label>
                                             <input class="form-control" type="email" id="account-email"
-                                                value="daniel.adams@example.com" disabled="" />
+                                                value="<?php echo $userRow['email']; ?>" disabled="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="account-phone">No.HP</label>
                                             <input class="form-control" type="text" id="account-phone"
-                                                value="+7 (805) 348 95 72" disabled="" />
+                                                value="<?php echo $userRow['noTelepon']; ?>" disabled="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="account-pass">PASSWORD</label>
-                                            <input class="form-control" type="password" id="account-pass" value="da"
-                                                disabled="" />
+                                            <input class="form-control" type="password" id="account-pass"
+                                                value="<?php echo $userRow['password']; ?>" disabled="" />
                                         </div>
                                     </div>
                                 </form>
@@ -114,6 +112,14 @@ include "koneksi.php"
             </div>
             <!-- end container -->
         </div>
+
+        <?php
+} else {
+    echo "Data user tidak ditemukan.";
+}
+
+?>
+
         <!-- end search-box -->
         <header class="header-int">
             <div class="container">
@@ -161,7 +167,6 @@ include "koneksi.php"
                         <li class="nav-item">
                             <a id="login-logout-link" class="nav-link" href="#" onclick="toggleLoginStatus()">LOGIN</a>
                         </li>
-                        <!-- The login modal -->
                         <div id="loginModal" class="modal">
                             <div class="modal-content">
                                 <span class="close" onclick="closeLoginModal()">&times;</span>
@@ -211,6 +216,25 @@ include "koneksi.php"
                             });
                         }
 
+                        function openSignUpModal() {
+                            // Tambahkan logika untuk membuka modal pendaftaran
+                            // Misalnya, dengan menampilkan modal signup atau menavigasi ke halaman pendaftaran
+                            $("#signupModal").show();
+                        }
+
+                        function closeLoginModal() {
+                            $("#loginModal").hide();
+                        }
+
+                        // ... Fungsi-fungsi lainnya ...
+
+                        $(document).ready(function() {
+                            // Menangani klik pada tautan "Sign Up"
+                            $("#signup-link").click(function() {
+                                openSignUpModal();
+                            });
+                        });
+
                         function closeLoginModal() {
                             $("#loginModal").hide();
                         }
@@ -223,6 +247,25 @@ include "koneksi.php"
                             } else {
                                 openLoginModal();
                             }
+                        }
+                        $(document).ready(function() {
+                            // Sembunyikan modals saat halaman dimuat
+                            $(".modal").hide();
+                        });
+
+                        function submitLoginForm(event) {
+                            event.preventDefault();
+                            // Logika login Anda di sini
+                        }
+
+                        function openModal(modalId) {
+                            // Tampilkan modal dengan ID tertentu
+                            $("#" + modalId).show();
+                        }
+
+                        function closeModal(modalId) {
+                            // Sembunyikan modal dengan ID tertentu
+                            $("#" + modalId).hide();
                         }
 
                         function openLoginModal() {
@@ -269,269 +312,315 @@ include "koneksi.php"
                         }
                         </script>
 
-                        <!-- The sign-up modal -->
-                        <div id="signupModal" class="modal">
-                            <div class="modal-content">
-                                <span class="close">&times;</span>
-                                <h2>Sign Up</h2>
-                                <form id="signupForm">
-                                    <div class="form-group">
-                                        <input type="text" id="firstName" name="firstName" placeholder="First Name"
-                                            required />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" id="lastName" name="lastName" placeholder="Last Name"
-                                            required />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="email" id="signupEmail" name="signupEmail" placeholder="Email"
-                                            required />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" id="signupPassword" name="signupPassword"
-                                            placeholder="Password" required />
-                                    </div>
-                                    <button type="submit" class="signup-btn">Sign Up</button>
-                                </form>
-                            </div>
-                        </div>
-                    </ul>
-                </nav>
-                <!-- end navbar -->
-            </div>
-            <!-- end container -->
-        </header>
-        <!-- end header-int -->
-        <section class="about-us-header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="section-title page-title">
-                            <h2>Tentang Kami</h2>
-                            <img src="images/title-seperator.png" alt="Image" />
-                            <p>
-                                Selamat datang di Artistic Nusantara Journey. Kami adalah kelompok yang berkomitmen
-                                untuk menciptakan pengalaman wisata seni tak terlupakan bagi pelanggan kami.
-                                kami telah mempersembahkan kegembiraan dan kepuasan kepada pelanggan dari berbagai
-                                belahan masyarakat Indonesia. Kami menyediakan beberapa tour wisata seni di beberapa
-                                kota di Indonesia
-                            </p>
-                        </div>
-                        <!-- end section-title -->
-                    </div>
-                    <!-- end col-12 -->
+                        <!-- Tambahkan elemen HTML lainnya atau skrip JavaScript di sini -->
+    </body>
+
+
+    <!-- The sign-up modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('signupModal')">&times;</span>
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <input type="text" id="firstName" name="firstName" placeholder="First Name" required />
                 </div>
-                <!-- end row -->
-            </div>
-            <!-- end container -->
-        </section>
-        <!-- end about-us -->
-
-        <!-- end about-us-desc -->
-        <section class="our-history">
-            <div class="container">
-                <div class="row no-gutters">
-                    <div class="col-lg-6">
-                        <div class="section-title">
-                            <h2>Tim Kami</h2>
-                            <img src="images/title-seperator.png" alt="Image" />
-                        </div>
-                        <!-- end section-title -->
-                    </div>
-                    <!-- end col-6 -->
-
-                    <!-- end col-6 -->
-                    <div class="col-12">
-                        <div class="wrapper">
-                            <div class="content">
-                                <div class="inner">
-                                    <h4>Muhammad Ikhsan Nurhadi</h4>
-                                    <img src="images/title-seperator.png" alt="Image" />
-                                    <p>
-                                        Hay, kenalin aku Ikhsan. Disini aku berperan sebagai project manager dari
-                                        kelompok ATHENA tugas ku disini mengoordinasikan tim, mengawasi dan memastikan
-                                        project berjalan sesuai rencana. Karena tugas besar kali ini bergandengan dengan
-                                        mata kuliah sjk jadi ada pembagian tugas dalam tim agar semua bisa selesai tepat
-                                        waktu dan aku lebih berfokus pada bagian jaringan tetapi bukan berarti aku tidak
-                                        mengerjakan web sama sekali. Ketika pembuatan web sudah sekitar 60-70% tugas ku
-                                        hanya mengawasi dan mengarahkan dan anggota tim ku yang melaksanakannya.
-                                    </p>
-                                </div>
-                                <!-- end inner -->
-                            </div>
-                            <!-- end content -->
-                            <figure><img src="images/IKSAN.jpg" alt="Image" /></figure>
-                        </div>
-                        <!-- end wrapper -->
-                        <div class="wrapper">
-                            <figure><img src="images/Pugar Huda Mantoro.jpg" alt="Image" /></figure>
-                            <div class="content">
-                                <div class="inner">
-                                    <h4>Pugar Huda Mantoro</h4>
-                                    <img src="images/title-seperator.png" alt="Image" />
-                                    <p>
-                                        Saya sebagai seorang Developer Backend. Pekerjaan saya fokus pada pengembangan
-                                        dan pemeliharaan bagian "mesin" dari situs web. Saya memiliki
-                                        tanggung jawab merancang, membangun, dan mengoptimalkan logika server, database,
-                                        dan fungsionalitas yang tidak terlihat oleh pengguna akhir.
-                                        Dengan menggunakan bahasa pemrograman seperti PHP saya
-                                        mengimplementasikan fitur-fitur baru dan memastikan keamanan data. Saya bekerja
-                                        erat dengan tim front-end untuk menyatukan berbagai komponen aplikasi dan
-                                        memastikan keseluruhan sistem berjalan dengan lancar. Keahlian saya sangat
-                                        penting untuk memberikan pengalaman pengguna yang responsif dan andal dalam
-                                        aplikasi.
-                                    </p>
-
-                                </div>
-                                <!-- end inner -->
-                            </div>
-                            <!-- end content -->
-                        </div>
-                        <!-- end wrapper -->
-                        <div class="wrapper">
-                            <div class="content">
-                                <div class="inner">
-                                    <h4>Raisha Alma Sahara</h4>
-                                    <img src="images/title-seperator.png" alt="Image" />
-                                    <p>
-                                        Sebagai seorang UI/UX designer, saya bertanggung jawab untuk merancang antarmuka
-                                        pengguna (UI) yang intuitif dan pengalaman pengguna (UX) yang memikat. Saya
-                                        memiliki keahlian dalam menerjemahkan kebutuhan pengguna menjadi desain yang
-                                        menarik dan fungsional, serta memastikan bahwa produk atau aplikasi yang
-                                        dirancang memiliki navigasi yang mudah dipahami, tata letak yang estetis, dan
-                                        interaksi yang menyenangkan.
-
-                                        Selain fokus pada aspek desain, saya juga terlibat dalam manajemen dokumen
-                                        proyek. Saya memastikan semua dokumen terkait proyek, seperti spesifikasi
-                                        produk, alur kerja, dan dokumentasi lainnya, terorganisir dengan baik dan mudah
-                                        diakses oleh anggota tim.
-
-                                        Dalam hal administrasi keuangan proyek, saya mengelola anggaran proyek,
-                                        melakukan pelacakan pengeluaran, membuat laporan keuangan, dan berkolaborasi
-                                        dengan tim untuk memastikan bahwa pengeluaran sesuai dengan anggaran yang
-                                        telah ditetapkan.
-                                    </p>
-
-                                </div>
-                                <!-- end inner -->
-                            </div>
-                            <!-- end content -->
-                            <figure><img src="images/RAISHA.jpg" alt="Image" /></figure>
-                        </div>
-                        <!-- end wrapper -->
-                        <div class="wrapper">
-                            <figure><img src="images/ZAENAL.jpg" alt="Image" /></figure>
-                            <div class="content">
-                                <div class="inner">
-                                    <h4>Zaenal Muttaqin</h4>
-                                    <img src="images/title-seperator.png" alt="Image" />
-                                    <p>
-                                        Di Projek ini, saya berperan sebagai debugger. Saya memperbaiki kodingan yang
-                                        salah lalu membenarkannya sehingga menjadi kodingan yang rapi. Dalam analisis
-                                        kode, saya mampu mengidentifikasi area yang memerlukan perbaikan, serta
-                                        merancang solusi yang efektif. Komunikasi yang efektif mengenai
-                                        perubahan-perubahan dalam kodingan dan kerja sama erat dengan tim adalah bagian
-                                        integral dari kontribusi saya dalam mencapai tujuan proyek secara keseluruhan.
-                                    </p>
-
-                                </div>
-                                <!-- end inner -->
-                            </div>
-                            <!-- end content -->
-                        </div>
-                    </div>
-                    <!-- end col-12 -->
+                <div class="form-group">
+                    <input type="text" id="lastName" nalogin modaikhsame="lastName" placeholder="Last Name" required />
                 </div>
-                <!-- end row -->
-            </div>
-            <!-- end container -->
-        </section>
-        <!-- end history -->
-
-        <!-- end milestones -->
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-4">
-                        <h5>TENTANG KAMI</h5>
-                        <ul class="footer-menu">
-                            <li><a href="about-us.php">Tentang Kami</a></li>
-
-                            <li><a href="#">Tim Kami</a></li>
-                            <li><a href="blog-list.php">Berita</a></li>
-                        </ul>
-                    </div>
-                    <!-- end col-3 -->
-                    <div class="col-lg-3 col-md-4">
-                        <h5>Layanan</h5>
-                        <ul class="footer-menu">
-                            <li><a href="#">Terms of Payment</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Difficulty Levels</a></li>
-                        </ul>
-                    </div>
-                    <!-- end col-3 -->
-                    <div class="col-lg-3 col-md-4">
-                        <h5>Hubungi Kami</h5>
-                        <address>
-                            ATHENA INC.<br />
-                            Jakal km 14.5, Yogyakarta<br />
-                            Telp: 123 456 7890<br />
-                            <a href="#">info@athenacomp.com</a>
-                        </address>
-                    </div>
-                    <!-- end col-3 -->
-
-                    <!-- end col-3 -->
-                    <div class="col-12">
-                        <ul class="social-media">
-                            <li>
-                                <a href="#"><i class="fa fa-tripadvisor"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- end col-12 -->
-                    <div class="col-12"><span class="copyright">&copy; ATHENA</span></div>
-                    <!-- end col-12 -->
+                <div class="form-group">
+                    <input type="email" id="signupEmail" name="signupEmail" placeholder="Email" required />
                 </div>
-                <!-- end row -->
-            </div>
-            <!-- end container -->
-        </footer>
+                <div class="form-group">
+                    <input type="password" id="signupPassword" name="signupPassword" placeholder="Password" required />
+                </div>
+                <button type="submit" class="signup-btn">Sign Up</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $("#signupForm").submit(function(event) {
+            event.preventDefault();
 
-        <!-- JS FILES -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-        <script>
-        // PRELOADER
-        (function($) {
-            $(window).on("load", function() {
-                $("body").addClass("page-loaded");
+            // Ambil nilai dari formulir pendaftaran
+            var firstName = $("#firstName").val();
+            var lastName = $("#lastName").val();
+            var signupEmail = $("#signupEmail").val();
+            var signupPassword = $("#signupPassword").val();
+
+            // Kirim data pendaftaran ke server melalui AJAX
+            $.ajax({
+                type: "POST",
+                url: "signupUser.php",
+                data: {
+                    firstName: firstName,
+                    lastName: lastName,
+                    signupEmail: signupEmail,
+                    signupPassword: signupPassword
+                },
+                success: function(response) {
+                    // Tampilkan respons dari server (misalnya, pesan sukses atau kesalahan)
+                    alert(response);
+
+                    // Jika pendaftaran berhasil, tutup popup signup
+                    if (response.includes("Pendaftaran berhasil")) {
+                        closeModal('signupModal');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Tampilkan pesan kesalahan jika terjadi kesalahan saat mengirimkan data
+                    alert("Terjadi kesalahan saat mendaftar. Silakan coba lagi.");
+                }
             });
-        })(jQuery);
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script>
-        <script src="js/swiper.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-        <script src="js/scripts.js"></script>
+        });
+    });
+
+    function closeModal(modalId) {
+        $("#" + modalId).hide();
+    }
+    </script>
+
+
+    </ul>
+    </nav>
+    <!-- end navbar -->
+    </div>
+    <!-- end container -->
+    </header>
+    <!-- end header-int -->
+    <section class="about-us-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title page-title">
+                        <h2>Tentang Kami</h2>
+                        <img src="images/title-seperator.png" alt="Image" />
+                        <p>
+                            Selamat datang di Artistic Nusantara Journey. Kami adalah kelompok yang berkomitmen
+                            untuk menciptakan pengalaman wisata seni tak terlupakan bagi pelanggan kami.
+                            kami telah mempersembahkan kegembiraan dan kepuasan kepada pelanggan dari berbagai
+                            belahan masyarakat Indonesia. Kami menyediakan beberapa tour wisata seni di beberapa
+                            kota di Indonesia
+                        </p>
+                    </div>
+                    <!-- end section-title -->
+                </div>
+                <!-- end col-12 -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- end about-us -->
+
+    <!-- end about-us-desc -->
+    <section class="our-history">
+        <div class="container">
+            <div class="row no-gutters">
+                <div class="col-lg-6">
+                    <div class="section-title">
+                        <h2>Tim Kami</h2>
+                        <img src="images/title-seperator.png" alt="Image" />
+                    </div>
+                    <!-- end section-title -->
+                </div>
+                <!-- end col-6 -->
+
+                <!-- end col-6 -->
+                <div class="col-12">
+                    <div class="wrapper">
+                        <div class="content">
+                            <div class="inner">
+                                <h4>Muhammad Ikhsan Nurhadi</h4>
+                                <img src="images/title-seperator.png" alt="Image" />
+                                <p>
+                                    Halo nama saya Ikhsan, dan saya memiliki peran sebagai Project Manager di tim
+                                    ATHENA. Tanggung jawab utama saya adalah mengoordinasikan serta mengawasi jalannya
+                                    proyek untuk memastikan semua berjalan sesuai rencana. Dalam proyek ini, saya
+                                    memiliki fokus khusus pada pengelolaan jaringan, tetapi saya tetap terlibat secara
+                                    keseluruhan dalam pembuatan situs web kami. Meskipun fokus saya terbagi antara
+                                    pengelolaan jaringan dan pembuatan situs web, saya tetap terlibat secara langsung.
+                                    Saya juga memberikan arahan yang diperlukan dan memastikan bahwa setiap langkah yang
+                                    diambil sesuai dengan visi yang telah ditetapkan untuk proyek ini.
+                                </p>
+                            </div>
+                            <!-- end inner -->
+                        </div>
+                        <!-- end content -->
+                        <figure><img src="images/IKSAN.jpg" alt="Image" /></figure>
+                    </div>
+                    <!-- end wrapper -->
+                    <div class="wrapper">
+                        <figure><img src="images/Pugar Huda Mantoro.jpg" alt="Image" /></figure>
+                        <div class="content">
+                            <div class="inner">
+                                <h4>Pugar Huda Mantoro</h4>
+                                <img src="images/title-seperator.png" alt="Image" />
+                                <p>
+                                    Saya sebagai seorang Developer Backend. Pekerjaan saya fokus pada pengembangan
+                                    dan pemeliharaan bagian "mesin" dari situs web. Saya memiliki
+                                    tanggung jawab merancang, membangun, dan mengoptimalkan logika server, database,
+                                    dan fungsionalitas yang tidak terlihat oleh pengguna akhir.
+                                    Dengan menggunakan bahasa pemrograman seperti PHP saya
+                                    mengimplementasikan fitur-fitur baru dan memastikan keamanan data. Saya bekerja
+                                    erat dengan tim front-end untuk menyatukan berbagai komponen aplikasi dan
+                                    memastikan keseluruhan sistem berjalan dengan lancar. Keahlian saya sangat
+                                    penting untuk memberikan pengalaman pengguna yang responsif dan andal dalam
+                                    aplikasi.
+                                </p>
+
+                            </div>
+                            <!-- end inner -->
+                        </div>
+                        <!-- end content -->
+                    </div>
+                    <!-- end wrapper -->
+                    <div class="wrapper">
+                        <div class="content">
+                            <div class="inner">
+                                <h4>Raisha Alma Sahara</h4>
+                                <img src="images/title-seperator.png" alt="Image" />
+                                <p>
+                                    Sebagai seorang UI/UX designer, saya bertanggung jawab untuk merancang antarmuka
+                                    pengguna (UI) yang intuitif dan pengalaman pengguna (UX) yang memikat. Saya
+                                    memiliki keahlian dalam menerjemahkan kebutuhan pengguna menjadi desain yang
+                                    menarik dan fungsional, serta memastikan bahwa produk atau aplikasi yang
+                                    dirancang memiliki navigasi yang mudah dipahami, tata letak yang estetis, dan
+                                    interaksi yang menyenangkan.
+
+                                    Selain fokus pada aspek desain, saya juga terlibat dalam manajemen dokumen
+                                    proyek. Saya memastikan semua dokumen terkait proyek, seperti spesifikasi
+                                    produk, alur kerja, dan dokumentasi lainnya, terorganisir dengan baik dan mudah
+                                    diakses oleh anggota tim.
+
+                                    Dalam hal administrasi keuangan proyek, saya mengelola anggaran proyek,
+                                    melakukan pelacakan pengeluaran, membuat laporan keuangan, dan berkolaborasi
+                                    dengan tim untuk memastikan bahwa pengeluaran sesuai dengan anggaran yang
+                                    telah ditetapkan.
+                                </p>
+
+                            </div>
+                            <!-- end inner -->
+                        </div>
+                        <!-- end content -->
+                        <figure><img src="images/RAISHA.jpg" alt="Image" /></figure>
+                    </div>
+                    <!-- end wrapper -->
+                    <div class="wrapper">
+                        <figure><img src="images/ZAENAL.jpg" alt="Image" /></figure>
+                        <div class="content">
+                            <div class="inner">
+                                <h4>Zaenal Muttaqin</h4>
+                                <img src="images/title-seperator.png" alt="Image" />
+                                <p>
+                                    Di Projek ini, saya berperan sebagai debugger. Saya memperbaiki kodingan yang
+                                    salah lalu membenarkannya sehingga menjadi kodingan yang rapi. Dalam analisis
+                                    kode, saya mampu mengidentifikasi area yang memerlukan perbaikan, serta
+                                    merancang solusi yang efektif. Komunikasi yang efektif mengenai
+                                    perubahan-perubahan dalam kodingan dan kerja sama erat dengan tim adalah bagian
+                                    integral dari kontribusi saya dalam mencapai tujuan proyek secara keseluruhan.
+                                </p>
+
+                            </div>
+                            <!-- end inner -->
+                        </div>
+                        <!-- end content -->
+                    </div>
+                </div>
+                <!-- end col-12 -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- end history -->
+
+    <!-- end milestones -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-4">
+                    <h5>TENTANG KAMI</h5>
+                    <ul class="footer-menu">
+                        <li><a href="about-us.php">Tentang Kami</a></li>
+
+                        <li><a href="#">Tim Kami</a></li>
+                        <li><a href="blog-list.php">Berita</a></li>
+                    </ul>
+                </div>
+                <!-- end col-3 -->
+                <div class="col-lg-3 col-md-4">
+                    <h5>Layanan</h5>
+                    <ul class="footer-menu">
+                        <li><a href="#">Terms of Payment</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Difficulty Levels</a></li>
+                    </ul>
+                </div>
+                <!-- end col-3 -->
+                <div class="col-lg-3 col-md-4">
+                    <h5>Hubungi Kami</h5>
+                    <address>
+                        ATHENA INC.<br />
+                        Jakal km 14.5, Yogyakarta<br />
+                        Telp: 123 456 7890<br />
+                        <a href="#">info@athenacomp.com</a>
+                    </address>
+                </div>
+                <!-- end col-3 -->
+
+                <!-- end col-3 -->
+                <div class="col-12">
+                    <ul class="social-media">
+                        <li>
+                            <a href="#"><i class="fa fa-tripadvisor"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- end col-12 -->
+                <div class="col-12"><span class="copyright">&copy; ATHENA</span></div>
+                <!-- end col-12 -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </footer>
+
+    <!-- JS FILES -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script>
+    // PRELOADER
+    (function($) {
+        $(window).on("load", function() {
+            $("body").addClass("page-loaded");
+        });
+    })(jQuery);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script src="js/scripts.js"></script>
     </body>
 
     </html>

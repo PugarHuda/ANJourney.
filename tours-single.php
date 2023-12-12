@@ -55,28 +55,26 @@ if (isset($_SESSION['user_id'])) {
                        </svg>
                    </div>
                    <!-- end preloader -->
+                   <?php
+// ID user yang ingin ditampilkan (sesuaikan dengan kebutuhan Anda)
+$userId = 1;
+
+// Query untuk mendapatkan data dari tabel "user" berdasarkan ID
+$sql = "SELECT * FROM user WHERE id_user = $userId";
+$result = $conn->query($sql);
+
+// Periksa apakah data ditemukan
+if ($result->num_rows > 0) {
+    // Ambil data dan isi formulir
+    $userRow = $result->fetch_assoc();
+?>
+
                    <div class="search-box">
                        <div class="container">
                            <div class="row">
                                <div class="col-12">
                                    <span class="search-close-btn"><i class="fa fa-times"></i></span>
                                    <h3>Profile</h3>
-                                   <!-- <form>
-              <div class="form-group">
-                <i class="fa fa-search"></i>
-                <input type="text" placeholder="Search Activities, Themes or Tours" />
-              </div>
-              --end form-group
-              <button type="submit">SEARCH</button>
-            </form>
-            <dl>
-              <dt>Suggestions <i class="fa fa-long-arrow-right"></i></dt>
-              <dd><a href="#">Adventure</a></dd>
-              <dd><a href="#">Nothern Lights</a></dd>
-              <dd><a href="#">Waterfalls</a></dd>
-              <dd><a href="#">Winter Tours</a></dd>
-              <dd><a href="#">Glaciar Walk</a></dd>
-            </dl> -->
                                </div>
                                <div class="container mt-5">
                                    <div class="row">
@@ -86,35 +84,36 @@ if (isset($_SESSION['user_id'])) {
                                                    <div class="form-group">
                                                        <label for="account-fn">NAMA DEPAN</label>
                                                        <input class="form-control" type="text" id="account-fn"
-                                                           value="Daniel" disabled="" />
+                                                           value="<?php echo $userRow['namaDepan']; ?>" disabled="" />
                                                    </div>
                                                </div>
                                                <div class="col-md-6">
                                                    <div class="form-group">
                                                        <label for="account-ln">NAMA BELAKANG</label>
                                                        <input class="form-control" type="text" id="account-ln"
-                                                           value="Adams" disabled="" />
+                                                           value="<?php echo $userRow['namaBelakang']; ?>"
+                                                           disabled="" />
                                                    </div>
                                                </div>
                                                <div class="col-md-6">
                                                    <div class="form-group">
                                                        <label for="account-email">E-MAIL</label>
                                                        <input class="form-control" type="email" id="account-email"
-                                                           value="daniel.adams@example.com" disabled="" />
+                                                           value="<?php echo $userRow['email']; ?>" disabled="" />
                                                    </div>
                                                </div>
                                                <div class="col-md-6">
                                                    <div class="form-group">
                                                        <label for="account-phone">No.HP</label>
                                                        <input class="form-control" type="text" id="account-phone"
-                                                           value="+7 (805) 348 95 72" disabled="" />
+                                                           value="<?php echo $userRow['noTelepon']; ?>" disabled="" />
                                                    </div>
                                                </div>
                                                <div class="col-md-6">
                                                    <div class="form-group">
                                                        <label for="account-pass">PASSWORD</label>
                                                        <input class="form-control" type="password" id="account-pass"
-                                                           value="da" disabled="" />
+                                                           value="<?php echo $userRow['password']; ?>" disabled="" />
                                                    </div>
                                                </div>
                                            </form>
@@ -127,6 +126,14 @@ if (isset($_SESSION['user_id'])) {
                        </div>
                        <!-- end container -->
                    </div>
+
+                   <?php
+} else {
+    echo "Data user tidak ditemukan.";
+}
+
+?>
+
                    <!-- end search-box -->
                    <header class="header-int">
                        <div class="container">
@@ -176,7 +183,6 @@ if (isset($_SESSION['user_id'])) {
                                        <a id="login-logout-link" class="nav-link" href="#"
                                            onclick="toggleLoginStatus()">LOGIN</a>
                                    </li>
-                                   <!-- The login modal -->
                                    <div id="loginModal" class="modal">
                                        <div class="modal-content">
                                            <span class="close" onclick="closeLoginModal()">&times;</span>
@@ -222,11 +228,29 @@ if (isset($_SESSION['user_id'])) {
                                            },
                                            error: function(xhr, status, error) {
                                                alert(
-                                                   "Terjadi kesalahan saat melakukan login. Silakan coba lagi."
-                                               );
+                                                   "Terjadi kesalahan saat melakukan login. Silakan coba lagi.");
                                            }
                                        });
                                    }
+
+                                   function openSignUpModal() {
+                                       // Tambahkan logika untuk membuka modal pendaftaran
+                                       // Misalnya, dengan menampilkan modal signup atau menavigasi ke halaman pendaftaran
+                                       $("#signupModal").show();
+                                   }
+
+                                   function closeLoginModal() {
+                                       $("#loginModal").hide();
+                                   }
+
+                                   // ... Fungsi-fungsi lainnya ...
+
+                                   $(document).ready(function() {
+                                       // Menangani klik pada tautan "Sign Up"
+                                       $("#signup-link").click(function() {
+                                           openSignUpModal();
+                                       });
+                                   });
 
                                    function closeLoginModal() {
                                        $("#loginModal").hide();
@@ -240,6 +264,25 @@ if (isset($_SESSION['user_id'])) {
                                        } else {
                                            openLoginModal();
                                        }
+                                   }
+                                   $(document).ready(function() {
+                                       // Sembunyikan modals saat halaman dimuat
+                                       $(".modal").hide();
+                                   });
+
+                                   function submitLoginForm(event) {
+                                       event.preventDefault();
+                                       // Logika login Anda di sini
+                                   }
+
+                                   function openModal(modalId) {
+                                       // Tampilkan modal dengan ID tertentu
+                                       $("#" + modalId).show();
+                                   }
+
+                                   function closeModal(modalId) {
+                                       // Sembunyikan modal dengan ID tertentu
+                                       $("#" + modalId).hide();
                                    }
 
                                    function openLoginModal() {
@@ -265,8 +308,7 @@ if (isset($_SESSION['user_id'])) {
                                            },
                                            error: function(xhr, status, error) {
                                                alert(
-                                                   "Terjadi kesalahan saat melakukan logout. Silakan coba lagi."
-                                               );
+                                                   "Terjadi kesalahan saat melakukan logout. Silakan coba lagi.");
                                            }
                                        });
                                    }
@@ -274,7 +316,7 @@ if (isset($_SESSION['user_id'])) {
 
                                    function checkLoginStatus() {
                                        var isLoggedIn =
-                                           <?php echo isset($_SESSION['user_email']) ? 'true' : 'false'; ?>;
+                                       <?php echo isset($_SESSION['user_email']) ? 'true' : 'false'; ?>;
                                        return isLoggedIn;
                                    }
 
@@ -289,44 +331,90 @@ if (isset($_SESSION['user_id'])) {
                                    }
                                    </script>
 
-                                   <!-- The sign-up modal -->
-                                   <div id="signupModal" class="modal">
-                                       <div class="modal-content">
-                                           <span class="close">&times;</span>
-                                           <h2>Sign Up</h2>
-                                           <form id="signupForm">
-                                               <div class="form-group">
-                                                   <input type="text" id="firstName" name="firstName"
-                                                       placeholder="First Name" required />
-                                               </div>
-                                               <div class="form-group">
-                                                   <input type="text" id="lastName" name="lastName"
-                                                       placeholder="Last Name" required />
-                                               </div>
-                                               <div class="form-group">
-                                                   <input type="email" id="signupEmail" name="signupEmail"
-                                                       placeholder="Email" required />
-                                               </div>
-                                               <div class="form-group">
-                                                   <input type="password" id="signupPassword" name="signupPassword"
-                                                       placeholder="Password" required />
-                                               </div>
-                                               <button type="submit" class="signup-btn">Sign Up</button>
-                                           </form>
-                                       </div>
-                                   </div>
-                               </ul>
-                           </nav>
-                           </nav>
-                           <!-- end navbar -->
-                       </div>
-                       <!-- end container -->
-                   </header>
-                   <!-- end header-int -->
-                   <section class="tour-single-header">
-                       <div class="container">
-                           <div class="row">
-                               <?php
+                                   <!-- Tambahkan elemen HTML lainnya atau skrip JavaScript di sini -->
+               </body>
+
+
+               <!-- The sign-up modal -->
+               <div id="signupModal" class="modal">
+                   <div class="modal-content">
+                       <span class="close" onclick="closeModal('signupModal')">&times;</span>
+                       <h2>Sign Up</h2>
+                       <form id="signupForm">
+                           <div class="form-group">
+                               <input type="text" id="firstName" name="firstName" placeholder="First Name" required />
+                           </div>
+                           <div class="form-group">
+                               <input type="text" id="lastName" name="lastName" placeholder="Last Name" required />
+                           </div>
+                           <div class="form-group">
+                               <input type="email" id="signupEmail" name="signupEmail" placeholder="Email" required />
+                           </div>
+                           <div class="form-group">
+                               <input type="password" id="signupPassword" name="signupPassword" placeholder="Password"
+                                   required />
+                           </div>
+                           <button type="submit" class="signup-btn">Sign Up</button>
+                       </form>
+                   </div>
+               </div>
+               <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+               <script>
+$(document).ready(function() {
+    $("#signupForm").submit(function(event) {
+        event.preventDefault();
+
+        // Ambil nilai dari formulir pendaftaran
+        var firstName = $("#firstName").val();
+        var lastName = $("#lastName").val();
+        var signupEmail = $("#signupEmail").val();
+        var signupPassword = $("#signupPassword").val();
+
+        // Kirim data pendaftaran ke server melalui AJAX
+        $.ajax({
+            type: "POST",
+            url: "signupUser.php",
+            data: {
+                firstName: firstName,
+                lastName: lastName,
+                signupEmail: signupEmail,
+                signupPassword: signupPassword
+            },
+            success: function(response) {
+                // Tampilkan respons dari server (misalnya, pesan sukses atau kesalahan)
+                alert(response);
+
+                // Jika pendaftaran berhasil, tutup popup signup
+                if (response.includes("Pendaftaran berhasil")) {
+                    closeModal('signupModal');
+                }
+            },
+            error: function(xhr, status, error) {
+                // Tampilkan pesan kesalahan jika terjadi kesalahan saat mengirimkan data
+                alert("Terjadi kesalahan saat mendaftar. Silakan coba lagi.");
+            }
+        });
+    });
+});
+
+function closeModal(modalId) {
+    $("#" + modalId).hide();
+}
+               </script>
+
+
+               </ul>
+               </nav>
+               </nav>
+               <!-- end navbar -->
+               </div>
+               <!-- end container -->
+               </header>
+               <!-- end header-int -->
+               <section class="tour-single-header">
+                   <div class="container">
+                       <div class="row">
+                           <?php
 // Pastikan parameter id_detailtour ada dalam URL
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $tourId = $_GET['id'];
@@ -339,99 +427,99 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $detailRow = $detailResult->fetch_assoc();
         // Tampilkan konten detail tur di sini
 ?>
-                               <!DOCTYPE html>
-                               <html lang="en">
+                           <!DOCTYPE html>
+                           <html lang="en">
 
-                               <head>
-                                   <meta charset="UTF-8">
-                                   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                                   <title><?php echo $detailRow['namaTour']; ?></title>
-                                   <!-- Tambahkan CSS atau elemen head lainnya sesuai kebutuhan -->
-                               </head>
+                           <head>
+                               <meta charset="UTF-8">
+                               <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                               <title><?php echo $detailRow['namaTour']; ?></title>
+                               <!-- Tambahkan CSS atau elemen head lainnya sesuai kebutuhan -->
+                           </head>
 
-                               <body>
-                                   <div class="col-lg-8">
-                                       <!-- <h6>FROM <?php echo $detailRow['namaKota']; ?></h6> -->
-                                       <h2><?php echo $detailRow['namaTour']; ?></h2>
+                           <body>
+                               <div class="col-lg-8">
+                                   <!-- <h6>FROM <?php echo $detailRow['namaKota']; ?></h6> -->
+                                   <h2><?php echo $detailRow['namaTour']; ?></h2>
 
-                                       <!-- Filter -->
-                                       <div class="filter dropdown">
-                                           <!-- Tambahkan dropdown filter sesuai kebutuhan -->
-                                       </div>
-                                       <!-- end filter -->
-
-                                       <div class="price">Price: <strong><?php echo $detailRow['hargaTour']; ?></strong>
-                                       </div><br>
-                                       <br>
-                                       <div class="price">Tanggal:
-                                           <strong><?php echo $detailRow['tanggalPelaksanaan']; ?></strong>
-                                       </div>
-                                       <!-- end price -->
+                                   <!-- Filter -->
+                                   <div class="filter dropdown">
+                                       <!-- Tambahkan dropdown filter sesuai kebutuhan -->
                                    </div>
-                                   <!-- end col-8 -->
+                                   <!-- end filter -->
 
-
-                                   <div class="col-lg-4">
-                                       <p><?php echo $detailRow['deskripsiTour']; ?></p>
-                                       <a class="site-btn" class="nav-link"
-                                           href="payment.php?id=<?php echo $detailRow['id_detailtour']; ?>">BOOK
-                                           TOUR</a>
+                                   <div class="price">Price: <strong><?php echo $detailRow['hargaTour']; ?></strong>
+                                   </div><br>
+                                   <br>
+                                   <div class="price">Tanggal:
+                                       <strong><?php echo $detailRow['tanggalPelaksanaan']; ?></strong>
                                    </div>
-
-
-                                   <div id="loginModal" class="modal">
-                                       <div class="modal-content">
-                                           <span class="close">&times;</span>
-                                           <h2>Welcome Back</h2>
-                                           <form id="loginForm">
-                                               <div class="form-group">
-                                                   <input type="email" id="loginEmail" name="loginEmail"
-                                                       placeholder="Email" required />
-                                               </div>
-                                               <div class="form-group">
-                                                   <input type="password" id="loginPassword" name="loginPassword"
-                                                       placeholder="Password" required />
-                                               </div>
-                                               <button button type="submit" class="login-btn">Login</button>
-                                           </form>
-                                           <p class="signup-link">Don't have an account? <a href="#"
-                                                   id="signup-link">Sign Up</a>
-                                           </p>
-                                       </div>
-                                   </div>
-                           </div>
-
-                           <!-- The sign-up modal -->
-                           <div id="signupModal" class="modal">
-                               <div class="modal-content">
-                                   <span class="close">&times;</span>
-                                   <h2>Sign Up</h2>
-                                   <form id="signupForm">
-                                       <div class="form-group">
-                                           <input type="text" id="firstName" name="firstName" placeholder="First Name"
-                                               required />
-                                       </div>
-                                       <div class="form-group">
-                                           <input type="text" id="lastName" name="lastName" placeholder="Last Name"
-                                               required />
-                                       </div>
-                                       <div class="form-group">
-                                           <input type="email" id="signupEmail" name="signupEmail" placeholder="Email"
-                                               required />
-                                       </div>
-                                       <div class="form-group">
-                                           <input type="password" id="signupPassword" name="signupPassword"
-                                               placeholder="Password" required />
-                                       </div>
-                                       <button type="submit" class="signup-btn">Sign Up</button>
-                                   </form>
+                                   <!-- end price -->
                                </div>
-                           </div>
+                               <!-- end col-8 -->
 
+
+                               <div class="col-lg-4">
+                                   <p><?php echo $detailRow['deskripsiTour']; ?></p>
+                                   <a class="site-btn" class="nav-link"
+                                       href="payment.php?id=<?php echo $detailRow['id_detailtour']; ?>">BOOK
+                                       TOUR</a>
+                               </div>
+
+
+                               <div id="loginModal" class="modal">
+                                   <div class="modal-content">
+                                       <span class="close">&times;</span>
+                                       <h2>Welcome Back</h2>
+                                       <form id="loginForm">
+                                           <div class="form-group">
+                                               <input type="email" id="loginEmail" name="loginEmail" placeholder="Email"
+                                                   required />
+                                           </div>
+                                           <div class="form-group">
+                                               <input type="password" id="loginPassword" name="loginPassword"
+                                                   placeholder="Password" required />
+                                           </div>
+                                           <button button type="submit" class="login-btn">Login</button>
+                                       </form>
+                                       <p class="signup-link">Don't have an account? <a href="#" id="signup-link">Sign
+                                               Up</a>
+                                       </p>
+                                   </div>
+                               </div>
                        </div>
-                       <!-- end col-4 -->
 
-               </body>
+                       <!-- The sign-up modal -->
+                       <div id="signupModal" class="modal">
+                           <div class="modal-content">
+                               <span class="close">&times;</span>
+                               <h2>Sign Up</h2>
+                               <form id="signupForm">
+                                   <div class="form-group">
+                                       <input type="text" id="firstName" name="firstName" placeholder="First Name"
+                                           required />
+                                   </div>
+                                   <div class="form-group">
+                                       <input type="text" id="lastName" name="lastName" placeholder="Last Name"
+                                           required />
+                                   </div>
+                                   <div class="form-group">
+                                       <input type="email" id="signupEmail" name="signupEmail" placeholder="Email"
+                                           required />
+                                   </div>
+                                   <div class="form-group">
+                                       <input type="password" id="signupPassword" name="signupPassword"
+                                           placeholder="Password" required />
+                                   </div>
+                                   <button type="submit" class="signup-btn">Sign Up</button>
+                               </form>
+                           </div>
+                       </div>
+
+                   </div>
+                   <!-- end col-4 -->
+
+                   </body>
 
                </html>
                <!-- end col-4 -->
