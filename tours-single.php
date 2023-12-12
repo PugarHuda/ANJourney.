@@ -228,7 +228,8 @@ if ($result->num_rows > 0) {
                                            },
                                            error: function(xhr, status, error) {
                                                alert(
-                                                   "Terjadi kesalahan saat melakukan login. Silakan coba lagi.");
+                                                   "Terjadi kesalahan saat melakukan login. Silakan coba lagi."
+                                               );
                                            }
                                        });
                                    }
@@ -308,7 +309,8 @@ if ($result->num_rows > 0) {
                                            },
                                            error: function(xhr, status, error) {
                                                alert(
-                                                   "Terjadi kesalahan saat melakukan logout. Silakan coba lagi.");
+                                                   "Terjadi kesalahan saat melakukan logout. Silakan coba lagi."
+                                               );
                                            }
                                        });
                                    }
@@ -316,7 +318,7 @@ if ($result->num_rows > 0) {
 
                                    function checkLoginStatus() {
                                        var isLoggedIn =
-                                       <?php echo isset($_SESSION['user_email']) ? 'true' : 'false'; ?>;
+                                           <?php echo isset($_SESSION['user_email']) ? 'true' : 'false'; ?>;
                                        return isLoggedIn;
                                    }
 
@@ -916,7 +918,8 @@ if ($result) {
                                                            <span><?php echo $row['hargaTour']; ?></span>
                                                        </li>
                                                    </ul>
-                                                   <a href="#">SELECT DATES</a>
+                                                   <a href="tours-single.php?id=<?php echo $row['id_detailtour']; ?>">SELECT
+                                                       DATES</a>
                                                </div>
                                                <!-- end tour-content -->
                                            </div>
